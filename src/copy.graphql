@@ -1,0 +1,38 @@
+type AllHomes @model {
+  id: ID!
+  zipcode: [Zipcode!]
+	country: String!
+}
+
+type Zipcode @model {
+  id: ID!
+  currentZipcode: String
+  allZip: [Property!]!
+  city: String!
+  country: String!
+}
+type Property @model{
+  id: ID!
+  zipcode: [Zipcode]
+  address: String
+  city: String
+	images: String
+	price: String!
+	soldStatus: String
+	favorite: String
+	watchTimes: Int
+	reviews: [Reviews]
+	description: String
+  comments: [Comments!]!
+}
+type Comments @model{
+  title: String!
+  user: String
+  comment: String!
+  data: String!
+}
+type Reviews @model {
+  id: ID!
+  content: String
+  user: String
+}
