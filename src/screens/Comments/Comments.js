@@ -24,8 +24,12 @@ class Comments extends Component {
     const { postId, titleName } = navigation.state.params;
     console.log('Comments', titleName);
     return (
-      <View style={{}}>
-        <ShowComments options={postId} action="Load Comments" />
+      <View style={{ flex: 1 }}>
+        <ShowComments
+          options={postId}
+          action="Load Comments"
+          queryFields={{ firstField: 'getPost', secondField: 'comments' }}
+        />
       </View>
     );
   }

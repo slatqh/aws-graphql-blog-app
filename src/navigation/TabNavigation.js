@@ -2,11 +2,11 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import { Home, Posts, Comments } from '../screens';
+import { Blogs, Posts, Comments } from '../screens';
 
 const BlogStack = createStackNavigator(
   {
-    Home,
+    Blogs,
     Posts,
     Comments,
   },

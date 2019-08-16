@@ -28,7 +28,12 @@ export default class Posts extends Component {
 
     return (
       <View>
-        <Post options={id} action="Load Posts" props={this.props} />
+        <Post
+          options={id}
+          action="Load Posts"
+          props={this.props}
+          queryFields={{ firstField: 'getBlog', secondField: 'posts' }}
+        />
       </View>
     );
   }

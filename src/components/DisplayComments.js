@@ -7,8 +7,8 @@ const DisplayComments = props => {
   const { data, noContent } = props;
   if (noContent) {
     return (
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <ShowEmtyContent text="No Comments yet. Create one!" />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ShowEmtyContent text="No Comments. Create one!" />
       </View>
     );
   }
