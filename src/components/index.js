@@ -1,6 +1,7 @@
 import { Button } from './Button';
-import { Blogs } from './Blogs';
-import { Posts } from './Posts';
 import { AddText } from './InputSection';
+import DisplayBlogs from './DisplayBlogs';
+import DisplayPosts from './DisplayPosts';
+import DisplayComments from './DisplayComments';
 
-export { Button, Blogs, Posts, AddText };
+export { Button, AddText, DisplayBlogs, DisplayPosts, DisplayComments };

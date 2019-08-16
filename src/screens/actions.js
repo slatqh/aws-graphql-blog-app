@@ -1,9 +1,10 @@
-import { SAVE_POST_ID, TEXT_INPUT } from './reducer';
+import { GET_BLOG_ID, TEXT_INPUT } from './reducer';
 
-export function getNameAndId(id) {
+export function getNameAndId(id, name) {
   return {
-    type: SAVE_POST_ID,
-    payload: id,
+    type: GET_BLOG_ID,
+    id,
+    name,
   };
 }
 
