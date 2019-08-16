@@ -2,26 +2,34 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import { Blogs, Posts, Comments } from '../screens';
+import { Blogs, Posts, Comments, TestScreen } from '../screens';
+import ModalScreen from '../screens/ModalScreen';
 
-const BlogStack = createStackNavigator(
+const BlogStack = createStackNavigator({
+  Blogs,
+  Posts,
+  Comments,
+});
+
+const MainBlog = createStackNavigator(
   {
-    Blogs,
-    Posts,
-    Comments,
+    Main: BlogStack,
+    Modal: ModalScreen,
   },
   {
-    defaultNavigationOptions: ({ navigation }) => {
-      const title = navigation.getParam('titleName');
-      return {
-        title: title === undefined ? 'Home' : title,
-      };
-    },
+    mode: 'modal',
+    headerMode: 'none',
   }
 );
 
-const TabNavigator = createBottomTabNavigator({
-  Home: BlogStack,
-});
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: MainBlog,
+    Test: TestScreen,
+  },
+  {
+    initialRouteName: 'Test',
+  }
+);
 
 export default TabNavigator;

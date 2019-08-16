@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Button } from 'react-native';
 import { withContent } from '../withContentHOC';
 import { DisplayPosts } from '../../components';
 
@@ -20,11 +20,21 @@ const blogQuery = `
 
 const Post = withContent(DisplayPosts, blogQuery);
 export default class Posts extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const params = navigation.state.params || {};
+
+    return {
+      headerRight: (
+        <Button onPress={() => navigation.navigate('Modal')} title="Info" />
+      ),
+      /* the rest of this config is unchanged */
+    };
+  };
+
   render() {
+    console.log(this.props.navigation);
     const { navigation } = this.props;
-    const { id, titleName } = navigation.state.params;
-    // const { titleName } = this.props.navigation.state.params;
-    console.log(titleName);
+    const { id } = navigation.state.params;
 
     return (
       <View>

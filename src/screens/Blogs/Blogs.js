@@ -7,6 +7,7 @@ import { DisplayBlogs } from '../../components';
 const BlogContent = withContent(DisplayBlogs, listBlogs);
 class Blogs extends React.Component {
   render() {
+    console.log('BLOG NAVIGATION', this.props.navigation);
     return (
       <View style={{ flex: 1 }}>
         <BlogContent
