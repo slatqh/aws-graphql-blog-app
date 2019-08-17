@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
+import { Avatar } from './Avatar';
 
 const { width, height } = Dimensions.get('window');
 const IMAGE_HEIGHT = height / 4;
@@ -35,11 +36,8 @@ export const CardView = ({ onPress, title, description, image, comments }) => (
       shadowRadius: 5,
     }}
   >
-    <View>
-      <Text>Dmitriy Blot</Text>
-      <Text>Dmitriy Blot</Text>
-      <Text>Dmitriy Blot</Text>
-    </View>
+    <Avatar />
+    <Divider style={{ marginHorizontal: 10 }} />
     <Text
       style={{
         fontSize: 14,
