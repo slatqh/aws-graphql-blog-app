@@ -1,6 +1,9 @@
 export default {
-  teal: '#40e0d0',
-  blue: '#6a5acd',
-  grey: 'dimgrey',
-  white: 'white',
+  teal: '#61f2f5',
+  purple: '#723881',
+  grey: '#e0e0e0',
+  white: '#ffffff',
+  black: '#200f21',
+  divider: '#c8c8c8',
+  lightblack: '#444444',
 };

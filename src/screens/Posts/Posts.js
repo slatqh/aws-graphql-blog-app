@@ -20,16 +20,20 @@ const blogQuery = `
 
 const Post = withContent(DisplayPosts, blogQuery);
 export default class Posts extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-
-    return {
+  static navigationOptions = ({ navigation }) =>
+    // const params = navigation.state.params || {};
+    ({
       headerRight: (
-        <Button onPress={() => navigation.navigate('Modal')} title="Info" />
+        <Button
+          onPress={() =>
+            navigation.navigate('Modal', {
+              id: navigation.state.params, // passing current post/blog id to modal screen
+            })
+          }
+          title="New"
+        />
       ),
-      /* the rest of this config is unchanged */
-    };
-  };
+    });
 
   render() {
     console.log(this.props.navigation);
@@ -37,7 +41,7 @@ export default class Posts extends Component {
     const { id } = navigation.state.params;
 
     return (
-      <View>
+      <View style={{}}>
         <Post
           options={id}
           action="Load Posts"

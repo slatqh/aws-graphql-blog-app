@@ -5,6 +5,9 @@ import DisplayPosts from './DisplayPosts';
 import DisplayComments from './DisplayComments';
 import { CreatePost } from './CreatePost';
 import { CustomTextInput } from './TextInput';
+import { CardView } from './Card';
+import { Divider } from './Divider';
+import { Avatar } from './Avatar';
 
 export {
   CustomButton,
@@ -14,4 +17,7 @@ export {
   DisplayComments,
   CreatePost,
   CustomTextInput,
+  CardView,
+  Divider,
+  Avatar,
 };
