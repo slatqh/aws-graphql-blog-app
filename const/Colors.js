@@ -6,4 +6,5 @@ export default {
   black: '#200f21',
   divider: '#c8c8c8',
   lightblack: '#444444',
+  milk: '#f6f6f6',
 };

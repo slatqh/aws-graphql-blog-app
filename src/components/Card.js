@@ -23,6 +23,7 @@ const CARD_HEIGHT = IMAGE_HEIGHT / 2.5;
 
 export const CardView = ({ onPress, title, description, image, comments }) => (
   <TouchableOpacity
+    onPress={onPress}
     style={{
       margin: 10,
       borderRadius: 5,

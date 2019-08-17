@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import { Divider, CardView } from '../components';
+import { Divider, CardView, DisplayComments } from '../components';
 import Colors from '../../const/Colors';
 
 const data = [
@@ -46,18 +46,7 @@ const data = [
 
 export default class TestScreen extends Component {
   render() {
-    return (
-      <ScrollView style={{ flex: 1 }}>
-        {data.map(el => (
-          <CardView
-            description={el.description}
-            image={el.image}
-            comments={el.commnets}
-            title={el.title}
-          />
-        ))}
-      </ScrollView>
-    );
+    return <DisplayComments data={data} />;
   }
 }
 const styles = StyleSheet.create({});

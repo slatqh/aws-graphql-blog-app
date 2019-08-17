@@ -8,6 +8,8 @@ import { CustomTextInput } from './TextInput';
 import { CardView } from './Card';
 import { Divider } from './Divider';
 import { Avatar } from './Avatar';
+import { SingleComent } from './SingleComent';
+import { WriteComment } from './WriteComment';
 
 export {
   CustomButton,
@@ -20,4 +22,6 @@ export {
   CardView,
   Divider,
   Avatar,
+  SingleComent,
+  WriteComment,
 };

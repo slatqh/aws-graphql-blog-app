@@ -15,14 +15,12 @@ import Colors from '../../const/Colors';
 export const CreatePost = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [text, setText] = useState('');
-  const [button, setButton] = useState('');
-
+  const [message, setMessage] = useState('');
   function saveData() {
     const postData = {
       title,
       description,
-      text,
+      message,
     };
 
     return props.data(postData);
@@ -53,7 +51,7 @@ export const CreatePost = props => {
           <TextInput
             placeholder={`${' '} Type something...`}
             multiline
-            onChangeText={e => setText(e)}
+            onChangeText={e => setMessage(e)}
           />
         </View>
       </View>

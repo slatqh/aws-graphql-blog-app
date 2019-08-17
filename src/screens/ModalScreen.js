@@ -10,13 +10,17 @@ export default class ModalScreen extends React.Component {
   };
 
   getBlogPosts = async data => {
-    const { title } = data;
+    const { title, description, message } = data;
     const { id } = this.props.navigation.state.params.id; // get Id from parent screen Posts
+    console.log('Form modal', title);
     try {
       const newPost = await API.graphql(
         graphqlOperation(createPost, {
           input: {
             title,
+            description,
+            message,
+            createAt: new Date(),
             postBlogId: id,
           },
         })

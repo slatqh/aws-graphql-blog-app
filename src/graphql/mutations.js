@@ -9,6 +9,10 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
       items {
         id
         title
+        description
+        createAt
+        likes
+        message
       }
       nextToken
     }
@@ -23,6 +27,10 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
       items {
         id
         title
+        description
+        createAt
+        likes
+        message
       }
       nextToken
     }
@@ -37,6 +45,10 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
       items {
         id
         title
+        description
+        createAt
+        likes
+        message
       }
       nextToken
     }
@@ -47,6 +59,10 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
     id
     title
+    description
+    createAt
+    likes
+    message
     blog {
       id
       name
@@ -68,6 +84,10 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
     id
     title
+    description
+    createAt
+    likes
+    message
     blog {
       id
       name
@@ -89,6 +109,10 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
     id
     title
+    description
+    createAt
+    likes
+    message
     blog {
       id
       name
@@ -113,6 +137,10 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     post {
       id
       title
+      description
+      createAt
+      likes
+      message
       blog {
         id
         name
@@ -131,6 +159,10 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     post {
       id
       title
+      description
+      createAt
+      likes
+      message
       blog {
         id
         name
@@ -149,6 +181,10 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     post {
       id
       title
+      description
+      createAt
+      likes
+      message
       blog {
         id
         name
