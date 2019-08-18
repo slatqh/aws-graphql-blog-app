@@ -2,8 +2,32 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import { Blogs, Posts, Comments, TestScreen, PostDetails } from '../screens';
+import {
+  Blogs,
+  Posts,
+  Comments,
+  TestScreen,
+  PostDetails,
+  AuthMain,
+  Login,
+  CreateAccount,
+} from '../screens';
+
 import ModalScreen from '../screens/ModalScreen';
+
+export const AuthStack = createStackNavigator(
+  {
+    Auth: AuthMain,
+    Login,
+    Signup: CreateAccount,
+  },
+  {
+    defaultNavigationOptions: {
+      header: null,
+    },
+    initialRouteName: 'Auth',
+  }
+);
 
 const BlogStack = createStackNavigator(
   {
@@ -36,9 +60,10 @@ const MainBlog = createStackNavigator(
   }
 );
 
-const TabNavigator = createBottomTabNavigator({
+const App = createBottomTabNavigator({
+  Auth: AuthStack,
   Home: MainBlog,
   Test: TestScreen,
 });
 
-export default TabNavigator;
+export default App;

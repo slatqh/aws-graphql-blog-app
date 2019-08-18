@@ -12,6 +12,9 @@ import { SingleComent } from './SingleComent';
 import { WriteComment } from './WriteComment';
 import { Loading } from './Loading';
 import { ShowError } from './ShowError';
+import { TextInput } from './Input';
+import TextCustom from './TextCustom';
+import LoadingStatus from './LoadingStatus';
 
 export {
   CustomButton,
@@ -28,4 +31,7 @@ export {
   WriteComment,
   Loading,
   ShowError,
+  TextInput,
+  TextCustom,
+  LoadingStatus,
 };
