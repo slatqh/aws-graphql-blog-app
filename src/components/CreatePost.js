@@ -37,10 +37,12 @@ export const CreatePost = props => {
           placeholder="Post title"
           icon="email"
           autoFocus
+          autoCorrect={false}
           onChangeText={e => setTitle(e)}
         />
         <CustomTextInput
           clearButtonMode="while-editing"
+          autoCorrect={false}
           placeholder="Post description"
           icon="email"
           // autoFocus
@@ -49,8 +51,11 @@ export const CreatePost = props => {
 
         <View style={styles.textInput}>
           <TextInput
-            placeholder={`${' '} Type something...`}
+            placeholder="Type something..."
             multiline
+            // color={Colors.lightblack}
+            autoCorrect={false}
+            style={{ padding: 10, color: Colors.lightblack }}
             onChangeText={e => setMessage(e)}
           />
         </View>

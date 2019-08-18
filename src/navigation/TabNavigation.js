@@ -2,13 +2,14 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import { Blogs, Posts, Comments, TestScreen } from '../screens';
+import { Blogs, Posts, Comments, TestScreen, PostDetails } from '../screens';
 import ModalScreen from '../screens/ModalScreen';
 
 const BlogStack = createStackNavigator(
   {
     Blogs,
     Posts,
+    PostDetails,
     Comments,
   },
   {
@@ -36,8 +37,8 @@ const MainBlog = createStackNavigator(
 );
 
 const TabNavigator = createBottomTabNavigator({
-  Test: TestScreen,
   Home: MainBlog,
+  Test: TestScreen,
 });
 
 export default TabNavigator;

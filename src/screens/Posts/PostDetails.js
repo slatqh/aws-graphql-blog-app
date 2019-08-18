@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withContent } from '../withContentHOC';
-import { DisplayComments } from '../../components';
+import { PostDetails } from '../../components';
 
 const postsComments = `
     query getPost($id: ID!){
       getPost(id: $id){
+        id
+        title
         comments{
           items{
             content
@@ -20,9 +22,9 @@ const postsComments = `
     }
     `;
 
-const ShowComments = withContent(DisplayComments, postsComments);
+const ShowPostDetails = withContent(PostDetails, postsComments);
 
-class Comments extends Component {
+class PostDetailsScreen extends Component {
   render() {
     const { navigation } = this.props;
     const { postId, titleName } = navigation.state.params;
@@ -30,7 +32,7 @@ class Comments extends Component {
     console.log('Comments', titleName);
     return (
       <View style={{ flex: 1 }}>
-        <ShowComments
+        <ShowPostDetails
           id={postId}
           action="Load Comments"
           queryFields={{ firstField: 'getPost', secondField: 'comments' }}
@@ -40,4 +42,4 @@ class Comments extends Component {
   }
 }
 
-export default Comments;
+export default PostDetailsScreen;

@@ -1,29 +1,21 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../const/Colors';
-import { ShowEmtyContent } from './ShowEmtyContent';
 import { Divider } from './Divider';
 import { Avatar } from './Avatar';
 import { SingleComent } from './SingleComent';
 import { WriteComment } from './WriteComment';
 
-const DisplayComments = props => {
-  const { data, noContent, onPress, title } = props;
-  if (noContent) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ShowEmtyContent text="No Comments. Create one!" />
-      </View>
-    );
-  }
+const PostDetails = ({ data, noContent, onPress }) => {
+  const { getPost } = data;
+  const { title, comments } = getPost;
   return (
     <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>
       <View style={styles.container}>
         <View style={{ flex: 0.3 }}>
           <Avatar />
-          <Text style={styles.title}>Post Title going here</Text>
+          <Text style={styles.title}>{title}</Text>
           <Divider style={{ marginHorizontal: 10 }} />
           <Text style={{ padding: 10 }}>
             Adipisicing nostrud laboris eiusmod nulla elit proident ut in non eu
@@ -66,30 +58,16 @@ const DisplayComments = props => {
           style={styles.comments}
         />
         {/* Single Comment from server */}
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
-        <SingleComent />
+        {comments.items.map(el => (
+          <SingleComent key={el.id} comment={el.content} />
+        ))}
       </View>
       <WriteComment />
     </ScrollView>
   );
 };
 
-export default DisplayComments;
+export default PostDetails;
 
 const styles = StyleSheet.create({
   container: {

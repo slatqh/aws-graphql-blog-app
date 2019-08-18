@@ -43,7 +43,7 @@ export default class Posts extends Component {
     return (
       <View style={{}}>
         <Post
-          options={id}
+          id={id}
           action="Load Posts"
           props={this.props}
           queryFields={{ firstField: 'getBlog', secondField: 'posts' }}

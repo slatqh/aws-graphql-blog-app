@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Colors from '../../const/Colors';
 
-export const SingleComent = props => (
+export const SingleComent = ({ comment }) => (
   <View
     style={{
       marginVertical: 5,
@@ -16,7 +16,7 @@ export const SingleComent = props => (
     }}
   >
     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-      <Text> Some Coment </Text>
+      <Text> {comment} </Text>
     </View>
   </View>
 );
