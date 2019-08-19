@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Amplify, { Auth } from 'aws-amplify';
 import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
 import { CustomButton } from '../../components';
 

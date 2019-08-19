@@ -5,8 +5,10 @@ import {
   View,
   ScrollView,
   SafeAreaView,
+  Button,
   StyleSheet,
 } from 'react-native';
+import { Storage } from 'aws-amplify';
 import { Divider, CardView, DisplayComments } from '../components';
 import Colors from '../../const/Colors';
 
@@ -45,8 +47,24 @@ const data = [
 ];
 
 export default class TestScreen extends Component {
+  uploadImage = () => {
+    Storage.put('test.txt', 'My Content', {
+      cacheControl: '', // (String) Specifies caching behavior along the request/reply chain
+      contentDisposition: '', // (String) Specifies presentational information for the object
+      expires: new Date().now() + 60 * 60 * 24 * 7, // (Date) The date and time at which the object is no longer cacheable. ISO-8601 string, or a UNIX timestamp in seconds
+      metadata: { key: 'value' }, // (map<String>) A map of metadata to store with the object in S3.
+    })
+      .then(result => console.log(result))
+      .catch(err => console.log(err));
+  };
+
   render() {
-    return <DisplayComments data={data} />;
+    return (
+      <View>
+        <SafeAreaView />
+        <Button title="upload" onPress={() => this.uploadImage} />
+      </View>
+    );
   }
 }
 const styles = StyleSheet.create({});

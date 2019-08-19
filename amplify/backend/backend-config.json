@@ -1,10 +1,17 @@
 {
+	"auth": {
+		"blogappb6073baf": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
 	"api": {
-		"blog": {
+		"blogapp": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
-				"securityType": "API_KEY"
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
 			}
 		}
 	}

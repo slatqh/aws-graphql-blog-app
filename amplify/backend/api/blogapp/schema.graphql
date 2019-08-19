@@ -1,15 +1,15 @@
+
 type Blog @model {
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
 }
 type Post @model {
+  message: String
+  description: String
+  createdAt: String
   id: ID!
   title: String!
-  description: String!
-  createAt: String!
-  likes: Int
-  message: String
   blog: Blog @connection(name: "BlogPosts")
   comments: [Comment] @connection(name: "PostComments")
 }
@@ -17,4 +17,4 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
-}`
+}

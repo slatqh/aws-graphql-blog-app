@@ -7,12 +7,11 @@ export const onCreateBlog = `subscription OnCreateBlog {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -25,12 +24,11 @@ export const onUpdateBlog = `subscription OnUpdateBlog {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -43,12 +41,11 @@ export const onDeleteBlog = `subscription OnDeleteBlog {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -57,12 +54,11 @@ export const onDeleteBlog = `subscription OnDeleteBlog {
 `;
 export const onCreatePost = `subscription OnCreatePost {
   onCreatePost {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -82,12 +78,11 @@ export const onCreatePost = `subscription OnCreatePost {
 `;
 export const onUpdatePost = `subscription OnUpdatePost {
   onUpdatePost {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -107,12 +102,11 @@ export const onUpdatePost = `subscription OnUpdatePost {
 `;
 export const onDeletePost = `subscription OnDeletePost {
   onDeletePost {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -135,12 +129,11 @@ export const onCreateComment = `subscription OnCreateComment {
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -157,12 +150,11 @@ export const onUpdateComment = `subscription OnUpdateComment {
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -179,12 +171,11 @@ export const onDeleteComment = `subscription OnDeleteComment {
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name

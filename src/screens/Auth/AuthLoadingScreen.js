@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, StatusBar, View } from 'react-native';
+import { ActivityIndicator, StatusBar, View, Linking } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -9,14 +9,22 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = () => {
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          console.log(`Initial url is: ${url}`);
+        } else {
+          console.log('NO URL');
+        }
+      })
+      .catch(err => console.error('An error occurred', err));
     const loogin = false;
     this.props.navigation.navigate(loogin ? 'App' : 'Auth');
   };
 
   // Render any loading content that you like here
   render() {
+    console.log('URL');
     return (
       <View>
         <ActivityIndicator />

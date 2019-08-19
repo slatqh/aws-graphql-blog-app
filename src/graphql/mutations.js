@@ -7,12 +7,11 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -25,12 +24,11 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -43,12 +41,11 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -57,12 +54,11 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
 `;
 export const createPost = `mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -82,12 +78,11 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
 `;
 export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -107,12 +102,11 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
 `;
 export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -135,12 +129,11 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -157,12 +150,11 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -179,12 +171,11 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name

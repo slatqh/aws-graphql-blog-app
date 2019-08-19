@@ -7,12 +7,11 @@ export const getBlog = `query GetBlog($id: ID!) {
     name
     posts {
       items {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
       nextToken
     }
@@ -38,12 +37,11 @@ export const listBlogs = `query ListBlogs(
 `;
 export const getPost = `query GetPost($id: ID!) {
   getPost(id: $id) {
+    message
+    description
+    createdAt
     id
     title
-    description
-    createAt
-    likes
-    message
     blog {
       id
       name
@@ -68,12 +66,11 @@ export const listPosts = `query ListPosts(
 ) {
   listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -91,12 +88,11 @@ export const getComment = `query GetComment($id: ID!) {
     id
     content
     post {
+      message
+      description
+      createdAt
       id
       title
-      description
-      createAt
-      likes
-      message
       blog {
         id
         name
@@ -118,12 +114,11 @@ export const listComments = `query ListComments(
       id
       content
       post {
+        message
+        description
+        createdAt
         id
         title
-        description
-        createAt
-        likes
-        message
       }
     }
     nextToken
