@@ -31,7 +31,7 @@ export function withContent(WrappedComponent, Query) {
           this.setState({ loading: false });
         }
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
         this.setState({ error: true });
       }
     };

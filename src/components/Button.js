@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../const/Colors';
 
 export const CustomButton = ({
@@ -36,9 +36,9 @@ export const CustomButton = ({
   ) : (
     <Button
       iconContainerStyle={styles.buttonNoGradient}
-      icon={
-        icon ? <Icon name={icon} size={20} color="white" margin={20} /> : null
-      }
+      // icon={
+      //    icon ? <Icon name={icon} size={20} color="white" margin={20} /> : null
+      // }
       iconLeft
       iconRight
       onPress={onPress}

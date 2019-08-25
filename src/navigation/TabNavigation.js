@@ -25,7 +25,7 @@ export const AuthStack = createStackNavigator(
     defaultNavigationOptions: {
       header: null,
     },
-    initialRouteName: 'Auth',
+    initialRouteName: 'Login',
   }
 );
 
@@ -61,9 +61,9 @@ const MainBlog = createStackNavigator(
 );
 
 const App = createBottomTabNavigator({
+  Home: MainBlog,
   Test: TestScreen,
   Auth: AuthStack,
-  Home: MainBlog,
 });
 
 export default App;

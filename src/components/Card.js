@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import MaterialIcon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+// import MaterialIcon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
 import { Avatar } from './Avatar';
@@ -78,9 +78,9 @@ export const CardView = ({ onPress, title, description, image, comments }) => (
             flexDirection: 'row',
           }}
         >
-          <Icon name="heart-o" size={15} color={Colors.lightblack} />
+          {/* <Icon name="heart-o" size={15} color={Colors.lightblack} />
           <Icon name="smile-o" size={15} color={Colors.lightblack} />
-          <Icon name="thumbs-o-up" size={15} color={Colors.lightblack} />
+          <Icon name="thumbs-o-up" size={15} color={Colors.lightblack} /> */}
         </View>
         <Text style={{ color: Colors.lightblack, fontSize: 12 }}>
           299 Comments
@@ -98,16 +98,16 @@ export const CardView = ({ onPress, title, description, image, comments }) => (
         }}
       >
         <TouchableOpacity style={styles.fieldsContainer}>
-          <Icon name="thumbs-o-up" size={24} color={Colors.black} />
+          {/* <Icon name="thumbs-o-up" size={24} color={Colors.black} /> */}
           <Text style={styles.fields}>Like</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.fieldsContainer}>
-          <MaterialIcon
+          {/* <MaterialIcon
             name="comment-text-outline"
             size={24}
             color={Colors.black}
             style={{ paddingTop: 5 }}
-          />
+          /> */}
           <Text style={styles.fields}>Comment</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.fieldsContainer}>

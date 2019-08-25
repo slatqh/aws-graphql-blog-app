@@ -10,7 +10,7 @@ const AppContainer = createAppContainer(
       App,
     },
     {
-      initialRouteName: 'AuthLoading',
+      initialRouteName: 'App',
     }
   )
 );

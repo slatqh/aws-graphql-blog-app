@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Amplify, { Auth } from 'aws-amplify';
 import { View, Text, Image, SafeAreaView, StyleSheet } from 'react-native';
 import { CustomButton } from '../../components';
 
@@ -25,7 +24,7 @@ export default class AuthMain extends Component {
           <CustomButton
             title="CREATE ACCOUNT"
             gradient
-            onPress={() => this.props.navigation.navigate('Signup')}
+            onPress={() => this.props.navigation.navigate('Login')}
           />
           <View style={styles.wrapper}>
             <View style={styles.wrapperOr} />

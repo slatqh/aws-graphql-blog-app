@@ -8,8 +8,9 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
+import { Auth } from 'aws-amplify';
 import { CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
 import { CustomButton, TextInput, TextCustom, Avatar } from '../../components';
@@ -26,7 +27,7 @@ class CreateAccount extends Component {
       male: null,
       female: null,
       gender: null,
-      name: null,
+      username: null,
       lastName: null,
       email: null,
       password: null,
@@ -40,49 +41,76 @@ class CreateAccount extends Component {
       passwordConfirmError: false,
       genderError: false,
       avatarSource: '',
+      confirmation: false,
+      code: null,
     };
   }
 
-  checkInputs() {
-    const {
-      name,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-      gender,
-    } = this.state;
-    if (name === null || name.length < 1) {
-      this.setState({ nameError: true });
-    } else if (lastName === null || lastName.length < 1) {
-      this.setState({ lastNameError: true });
-    } else if (email === null || email.length < 1) {
-      this.setState({ emailError: true });
-    } else if (password === null || password.length < 7) {
-      this.setState({ passwordError: true });
-    } else if (confirmPassword === null || confirmPassword.length < 1) {
-      this.setState({ passwordConfirmError: true });
-    } else if (password !== confirmPassword) {
-      Alert.alert('Password not match', null, [{ text: 'OK' }], {
-        cancelable: false,
-      });
-    } else if (gender === null) {
-      this.setState({ genderError: true });
-    } else {
-      this.createAccount();
-    }
-  }
+  // checkInputs() {
+  //   const {
+  //     name,
+  //     lastName,
+  //     email,
+  //     password,
+  //     confirmPassword,
+  //     gender,
+  //   } = this.state;
+  //   if (name === null || name.length < 1) {
+  //     this.setState({ nameError: true });
+  //   } else if (lastName === null || lastName.length < 1) {
+  //     this.setState({ lastNameError: true });
+  //   } else if (email === null || email.length < 1) {
+  //     this.setState({ emailError: true });
+  //   } else if (password === null || password.length < 7) {
+  //     this.setState({ passwordError: true });
+  //   } else if (confirmPassword === null || confirmPassword.length < 1) {
+  //     this.setState({ passwordConfirmError: true });
+  //   } else if (password !== confirmPassword) {
+  //     Alert.alert('Password not match', null, [{ text: 'OK' }], {
+  //       cancelable: false,
+  //     });
+  //   } else if (gender === null) {
+  //     this.setState({ genderError: true });
+  //   } else {
+  //     this.createAccount();
+  //   }
+  // }
 
   async createAccount() {
-    const { name, email, password, gender, phone } = this.state;
-    await this.props.signUp({
-      name,
-      email,
+    const { username, email, password, gender, phone } = this.state;
+    Auth.signUp({
+      username,
       password,
-      gender,
-      phone,
-    });
-    this.props.navigation.navigate(this.props.isLoggin ? 'App' : 'Signup');
+      attributes: {
+        email, // optional
+        // phone,   // optional - E.164 number convention
+        // other custom attributes
+      },
+      validationData: [], // optional
+    })
+      .then(data => {
+        console.log(data);
+        this.setState({ confirmation: true });
+      })
+      .catch(err => console.log(err));
+
+    // After retrieving the confirmation code from the user
+
+    // Auth.resendSignUp(name).then(() => {
+    //     console.log('code resent successfully');
+    // }).catch(e => {
+    //     console.log(e);
+    // });
+  }
+
+  confirmationCode() {
+    const { username, code } = this.state;
+    Auth.confirmSignUp(username, code, {
+      // Optional. Force user confirmation irrespective of existing alias. By default set to True.
+      forceAliasCreation: true,
+    })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
 
   selectPhotoTapped() {
@@ -122,7 +150,7 @@ class CreateAccount extends Component {
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
           <SafeAreaView>
-            <Icon
+            {/* <Icon
               onPress={() => this.props.navigation.goBack(null)}
               style={{
                 position: 'absolute',
@@ -134,14 +162,14 @@ class CreateAccount extends Component {
               type="ionicons"
               color={Colors.purple}
               size={35}
-            />
+            /> */}
             <Image
               style={styles.logo}
               source={require('../../../assets/images/logo.png')}
               resizeMode="center"
             />
           </SafeAreaView>
-          <Avatar onPress={() => this.selectPhotoTapped()} />
+          {/* <Avatar onPress={() => this.selectPhotoTapped()} /> */}
         </View>
         <View style={styles.wrap}>
           <View style={{ flexDirection: 'row' }}>
@@ -149,7 +177,9 @@ class CreateAccount extends Component {
               containerStyle={{ flex: 1 }}
               placeholder="FIRST NAME"
               label="first name"
-              onChangeText={e => this.setState({ name: e, nameError: false })}
+              onChangeText={e =>
+                this.setState({ username: e, nameError: false })
+              }
               error={!!this.state.nameError}
             />
             <TextInput
@@ -195,54 +225,12 @@ class CreateAccount extends Component {
             placeholder="PHONE"
             onChangeText={e => this.setState({ phone: e })}
           />
-          <View style={{ marginTop: 20, paddingLeft: 10 }}>
-            <TextCustom size={12} title="GENDER" />
-          </View>
-          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-            <CheckBox
-              left
-              title="MALE"
-              iconLeft
-              textStyle={styles.checkBoxTitle}
-              containerStyle={styles.checkBox}
-              checkedIcon="check-circle"
-              uncheckedIcon="circle-thin"
-              uncheckedColor={Colors.purple}
-              checkedColor={Colors.purple}
-              checked={this.state.male}
-              onPress={() =>
-                this.setState({
-                  male: true,
-                  female: false,
-                  gender: 'MALE',
-                })
-              }
-            />
-            <CheckBox
-              right
-              title="FEMALE"
-              textStyle={styles.checkBoxTitle}
-              iconLeft
-              containerStyle={styles.checkBox}
-              checkedIcon="check-circle"
-              uncheckedIcon="circle-thin"
-              uncheckedColor={Colors.purple}
-              checkedColor={Colors.purple}
-              checked={this.state.female}
-              onPress={() =>
-                this.setState({
-                  female: true,
-                  male: false,
-                  gender: 'FEMALE',
-                })
-              }
-            />
-          </View>
-          {this.state.genderError === true ? (
-            <Text style={styles.error}>Please select gender</Text>
-          ) : (
-            <View />
-          )}
+
+          <TextInput
+            placeholder="CONFIMATION CODE"
+            onChangeText={e => this.setState({ code: e })}
+          />
+          <View style={{ marginTop: 20, paddingLeft: 10 }} />
           {this.props.error ? (
             <Text style={styles.error}>{this.props.error}</Text>
           ) : null}
@@ -254,11 +242,19 @@ class CreateAccount extends Component {
               marginHorizontal: 25,
             }}
           />
-          <CustomButton
-            title="CREATE ACCOUNT"
-            gradient
-            onPress={() => this.checkInputs()}
-          />
+          {!this.state.confirmation ? (
+            <CustomButton
+              title="CREATE ACCOUNT"
+              gradient
+              onPress={() => this.createAccount()}
+            />
+          ) : (
+            <CustomButton
+              title="Confirm"
+              gradient
+              onPress={() => this.confirmationCode()}
+            />
+          )}
         </View>
       </View>
     );

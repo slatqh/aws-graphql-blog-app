@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import API from '@aws-amplify/api';
 import AppNavigator from './src/navigation/AppNavigation';
 import store from './src/Redux/store';
-
+import Amplify, { Auth } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react-native';
 import config from './aws-exports';
 
 console.disableYellowBox = true;
 
-API.configure(config);
-PubSub.configure(config);
+Amplify.configure(config);
 
 class App extends React.Component {
   render() {
