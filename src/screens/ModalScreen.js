@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from 'react-native';
 import API, { graphqlOperation } from '@aws-amplify/api';
+import { withAuthenticator } from 'aws-amplify-react-native';
 import { createPost } from '../graphql/mutations';
 import { CreatePost } from '../components';
 
-export default class ModalScreen extends React.Component {
+class ModalScreen extends React.Component {
   state = {
     data: null,
   };
@@ -41,3 +42,4 @@ export default class ModalScreen extends React.Component {
     );
   }
 }
+export default withAuthenticator(ModalScreen);

@@ -9,6 +9,7 @@ export default class AuthMain extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 2 }}>

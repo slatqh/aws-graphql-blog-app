@@ -10,11 +10,8 @@ const AppContainer = createAppContainer(
       App,
     },
     {
-      initialRouteName: 'App',
+      initialRouteName: 'Auth',
     }
   )
 );
-
-// Now AppContainer is the main component for React to render
-
 export default AppContainer;

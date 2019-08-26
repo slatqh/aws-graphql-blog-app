@@ -59,17 +59,18 @@ class Login extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style={{ flex: 1 }}>
         {/* {!this.props.loading ? (
           <LoadingStatus loading={this.props.loading} />
         ) : null} */}
-        <View style={{ flex: 1 }}>
+        <View style={{}}>
           <SafeAreaView>
             <Image
               style={styles.image}
               source={require('../../../assets/images/logo.png')}
-              resizeMode="center"
+              resizeMode="cover"
             />
           </SafeAreaView>
         </View>
@@ -165,19 +166,14 @@ const styles = StyleSheet.create({
   image: {
     justifyContent: 'center',
     alignSelf: 'center',
-    width: 300,
-    height: 200,
+    width: 400,
+    height: 300,
   },
   text: {
-    flex: 2,
+    paddingTop: 20,
+    flex: 1,
     paddingHorizontal: 20,
     alignContent: 'center',
   },
 });
-
-// const mapStateToProps = ({ Auth }) => {
-//   const { loading, isLoggin } = Auth;
-//   return { loading, isLoggin };
-// };
-
 export default Login;
