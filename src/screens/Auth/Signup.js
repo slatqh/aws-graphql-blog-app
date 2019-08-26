@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { CheckBox } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
 import { CustomButton, TextInput, TextCustom, Avatar } from '../../components';
@@ -109,7 +109,12 @@ class CreateAccount extends Component {
       // Optional. Force user confirmation irrespective of existing alias. By default set to True.
       forceAliasCreation: true,
     })
-      .then(data => console.log(data))
+      .then(data => {
+        if (data) {
+          console.log('User confimation success');
+          this.props.navigation.navigate('App');
+        }
+      })
       .catch(err => console.log(err));
   }
 
@@ -150,7 +155,7 @@ class CreateAccount extends Component {
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
           <SafeAreaView>
-            {/* <Icon
+            <Icon
               onPress={() => this.props.navigation.goBack(null)}
               style={{
                 position: 'absolute',
@@ -162,7 +167,7 @@ class CreateAccount extends Component {
               type="ionicons"
               color={Colors.purple}
               size={35}
-            /> */}
+            />
             <Image
               style={styles.logo}
               source={require('../../../assets/images/logo.png')}
@@ -290,12 +295,6 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
-
-// const mapStateToProps = ({ Auth }) => {
-//   const { loading, isLoggin, error } = Auth;
-//   return { loading, isLoggin, error };
-// };
-
 export default connect(
   null,
   {}

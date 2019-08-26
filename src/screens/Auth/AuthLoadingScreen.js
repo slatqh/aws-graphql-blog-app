@@ -9,15 +9,6 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = () => {
-    Linking.getInitialURL()
-      .then(url => {
-        if (url) {
-          console.log(`Initial url is: ${url}`);
-        } else {
-          console.log('NO URL');
-        }
-      })
-      .catch(err => console.error('An error occurred', err));
     const loogin = false;
     this.props.navigation.navigate(loogin ? 'App' : 'Auth');
   };

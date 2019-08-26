@@ -1,24 +1,24 @@
 {
-	"auth": {
-		"blogappb6073baf": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
-	"api": {
-		"blogapp": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"securityType": "API_KEY"
-			}
-		}
-	},
-	"storage": {
-		"BlogPictures": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+    "auth": {
+        "blogappb6073baf": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
+        }
+    },
+    "api": {
+        "blogapp": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "securityType": "API_KEY"
+            }
+        }
+    },
+    "storage": {
+        "BlogPictures": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    }
 }

@@ -24,6 +24,7 @@ class Login extends Component {
       password: null,
       emailError: false,
       passwordError: false,
+      authError: false,
     };
   }
 
@@ -32,44 +33,11 @@ class Login extends Component {
     try {
       const user = await Auth.signIn(username, password);
       console.log('USER', user);
-      if (
-        user.challengeName === 'SMS_MFA' ||
-        user.challengeName === 'SOFTWARE_TOKEN_MFA'
-      ) {
-        // You need to get the code from the UI inputs
-        // and then trigger the following function with a button click
-        const code = getCodeFromUserInput();
-        // If MFA is enabled, sign-in should be confirmed with the confirmation code
-        const loggedUser = await Auth.confirmSignIn(
-          user, // Return object from Auth.signIn()
-          code, // Confirmation code
-          mfaType // MFA Type e.g. SMS_MFA, SOFTWARE_TOKEN_MFA
-        );
-        console.log(loggedUser);
-      } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
-        // You need to get the new password and required attributes from the UI inputs
-        // and then trigger the following function with a button click
-        // For example, the email and phone_number are required attributes
-        const { username, email, phone_number } = getInfoFromUserInput();
-        const loggedUser = await Auth.completeNewPassword(
-          user, // the Cognito User Object
-          newPassword, // the new password
-          // OPTIONAL, the required attributes
-          {
-            email,
-            phone_number,
-          }
-        );
-        console.log(loggedUser);
-      } else if (user.challengeName === 'MFA_SETUP') {
-        // This happens when the MFA method is TOTP
-        // The user needs to setup the TOTP before using it
-        // More info please check the Enabling MFA part
-        Auth.setupTOTP(user);
+
+      if (user) {
+        this.props.navigation.navigate('App');
       } else {
-        // The user directly signs in
-        console.log(user);
+        this.setState({ authError: true });
       }
     } catch (err) {
       if (err.code === 'UserNotConfirmedException') {
@@ -105,6 +73,9 @@ class Login extends Component {
             />
           </SafeAreaView>
         </View>
+        {this.state.authError ? (
+          <Text style={{ color: 'red' }}>Some error with loggin</Text>
+        ) : null}
         <View style={styles.text}>
           <TextInput
             placeholder="EMAIL"

@@ -11,6 +11,7 @@ class Blogs extends React.Component {
       <View style={{ flex: 1 }}>
         <BlogContent
           props={this.props}
+          action="Load Blogs"
           queryFields={{ firstField: 'listBlogs', secondField: false }}
         />
       </View>

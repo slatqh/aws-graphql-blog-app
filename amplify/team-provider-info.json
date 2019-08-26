@@ -13,7 +13,7 @@
         "categories": {
             "auth": {
                 "blogappb6073baf": {
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"2493217897608354\",\"client_secret\":\"e27c186e3c27d6b18f7d235c5496570e\"}]"
+                    "facebookAppId": "2493217897608354"
                 }
             }
         }

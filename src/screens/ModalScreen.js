@@ -20,7 +20,7 @@ export default class ModalScreen extends React.Component {
             title,
             description,
             message,
-            createAt: new Date(),
+            createdAt: new Date(),
             postBlogId: id,
           },
         })

@@ -44,16 +44,19 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
+    "useDefault": "manual",
+    "hostedUI": false,
     "usernameAttributes": [
         "email"
     ],
-    "hostedUIDomainName": "blogappb6073baf-b6073baf",
-    "authProvidersUserPool": [
-        "Facebook"
+    "dependsOn": [],
+    "thirdPartyAuth": true,
+    "authProviders": [
+        "graph.facebook.com"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:8081/\"],\"LogoutURLs\":[\"http://localhost:8081/\"]}",
-    "dependsOn": []
+    "triggers": "{}",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": []
 }
