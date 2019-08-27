@@ -91,16 +91,7 @@ Parameters:
               
   dependsOn:
     Type: CommaDelimitedList
-        
-  thirdPartyAuth:
-    Type: String
-                    
-  authProviders:
-    Type: CommaDelimitedList
       
-  facebookAppId:
-    Type: String
-              
   triggers:
     Type: String
                     
@@ -347,13 +338,6 @@ Resources:
             - cognito-idp.${region}.amazonaws.com/${client}
             - { region: !Ref "AWS::Region",  client: !Ref UserPool}
             
-      SupportedLoginProviders: 
-        
-        graph.facebook.com: !Ref facebookAppId
-        
-        
-        
-      
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
        
        
@@ -400,9 +384,6 @@ Outputs :
    
    
   
-  
-  FacebookWebClient:
-    Value: !Ref facebookAppId
    
    
   

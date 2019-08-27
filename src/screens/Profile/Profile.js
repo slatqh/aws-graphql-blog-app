@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Button, SafeAreaView } from 'react-native';
+import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
 
-export default class Profile extends Component {
+class Profile extends Component {
   signOut() {
-    Auth.signOut()
+    Auth.signOut(this.props.authData)
       .then(data => console.log(data))
       .catch(err => console.log(err));
+    // this.props.navigation.navigate('Login');
   }
 
   render() {
@@ -20,3 +22,4 @@ export default class Profile extends Component {
     );
   }
 }
+export default withAuthenticator(Profile);

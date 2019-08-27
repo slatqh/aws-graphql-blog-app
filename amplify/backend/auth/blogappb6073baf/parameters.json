@@ -1,6 +1,6 @@
 {
     "identityPoolName": "blogappb6073baf_identitypool_b6073baf",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "blogapb6073baf",
     "userPoolName": "blogappb6073baf_userpool_b6073baf",
     "autoVerifiedAttributes": [
@@ -44,16 +44,12 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
+    "useDefault": "default",
     "hostedUI": false,
     "usernameAttributes": [
         "email"
     ],
     "dependsOn": [],
-    "thirdPartyAuth": true,
-    "authProviders": [
-        "graph.facebook.com"
-    ],
     "triggers": "{}",
     "parentStack": {
         "Ref": "AWS::StackId"

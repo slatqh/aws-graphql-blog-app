@@ -8,13 +8,9 @@ import {
   Text,
 } from 'react-native';
 import { Auth } from 'aws-amplify';
+import { Authenticator } from 'aws-amplify-react-native';
 
-import {
-  CustomButton,
-  TextInput,
-  TextCustom,
-  LoadingStatus,
-} from '../../components';
+import { CustomButton, TextInput, TextCustom } from '../../components';
 
 class Login extends Component {
   constructor(props) {
@@ -26,6 +22,16 @@ class Login extends Component {
       passwordError: false,
       authError: false,
     };
+  }
+
+  checkInputs() {
+    const { username, password } = this.state;
+    if (username === null || username.length < 1) {
+      this.setState({ emailError: true });
+    } else if (password === null || password.length < 2) {
+      this.setState({ passwordError: true });
+    }
+    this.SignIn();
   }
 
   async SignIn() {
@@ -40,140 +46,90 @@ class Login extends Component {
         this.setState({ authError: true });
       }
     } catch (err) {
-      if (err.code === 'UserNotConfirmedException') {
-        // The error happens if the user didn't finish the confirmation step when signing up
-        // In this case you need to resend the code and confirm the user
-        // About how to resend the code and confirm the user, please check the signUp part
-      } else if (err.code === 'PasswordResetRequiredException') {
-        // The error happens when the password is reset in the Cognito console
-        // In this case you need to call forgotPassword to reset the password
-        // Please check the Forgot Password part.
-      } else if (err.code === 'NotAuthorizedException') {
-        // The error happens when the incorrect password is provided
-      } else if (err.code === 'UserNotFoundException') {
-        // The error happens when the supplied username/email does not exist in the Cognito user pool
-      } else {
-        console.log(err);
-      }
+      this.setState({ authError: err.message });
+      console.log(err);
     }
   }
 
   render() {
-    console.log(this.props);
+    const { authError, emailError, passwordError } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        {/* {!this.props.loading ? (
-          <LoadingStatus loading={this.props.loading} />
-        ) : null} */}
-        <View style={{}}>
-          <SafeAreaView>
-            <Image
-              style={styles.image}
-              source={require('../../../assets/images/logo.png')}
-              resizeMode="cover"
-            />
-          </SafeAreaView>
-        </View>
-        {this.state.authError ? (
-          <Text style={{ color: 'red' }}>Some error with loggin</Text>
-        ) : null}
-        <View style={styles.text}>
-          <TextInput
-            placeholder="EMAIL"
-            label="email"
-            onChangeText={e => this.setState({ username: e, emailError: '' })}
-            error={!!this.state.emailError}
-          />
-          <TextInput
-            placeholder="PASSWORD"
-            secureTextEntry
-            onChangeText={e =>
-              this.setState({ password: e, passwordError: '' })
-            }
-            password={!!this.state.passwordError}
-          />
-          <View style={{ margin: 15 }}>
-            <CustomButton
-              title="SIGN IN"
-              gradient
-              // onPress={() => this.signIn()}
-              onPress={() => this.SignIn()}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 20,
-              marginHorizontal: 15,
-            }}
-          >
-            <TouchableOpacity>
-              <TextCustom
-                title="FORGOT DETAILS?"
-                size={10}
-                styles={{ fontWeight: '500' }}
+      <Authenticator hideDefault>
+        <View style={{ flex: 1 }}>
+          <View style={{}}>
+            <SafeAreaView>
+              <Image
+                style={styles.image}
+                source={require('../../../assets/images/logo.png')}
               />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Signup')}
-            >
-              <TextCustom
-                title="CREATE ACCOUNT"
-                size={10}
-                styles={{ fontWeight: '500' }}
-              />
-            </TouchableOpacity>
+            </SafeAreaView>
           </View>
-          <View
-            style={{ flex: 1, alignSelf: 'center', justifyContent: 'center' }}
-          >
-            <Text
+          {authError ? <Text style={{ color: 'red' }}>{authError}</Text> : null}
+          <View style={styles.text}>
+            <TextInput
+              placeholder="EMAIL"
+              label="email"
+              onChangeText={e => this.setState({ username: e, emailError: '' })}
+              error={!!emailError}
+            />
+            <TextInput
+              placeholder="PASSWORD"
+              secureTextEntry
+              onChangeText={e =>
+                this.setState({ password: e, passwordError: '' })
+              }
+              password={!!passwordError}
+            />
+            <View style={{ margin: 15 }}>
+              <CustomButton
+                title="SIGN IN"
+                gradient
+                onPress={() => this.checkInputs()}
+              />
+            </View>
+            <View
               style={{
-                alignSelf: 'center',
-                // fontFamily: 'montserrat',
-                color: '#7f8184',
-                fontSize: 12,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: 20,
+                marginHorizontal: 15,
               }}
             >
-              CLICK HERE FOR
-            </Text>
-            <Text
-              style={{
-                // fontFamily: 'montserrat',
-                color: '#7f8184',
-                fontSize: 12,
-              }}
-            >
-              BEAUTY BAR FOR{' '}
-              <Text
-                style={{
-                  // fontFamily: 'montserrat-semiBold',
-                  fontSize: 12,
-                  paddingLeft: 3,
-                }}
+              <TouchableOpacity>
+                <TextCustom
+                  title="FORGOT DETAILS?"
+                  size={10}
+                  styles={{ fontWeight: '500' }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Signup')}
               >
-                BUSINESS
-              </Text>
-            </Text>
+                <TextCustom
+                  title="CREATE ACCOUNT"
+                  size={10}
+                  styles={{ fontWeight: '500' }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </Authenticator>
     );
   }
 }
+
+export default Login;
 const styles = StyleSheet.create({
   image: {
     justifyContent: 'center',
     alignSelf: 'center',
-    width: 400,
+    width: 300,
     height: 300,
   },
   text: {
     paddingTop: 20,
     flex: 1,
-    paddingHorizontal: 20,
     alignContent: 'center',
   },
 });
-export default Login;

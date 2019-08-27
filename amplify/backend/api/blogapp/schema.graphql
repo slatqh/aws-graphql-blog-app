@@ -18,3 +18,10 @@ type Comment @model {
   content: String
   post: Post @connection(name: "PostComments")
 }
+
+type User @model {
+  name: String!
+  lastName: String
+  phone: String
+  email: String!
+}
