@@ -30,11 +30,11 @@ class Comments extends Component {
     console.log('Comments', titleName);
     return (
       <View style={{ flex: 1 }}>
-        <ShowComments
+        {/* <ShowComments
           id={postId}
           action="Load Comments"
           queryFields={{ firstField: 'getPost', secondField: 'comments' }}
-        />
+        /> */}
       </View>
     );
   }

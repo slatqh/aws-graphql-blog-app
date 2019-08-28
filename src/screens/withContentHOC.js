@@ -38,15 +38,20 @@ export function withContent(WrappedComponent, Query) {
 
     render() {
       const { data, noContent, error } = this.state;
-      console.log(data);
-      const { props } = this.props;
       if (error) {
         return <ShowError />;
       }
       if (!data) {
         return <Loading />;
       }
-      return <WrappedComponent data={data} {...props} noContent={noContent} />;
+      return (
+        <WrappedComponent
+          data={data}
+          {...this.props}
+          noContent={noContent}
+          showCommnet="Show Comments"
+        />
+      );
     }
   };
 }

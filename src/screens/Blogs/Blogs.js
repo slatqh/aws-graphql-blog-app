@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { listBlogs } from '../../graphql/queries';
 import { withContent } from '../withContentHOC';
@@ -9,11 +9,7 @@ class Blogs extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <BlogContent
-          props={this.props}
-          action="Load Blogs"
-          queryFields={{ firstField: 'listBlogs', secondField: false }}
-        />
+        <BlogContent {...this.props} action="Load Blogs" />
       </View>
     );
   }

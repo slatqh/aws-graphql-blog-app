@@ -19,6 +19,7 @@ const blogQuery = `
     `;
 
 const Post = withContent(DisplayPosts, blogQuery);
+
 export default class Posts extends Component {
   static navigationOptions = ({ navigation }) =>
     // const params = navigation.state.params || {};
@@ -36,16 +37,14 @@ export default class Posts extends Component {
     });
 
   render() {
-    console.log(this.props.navigation);
-    const { navigation } = this.props;
-    const { id } = navigation.state.params;
+    const { id } = this.props.navigation.state.params;
 
     return (
       <View style={{}}>
         <Post
           id={id}
           action="Load Posts"
-          props={this.props}
+          {...this.props}
           queryFields={{ firstField: 'getBlog', secondField: 'posts' }}
         />
       </View>

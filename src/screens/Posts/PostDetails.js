@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { withContent } from '../withContentHOC';
-import { PostDetails } from '../../components';
+import { PostDetails, WriteComment } from '../../components';
+import { createComment } from '../../graphql/mutations';
+import { createContent } from '../postToServerHOC';
+
+const PostComment = createContent(WriteComment, createComment);
 
 const postsComments = `
     query getPost($id: ID!){
       getPost(id: $id){
         id
         title
+        description
+        message
         comments{
           items{
             content
@@ -23,20 +29,15 @@ const postsComments = `
     `;
 
 const ShowPostDetails = withContent(PostDetails, postsComments);
-
 class PostDetailsScreen extends Component {
   render() {
     const { navigation } = this.props;
-    const { postId, titleName } = navigation.state.params;
-    console.log('postId', postId);
-    console.log('Comments', titleName);
+    const { postId } = navigation.state.params;
     return (
       <View style={{ flex: 1 }}>
-        <ShowPostDetails
-          id={postId}
-          action="Load Comments"
-          queryFields={{ firstField: 'getPost', secondField: 'comments' }}
-        />
+        <ShowPostDetails id={postId} action="Load Comments">
+          <PostComment id={postId} />
+        </ShowPostDetails>
       </View>
     );
   }

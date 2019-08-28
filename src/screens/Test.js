@@ -9,7 +9,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Storage } from 'aws-amplify';
-import { Divider, CardView, DisplayComments } from '../components';
+import {
+  Divider,
+  CardView,
+  DisplayComments,
+  WriteComment,
+} from '../components';
 import Colors from '../../const/Colors';
 
 const data = [
@@ -47,6 +52,10 @@ const data = [
 ];
 
 export default class TestScreen extends Component {
+  state = {
+    comment: null,
+  };
+
   uploadImage = () => {
     Storage.put('test.txt', 'My Content', {
       cacheControl: '', // (String) Specifies caching behavior along the request/reply chain
@@ -59,10 +68,12 @@ export default class TestScreen extends Component {
   };
 
   render() {
+    console.log(this.state.comment);
     return (
       <View>
         <SafeAreaView />
         <Button title="upload" onPress={() => this.uploadImage} />
+        <WriteComment getComment={data => this.setState({ comment: data })} />
       </View>
     );
   }

@@ -5,11 +5,9 @@ import Colors from '../../const/Colors';
 import { Divider } from './Divider';
 import { Avatar } from './Avatar';
 import { SingleComent } from './SingleComent';
-import { WriteComment } from './WriteComment';
 
-const PostDetails = ({ data, noContent, onPress }) => {
-  const { getPost } = data;
-  const { title, comments } = getPost;
+const PostDetails = ({ data, children }) => {
+  const { comments, description, message, title } = data.getPost;
   return (
     <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>
       <View style={styles.container}>
@@ -17,12 +15,8 @@ const PostDetails = ({ data, noContent, onPress }) => {
           <Avatar />
           <Text style={styles.title}>{title}</Text>
           <Divider style={{ marginHorizontal: 10 }} />
-          <Text style={{ padding: 10 }}>
-            Adipisicing nostrud laboris eiusmod nulla elit proident ut in non eu
-            sit. Adipisicing nostrud laboris eiusmod nulla elit proident ut in
-            non eu sit. Adipisicing nostrud laboris eiusmod nulla elit proident
-            ut in non eu sit.
-          </Text>
+          <Text>{description}</Text>
+          <Text style={{ padding: 10 }}>{message}</Text>
         </View>
         <View style={styles.imageSection}>
           <Image
@@ -61,8 +55,8 @@ const PostDetails = ({ data, noContent, onPress }) => {
         {comments.items.map(el => (
           <SingleComent key={el.id} comment={el.content} />
         ))}
+        {children}
       </View>
-      <WriteComment />
     </ScrollView>
   );
 };
