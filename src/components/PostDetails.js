@@ -1,5 +1,12 @@
-import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
@@ -51,11 +58,10 @@ const PostDetails = ({ data, children }) => {
         <View // commnets /  like / share
           style={styles.comments}
         />
-        {/* Single Comment from server */}
         {comments.items.map(el => (
           <SingleComent key={el.id} comment={el.content} />
         ))}
-        {children}
+        {/* {children} */}
       </View>
     </ScrollView>
   );
@@ -67,7 +73,6 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     flex: 1,
-    marginTop: 60,
     borderRadius: 5,
     borderColor: Colors.grey,
     borderWidth: 1,

@@ -19,6 +19,14 @@ export function withContent(WrappedComponent, Query) {
       this.loadDataFromServer();
     }
 
+    // shouldComponentUpdate(prevState, nextProps) {
+    //   console.log(prevState, nextProps);
+    //   if (prevState.comment !== nextProps.comment) {
+    //     return true;
+    //   }
+    //   return true;
+    // }
+
     loadDataFromServer = async () => {
       const { id, action } = this.props;
       try {
@@ -29,6 +37,9 @@ export function withContent(WrappedComponent, Query) {
         if (data) {
           this.setState({ data });
           this.setState({ loading: false });
+          if (this.props.reload) {
+            return this.props.reload(this.loadDataFromServer);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -37,6 +48,7 @@ export function withContent(WrappedComponent, Query) {
     };
 
     render() {
+      console.log('FETCH DATA');
       const { data, noContent, error } = this.state;
       if (error) {
         return <ShowError />;
@@ -44,14 +56,7 @@ export function withContent(WrappedComponent, Query) {
       if (!data) {
         return <Loading />;
       }
-      return (
-        <WrappedComponent
-          data={data}
-          {...this.props}
-          noContent={noContent}
-          showCommnet="Show Comments"
-        />
-      );
+      return <WrappedComponent data={data} {...this.props} />;
     }
   };
 }

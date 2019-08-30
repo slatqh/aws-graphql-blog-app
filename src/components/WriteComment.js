@@ -1,9 +1,14 @@
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, TouchableOpacity, Text } from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../../const/Colors';
 
 export const WriteComment = ({ onPress }) => {
   const [comment, setComment] = useState(null);
+
+  function submitComment() {
+    onPress(comment);
+    setComment('');
+  }
   return (
     <View
       style={{
@@ -22,12 +27,14 @@ export const WriteComment = ({ onPress }) => {
           multiline
           style={{ flex: 0.9 }}
           onChangeText={e => setComment(e)}
+          value={comment}
         />
-        <Button
-          title="Post"
-          onPress={() => onPress(comment)}
+        <TouchableOpacity
+          onPress={() => submitComment()}
           style={{ alignSelf: 'flex-end', flex: 0.3 }}
-        />
+        >
+          <Text>Post</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
