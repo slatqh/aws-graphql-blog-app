@@ -1,11 +1,13 @@
 import { View, Text, Button, ActivityIndicator, TextInput } from 'react-native';
 import React, { Component } from 'react';
-import { withContent } from '../withContentHOC';
-import { PostDetails, WriteComment } from '../../components';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import Wrapper from '../withContentHOC';
+import { PostDetails, WriteComment, SingleComent } from '../../components';
 import { createComment } from '../../graphql/mutations';
 import CreateContent from '../postToServerHOC';
+import { listComments } from '../../graphql/queries';
 
-const postsComments = `
+const postDetails = `
 query getPost($id: ID!){
   getPost(id: $id){
     id
@@ -25,53 +27,87 @@ query getPost($id: ID!){
   }
 }
 `;
+const postComments = `
+query getPost($id: ID!){
+  getPost(id: $id){
+    comments{
+      items{
+        content
+        id
+      }
+    }
+  }
+}
+`;
 
-const ShowPostDetails = withContent(PostDetails, postsComments);
 class PostDetailsScreen extends Component {
   state = {
     isLoading: false,
-    comment: 'No Comment',
+    data: [],
+    comments: [],
+    commentLoading: false,
   };
 
-  // shouldComponentUpdate(prevState, nextState) {
-  //   console.log(prevState, nextState);
-  //   if (prevState.comment !== nextState.comment) {
-  //     return false;
-  //   }
-  // }
+  componentDidMount() {
+    this.fetchComments();
+  }
 
-  reloadComponent = reload => {
-    console.log(reload);
-    reload;
-  };
+  async fetchComments() {
+    const { navigation } = this.props;
+    const { postId } = navigation.state.params;
+    try {
+      this.setState({ isLoading: true });
+      const { data } = await API.graphql(
+        graphqlOperation(postComments, { id: postId })
+      );
+      if (data) {
+        this.setState({ isLoading: false });
+        this.setState({ comments: data.getPost.comments.items });
+      }
+    } catch (error) {
+      this.setState({ isLoading: false });
+      console.log(error);
+    }
+  }
+
+  async saveNewComment(comment) {
+    const { navigation } = this.props;
+    const { postId } = navigation.state.params;
+    const newComment = {
+      commentPostId: postId,
+      content: comment,
+    };
+    try {
+      const { data } = await API.graphql(
+        graphqlOperation(createComment, { input: newComment })
+      ).catch(err => console.log(`Problem with create comment`, err));
+      console.log('Comment submited', data);
+      if (data) {
+        this.fetchComments();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   render() {
-    // console.log('Post details component isLoading', this.state.comment);
     const { navigation } = this.props;
-    const { isLoading } = this.state;
     const { postId } = navigation.state.params;
+    console.log('STATE DATA', this.state.comments);
     return (
-      <View style={{ flex: 1 }}>
-        <ShowPostDetails
-          id={postId}
-          action="Load Comments"
-          comment={this.state.comment}
-          reload={reload => this.reloadComponent(reload)}
-        />
-        <CreateContent
-          id={postId}
-          callback={this.reloadComponent()}
-          // commentSubmited={() => this.setState({ isLoading: true })}
-        >
-          {(postDataToServer, loading) => (
-            <WriteComment
-              onPress={comment => {
-                postDataToServer(comment, postId, createComment);
-              }}
-            />
-          )}
-        </CreateContent>
-      </View>
+      <Wrapper query={postDetails} action="Load Post details" id={postId}>
+        {({ data }) => (
+          <View style={{ flex: 1 }}>
+            <PostDetails data={data}>
+              {this.state.comments.map(el => (
+                <SingleComent key={el.id} comment={el.content} />
+              ))}
+              {this.state.isLoading ? <ActivityIndicator size="large" /> : null}
+            </PostDetails>
+            <WriteComment onPress={comment => this.saveNewComment(comment)} />
+          </View>
+        )}
+      </Wrapper>
     );
   }
 }

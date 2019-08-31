@@ -5,7 +5,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../const/Colors';
@@ -13,8 +13,8 @@ import { Divider } from './Divider';
 import { Avatar } from './Avatar';
 import { SingleComent } from './SingleComent';
 
-const PostDetails = ({ data, children }) => {
-  const { comments, description, message, title } = data.getPost;
+const PostDetails = props => {
+  const { description, message, title } = props.data.getPost;
   return (
     <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>
       <View style={styles.container}>
@@ -58,10 +58,8 @@ const PostDetails = ({ data, children }) => {
         <View // commnets /  like / share
           style={styles.comments}
         />
-        {comments.items.map(el => (
-          <SingleComent key={el.id} comment={el.content} />
-        ))}
-        {/* {children} */}
+        {/* {loading ? <ActivityIndicator size="large" /> : null} */}
+        {props.children}
       </View>
     </ScrollView>
   );

@@ -1,16 +1,26 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { listBlogs } from '../../graphql/queries';
-import { withContent } from '../withContentHOC';
-import { DisplayBlogs } from '../../components';
+import Wrapper from '../withContentHOC';
 
-const BlogContent = withContent(DisplayBlogs, listBlogs);
+// const BlogContent = withContent(DisplayBlogs, listBlogs);
 class Blogs extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <BlogContent {...this.props} action="Load Blogs" />
-      </View>
+      <Wrapper query={listBlogs} action="Load Blogs">
+        {({ data }) =>
+          data.listBlogs.items.map(el => (
+            <TouchableOpacity
+              key={el.id}
+              onPress={() =>
+                this.props.navigation.navigate('Posts', { id: el.id })
+              }
+            >
+              <Text>{el.name}</Text>
+            </TouchableOpacity>
+          ))
+        }
+      </Wrapper>
     );
   }
 }

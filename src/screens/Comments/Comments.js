@@ -20,7 +20,7 @@ const postsComments = `
     }
     `;
 
-const ShowComments = withContent(DisplayComments, postsComments);
+// const ShowComments = withContent(DisplayComments, postsComments);
 
 class Comments extends Component {
   render() {
