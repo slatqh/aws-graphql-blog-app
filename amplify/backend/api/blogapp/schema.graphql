@@ -9,6 +9,7 @@ type Post @model {
   description: String
   createdAt: String
   id: ID!
+  image: [S3Object]
   title: String!
   blog: Blog @connection(name: "BlogPosts")
   comments: [Comment] @connection(name: "PostComments")
@@ -17,6 +18,12 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
+}
+
+type S3Object {
+    bucket: String!
+    key: String!
+    region: String!
 }
 
 type User @model {
