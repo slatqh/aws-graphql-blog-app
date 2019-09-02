@@ -15,6 +15,7 @@ import { ShowError } from './ShowError';
 import { TextInput } from './Input';
 import TextCustom from './TextCustom';
 import LoadingStatus from './LoadingStatus';
+import ImageSelect from './ImagePicker';
 
 export {
   CustomButton,
@@ -34,4 +35,5 @@ export {
   TextInput,
   TextCustom,
   LoadingStatus,
+  ImageSelect,
 };

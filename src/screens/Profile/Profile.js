@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Button, SafeAreaView } from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import { Auth } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
+
+const avatarImage = require('../../../assets/images/avatarDefault.png');
 
 class Profile extends Component {
   constructor(props) {
@@ -11,11 +20,18 @@ class Profile extends Component {
 
     // Hub.listen('auth', this, 'navigator'); // Add this component as listener of auth event.
 
-    this.state = { user: null };
+    this.state = { user: null, images: false };
   }
 
   componentDidMount() {
     this.loadUser();
+    this.getImages();
+  }
+
+  getImages() {
+    Storage.get('yourKeyHere.jpeg')
+      .then(result => this.setState({ images: result }))
+      .catch(err => console.log(err));
   }
 
   signOut() {
@@ -32,13 +48,25 @@ class Profile extends Component {
   }
 
   render() {
-    console.log(this.user);
+    console.log(this.state.images);
     return (
       <View>
         <SafeAreaView>
           <Text>Email</Text>
           <Text>{this.props.authData.attributes.email}</Text>
           <Button title="Sign Out" onPress={() => this.signOut()} />
+          <Image
+            source={{
+              uri: this.state.images,
+            }}
+            style={{
+              width: 200,
+              height: 300,
+              borderWidth: 1,
+              borderColor: 'black',
+              padding: 20,
+            }}
+          />
         </SafeAreaView>
       </View>
     );
