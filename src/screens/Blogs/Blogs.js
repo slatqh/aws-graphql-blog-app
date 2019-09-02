@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { listBlogs } from '../../graphql/queries';
 import Wrapper from '../withContentHOC';
+import Colors from '../../../const/Colors';
 
 // const BlogContent = withContent(DisplayBlogs, listBlogs);
 class Blogs extends React.Component {
@@ -12,6 +13,7 @@ class Blogs extends React.Component {
           data.listBlogs.items.map(el => (
             <TouchableOpacity
               key={el.id}
+              style={{ margin: 8, backgroundColor: Colors.teal }}
               onPress={() =>
                 this.props.navigation.navigate('Posts', { id: el.id })
               }
