@@ -17,6 +17,7 @@ export const CustomButton = ({
   nospace,
   border,
   iconRight,
+  radius,
 }) =>
   gradient ? (
     <Button
@@ -27,7 +28,11 @@ export const CustomButton = ({
         end: { x: 1, y: 0.5 },
       }}
       onPress={onPress}
-      buttonStyle={[styles.button, titleSize ? { fontSize: titleSize } : null]}
+      buttonStyle={[
+        styles.button,
+        titleSize ? { fontSize: titleSize } : null,
+        { borderRadius: radius || 30 },
+      ]}
       containerStyle={styles.container}
       type={type}
       title={title}
@@ -44,7 +49,11 @@ export const CustomButton = ({
       onPress={onPress}
       buttonStyle={[
         styles.button,
-        { backgroundColor: color, justifyContent: 'space-around' },
+        {
+          backgroundColor: color,
+          justifyContent: 'space-around',
+          borderRadius: radius || 30,
+        },
       ]}
       containerStyle={border ? styles.noGradientBorder : null}
       type={type}
@@ -56,7 +65,6 @@ export const CustomButton = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 30,
     borderColor: 'transparent',
   },
   title: {

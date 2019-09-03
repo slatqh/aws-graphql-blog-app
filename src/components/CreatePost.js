@@ -31,14 +31,13 @@ export const CreatePost = props => {
   }
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, paddingTop: 30 }}>
-        <View style={{ alignItems: 'flex-end' }}>
-          <Button title="cancel" onPress={() => props.navigation.goBack()} />
-        </View>
+      <View style={{ alignItems: 'flex-end', marginTop: 40 }}>
+        <Button title="cancel" onPress={() => props.navigation.goBack()} />
+      </View>
+      <View style={{ flex: 1, paddingTop: 30, padding: 10 }}>
         <CustomTextInput
           clearButtonMode="while-editing"
           placeholder="Post title"
-          icon="email"
           autoFocus
           autoCorrect={false}
           onChangeText={e => setTitle(e)}
@@ -47,8 +46,6 @@ export const CreatePost = props => {
           clearButtonMode="while-editing"
           autoCorrect={false}
           placeholder="Post description"
-          icon="email"
-          // autoFocus
           onChangeText={e => setDescription(e)}
         />
 
@@ -56,9 +53,14 @@ export const CreatePost = props => {
           <TextInput
             placeholder="Type something..."
             multiline
-            // color={Colors.lightblack}
+            color={Colors.teal}
             autoCorrect={false}
-            style={{ padding: 10, color: Colors.lightblack, flex: 1 }}
+            style={{
+              padding: 10,
+              color: Colors.lightblack,
+              flex: 1,
+              height: 150,
+            }}
             onChangeText={e => setMessage(e)}
           />
         </View>
@@ -72,8 +74,9 @@ export const CreatePost = props => {
 };
 const styles = StyleSheet.create({
   textInput: {
-    margin: 10,
-    borderColor: Colors.teal,
+    flex: 1,
+    marginTop: 20,
+    // borderColor: Colors.teal,
     opacity: 0.6,
     borderWidth: 0.5,
     borderRadius: 5,

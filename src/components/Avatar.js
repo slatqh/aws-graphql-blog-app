@@ -9,7 +9,7 @@ export const Avatar = ({ children, style, onPress }) => (
       style={{
         alignItems: 'center',
         padding: 10,
-        backgroundColor: Colors.lightgrey,
+        backgroundColor: Colors.milk,
         flexDirection: 'row',
       }}
     >

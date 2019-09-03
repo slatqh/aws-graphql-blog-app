@@ -76,39 +76,39 @@ export default class ImageSelect extends Component {
             images.length == 0 ? styles.emptyContainer : styles.avatarContainer
           }
         >
-          {images.length == 0 ? (
+          {//   images.length == 0 ? (
+          //   <TouchableOpacity
+          //     onPress={this.selectPhotoTapped.bind(this)}
+          //     style={{
+          //       alignItems: 'center',
+          //     }}
+          //   >
+          //     <Image
+          //       style={{ width: 50, height: 50 }}
+          //       source={require('../../assets/images/imageselect.png')}
+          //     />
+          //     <Text style={{ paddingTop: 5 }}>Select a Photo</Text>
+          //   </TouchableOpacity>
+          // ) : (
+          images.map(image => (
             <TouchableOpacity
-              onPress={this.selectPhotoTapped.bind(this)}
-              style={{
-                alignItems: 'center',
-              }}
+              onPress={() => this.removeImage(image)}
+              key={image.uri}
             >
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={require('../../assets/images/imageselect.png')}
-              />
-              <Text style={{ paddingTop: 5 }}>Select a Photo</Text>
+              <Image style={styles.avatar} source={{ uri: image.uri }} />
             </TouchableOpacity>
-          ) : (
-            images.map(image => (
-              <TouchableOpacity
-                onPress={() => this.removeImage(image)}
-                key={image.uri}
-              >
-                <Image style={styles.avatar} source={{ uri: image.uri }} />
-              </TouchableOpacity>
-            ))
-          )}
+          ))
+          // )
+          }
         </View>
-        {images.length == 0 ? null : (
-          <View style={{ flex: 1, padding: 15, justifyContent: 'flex-end' }}>
-            <CustomButton
-              title="upload images"
-              color={Colors.teal}
-              onPress={this.selectPhotoTapped.bind(this)}
-            />
-          </View>
-        )}
+        <View style={{ flex: 1, padding: 15, justifyContent: 'flex-end' }}>
+          <CustomButton
+            title="Upload images"
+            radius={5}
+            color={Colors.lightblack}
+            onPress={() => this.selectPhotoTapped()}
+          />
+        </View>
       </View>
     );
   }
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.lightgrey,
     borderWidth: 1 / PixelRatio.get(),
     borderRadius: 5,
-
+    padding: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     flexShrink: 4,

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { Storage } from 'aws-amplify';
-// import MaterialIcon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
 import { Avatar } from './Avatar';
@@ -41,15 +41,17 @@ export const CardView = ({
     <TouchableOpacity
       onPress={onPress}
       style={{
-        margin: 10,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10,
         borderRadius: 5,
-        borderColor: Colors.grey,
+        borderColor: Colors.lightgrey,
         borderWidth: 1,
         backgroundColor: Colors.white,
-        shadowOffset: { width: -1, height: 8 },
+        shadowOffset: { width: -1, height: 9 },
         shadowColor: '00000',
         shadowOpacity: 0.2,
-        shadowRadius: 5,
+        shadowRadius: 10,
       }}
     >
       <Avatar />
@@ -70,13 +72,12 @@ export const CardView = ({
       >
         <Image
           // style={styles.backgroundImage}
+          source={{ uri: images }}
           style={{
             width: null,
             height: 150,
-            // overflow: 'visible',
             backgroundColor: Colors.white,
           }}
-          source={{ uri: images }}
           resizeMethod="scale"
         />
       </View>
@@ -96,9 +97,9 @@ export const CardView = ({
               flexDirection: 'row',
             }}
           >
-            {/* <Icon name="heart-o" size={15} color={Colors.lightblack} />
+            <Icon name="heart-o" size={15} color={Colors.lightblack} />
             <Icon name="smile-o" size={15} color={Colors.lightblack} />
-            <Icon name="thumbs-o-up" size={15} color={Colors.lightblack} /> */}
+            <Icon name="thumbs-o-up" size={15} color={Colors.lightblack} />
           </View>
           <Text style={{ color: Colors.lightblack, fontSize: 12 }}>
             299 Comments

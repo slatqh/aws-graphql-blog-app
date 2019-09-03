@@ -13,15 +13,17 @@ export const CustomTextInput = ({
   password,
   containerStyle,
   multiline,
+  clearButtonMode,
 }) => (
   <Input
     placeholder={placeholder}
     onChangeText={onChangeText}
     autoCapitalize="none"
-    placeholderTextColor={Colors.lightblack}
+    placeholderTextColor={Colors.lightgrey}
     autoCorrect={false}
-    // multiline={multiline}
-    // placeholderStyle={{ color: 'red', letterSpacing: 15 }}
+    multiline={multiline}
+    clearButtonMode={clearButtonMode}
+    placeholderStyle={{ letterSpacing: 1, fontSize: 18 }}
     secureTextEntry={secureTextEntry}
     underlineColorAndroid="transparent"
     keyboardAppearance="default"
@@ -37,21 +39,26 @@ export const CustomTextInput = ({
         ? 'Password must be at least 8 characters long.'
         : null
     }
-    // leftIcon={<Icon iconStyle={{ color: 'white' }} name={icon} size={24} />}
+    leftIcon={
+      icon ? (
+        <Icon iconStyle={{ color: 'white' }} name={icon} size={24} />
+      ) : null
+    }
   />
 );
 
 const styles = StyleSheet.create({
   inputContainerStyle: {
-    borderBottomColor: Colors.lightgrey,
+    borderBottomColor: Colors.lightblack,
     opacity: 0.9,
     height: 20,
     paddingBottom: 12.5,
     paddingTop: 25,
   },
   inputStyle: {
-    color: Colors.grey,
-    fontSize: 12,
+    color: Colors.lightblack,
+    fontSize: 14,
+    letterSpacing: 1,
     paddingLeft: 0,
     // fontFamily: 'montserrat',
   },

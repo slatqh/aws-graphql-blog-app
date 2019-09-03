@@ -41,14 +41,14 @@ export const TextInput = ({
 
 const styles = StyleSheet.create({
   inputContainerStyle: {
-    borderBottomColor: Colors.lightgrey,
+    borderBottomColor: Colors.lightblack,
     opacity: 0.9,
     height: 20,
     paddingBottom: 12.5,
     paddingTop: 25,
   },
   inputStyle: {
-    color: Colors.grey,
+    color: Colors.lightblack,
     fontSize: 12,
     paddingLeft: 10,
     // fontFamily: 'montserrat',
