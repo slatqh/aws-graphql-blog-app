@@ -43,7 +43,7 @@ export default class Wrapper extends React.Component {
   };
 
   render() {
-    // console.log('FETCH DATA', this.state.data);
+    console.log('FETCH DATA', this.state.data);
     const { data, error, loading } = this.state;
     if (loading) {
       return <ActivityIndicator size="large" />;

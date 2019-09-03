@@ -58,6 +58,11 @@ export const onCreatePost = `subscription OnCreatePost {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -82,6 +87,11 @@ export const onUpdatePost = `subscription OnUpdatePost {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -106,6 +116,11 @@ export const onDeletePost = `subscription OnDeletePost {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -133,6 +148,11 @@ export const onCreateComment = `subscription OnCreateComment {
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -154,6 +174,11 @@ export const onUpdateComment = `subscription OnUpdateComment {
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -175,6 +200,11 @@ export const onDeleteComment = `subscription OnDeleteComment {
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -184,6 +214,33 @@ export const onDeleteComment = `subscription OnDeleteComment {
         nextToken
       }
     }
+  }
+}
+`;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    name
+    lastName
+    phone
+    email
+  }
+}
+`;
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
+    name
+    lastName
+    phone
+    email
+  }
+}
+`;
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
+    name
+    lastName
+    phone
+    email
   }
 }
 `;

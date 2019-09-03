@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { CustomButton } from './Button';
 import { CustomTextInput } from './TextInput';
+import ImageSelect from './ImagePicker';
 
 import Colors from '../../const/Colors';
 
@@ -16,16 +17,18 @@ export const CreatePost = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
+  const [images, setImages] = useState([]);
+
   function saveData() {
     const postData = {
       title,
       description,
       message,
+      images,
     };
 
     return props.data(postData);
   }
-  console.log('CreatePost', props);
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, paddingTop: 30 }}>
@@ -55,10 +58,11 @@ export const CreatePost = props => {
             multiline
             // color={Colors.lightblack}
             autoCorrect={false}
-            style={{ padding: 10, color: Colors.lightblack }}
+            style={{ padding: 10, color: Colors.lightblack, flex: 1 }}
             onChangeText={e => setMessage(e)}
           />
         </View>
+        <ImageSelect selectImages={img => setImages(img)} />
       </View>
       <View style={{ paddingHorizontal: 15, marginBottom: 20 }}>
         <CustomButton title="Save" gradient onPress={() => saveData()} />
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     borderWidth: 0.5,
     borderRadius: 5,
-    height: 200,
-    textAlignVertical: 'top',
+    // height: 200,
+    // textAlignVertical: 'top',
   },
 });

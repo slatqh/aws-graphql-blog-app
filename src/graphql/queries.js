@@ -41,6 +41,11 @@ export const getPost = `query GetPost($id: ID!) {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -70,6 +75,11 @@ export const listPosts = `query ListPosts(
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -92,6 +102,11 @@ export const getComment = `query GetComment($id: ID!) {
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -120,6 +135,31 @@ export const listComments = `query ListComments(
         id
         title
       }
+    }
+    nextToken
+  }
+}
+`;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    name
+    lastName
+    phone
+    email
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      name
+      lastName
+      phone
+      email
     }
     nextToken
   }

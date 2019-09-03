@@ -9,7 +9,7 @@ type Post @model {
   description: String
   createdAt: String
   id: ID!
-  image: [S3Object]
+  images: [S3Object]
   title: String!
   blog: Blog @connection(name: "BlogPosts")
   comments: [Comment] @connection(name: "PostComments")

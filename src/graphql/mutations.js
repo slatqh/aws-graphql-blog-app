@@ -58,6 +58,11 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -82,6 +87,11 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -106,6 +116,11 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
     description
     createdAt
     id
+    images {
+      bucket
+      key
+      region
+    }
     title
     blog {
       id
@@ -133,6 +148,11 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -154,6 +174,11 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -175,6 +200,11 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
       description
       createdAt
       id
+      images {
+        bucket
+        key
+        region
+      }
       title
       blog {
         id
@@ -184,6 +214,33 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         nextToken
       }
     }
+  }
+}
+`;
+export const createUser = `mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    name
+    lastName
+    phone
+    email
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    name
+    lastName
+    phone
+    email
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
+    name
+    lastName
+    phone
+    email
   }
 }
 `;

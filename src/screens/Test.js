@@ -13,11 +13,12 @@ export default class TestScreen extends Component {
     const image = this.state.images.map(el => el.uri);
     console.log(image.toString());
     try {
-      const response = await fetch(image.toString());
-
+      const response = await fetch(image);
+      console.log('response', response);
       const blob = await response.blob();
+      console.log('blob', blob._data.blobId);
 
-      Storage.put('yourKeyHere.jpeg', blob, {
+      Storage.put(`${blob._data.blobId}`, blob, {
         contentType: 'image/jpeg',
       });
     } catch (err) {
@@ -31,9 +32,9 @@ export default class TestScreen extends Component {
       <View style={{ flex: 1 }}>
         <SafeAreaView />
         <ImageSelect selectImages={images => this.setState({ images })}>
-          {() => this.uploadImage()}
+          {/* {() => this.uploadImage()} */}
         </ImageSelect>
-        <Button title="upload" onPress={() => this.uploadImage} />
+        <Button title="upload" onPress={() => this.uploadImage()} />
       </View>
     );
   }

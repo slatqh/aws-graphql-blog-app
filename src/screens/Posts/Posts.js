@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Button, Text } from 'react-native';
+import API, { graphqlOperation } from '@aws-amplify/api';
 import Wrapper from '../withContentHOC';
 import { CardView } from '../../components';
+import { deletePost } from '../../graphql/mutations';
 
 const blogQuery = `
     query getBlog($id: ID!){
@@ -12,6 +14,10 @@ const blogQuery = `
           items{
             title
             id
+            images{
+              key
+            }
+            description
           }
         }
       }
@@ -32,6 +38,24 @@ export default class Posts extends Component {
     ),
   });
 
+  state = {
+    loading: false,
+    error: false,
+  };
+
+  async _deletePost(id) {
+    console.log(id);
+    try {
+      this.setState({ loading: true });
+      await API.graphql(graphqlOperation(deletePost, { input: { id } })).catch(
+        err => console.log(`Problem with deleting POST`, err)
+      );
+    } catch (error) {
+      console.log(error);
+      this.setState({ error: true, loading: false });
+    }
+  }
+
   render() {
     const { id } = this.props.navigation.state.params;
 
@@ -49,7 +73,8 @@ export default class Posts extends Component {
                   })
                 }
                 title={el.title}
-                key={el.id}
+                postImage={el.images}
+                deletePost={() => this._deletePost(el.id)}
               />
             ))
           }

@@ -105,7 +105,7 @@ export default class ImageSelect extends Component {
             <CustomButton
               title="upload images"
               color={Colors.teal}
-              onPress={this.props.children}
+              onPress={this.selectPhotoTapped.bind(this)}
             />
           </View>
         )}
