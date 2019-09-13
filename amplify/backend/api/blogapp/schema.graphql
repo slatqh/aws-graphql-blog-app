@@ -4,10 +4,16 @@ type Blog @model {
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
 }
-type Post @model {
+type Post @model
+@auth(
+    rules: [
+      {allow: owner, ownerField: "owner", operations: [create, update, delete, read]},
+    ])
+{
   message: String
   description: String
   createdAt: String
+  Author: User @ connection(name: "PostAuthor")
   id: ID!
   images: [S3Object]
   title: String!
@@ -31,4 +37,6 @@ type User @model {
   lastName: String
   phone: String
   email: String!
+  avatar: [S3Object]
+  myPost: [Post] @ connection(name: "PostAuthor")
 }

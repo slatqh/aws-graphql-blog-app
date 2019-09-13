@@ -8,21 +8,23 @@ import Colors from '../../../const/Colors';
 class Blogs extends React.Component {
   render() {
     return (
-      <Wrapper query={listBlogs} action="Load Blogs">
-        {({ data }) =>
-          data.listBlogs.items.map(el => (
-            <TouchableOpacity
-              key={el.id}
-              style={{ margin: 8, backgroundColor: Colors.teal }}
-              onPress={() =>
-                this.props.navigation.navigate('Posts', { id: el.id })
-              }
-            >
-              <Text>{el.name}</Text>
-            </TouchableOpacity>
-          ))
-        }
-      </Wrapper>
+      <View style={{ backgroundColor: Colors.blonde, flex: 1 }}>
+        <Wrapper query={listBlogs} action="Load Blogs">
+          {({ data }) =>
+            data.listBlogs.items.map(el => (
+              <TouchableOpacity
+                key={el.id}
+                style={{ margin: 8, backgroundColor: Colors.teal }}
+                onPress={() =>
+                  this.props.navigation.navigate('Posts', { id: el.id })
+                }
+              >
+                <Text>{el.name}</Text>
+              </TouchableOpacity>
+            ))
+          }
+        </Wrapper>
+      </View>
     );
   }
 }

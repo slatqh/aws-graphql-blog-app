@@ -40,6 +40,20 @@ export const getPost = `query GetPost($id: ID!) {
     message
     description
     createdAt
+    Author {
+      name
+      lastName
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      myPost {
+        nextToken
+      }
+    }
     id
     images {
       bucket
@@ -74,6 +88,12 @@ export const listPosts = `query ListPosts(
       message
       description
       createdAt
+      Author {
+        name
+        lastName
+        phone
+        email
+      }
       id
       images {
         bucket
@@ -101,6 +121,12 @@ export const getComment = `query GetComment($id: ID!) {
       message
       description
       createdAt
+      Author {
+        name
+        lastName
+        phone
+        email
+      }
       id
       images {
         bucket
@@ -146,6 +172,21 @@ export const getUser = `query GetUser($id: ID!) {
     lastName
     phone
     email
+    avatar {
+      bucket
+      key
+      region
+    }
+    myPost {
+      items {
+        message
+        description
+        createdAt
+        id
+        title
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -160,6 +201,14 @@ export const listUsers = `query ListUsers(
       lastName
       phone
       email
+      avatar {
+        bucket
+        key
+        region
+      }
+      myPost {
+        nextToken
+      }
     }
     nextToken
   }

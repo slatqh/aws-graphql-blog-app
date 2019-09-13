@@ -16,6 +16,7 @@ import { TextInput } from './Input';
 import TextCustom from './TextCustom';
 import LoadingStatus from './LoadingStatus';
 import ImageSelect from './ImagePicker';
+import { PostAuthor } from './PostAuthor';
 
 export {
   CustomButton,
@@ -36,4 +37,5 @@ export {
   TextCustom,
   LoadingStatus,
   ImageSelect,
+  PostAuthor,
 };

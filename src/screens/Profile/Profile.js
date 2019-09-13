@@ -8,9 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import { Auth, Storage } from 'aws-amplify';
-
-const avatarImage = require('../../../assets/images/avatarDefault.png');
+import { Auth } from 'aws-amplify';
 
 class Profile extends Component {
   constructor(props) {
@@ -25,20 +23,14 @@ class Profile extends Component {
 
   componentDidMount() {
     this.loadUser();
-    this.getImages();
-  }
-
-  getImages() {
-    Storage.get('yourKeyHere.jpeg')
-      .then(result => this.setState({ images: result }))
-      .catch(err => console.log(err));
+    // this.getImages();
   }
 
   signOut() {
     Auth.signOut(this.props.authData.pool.clientId)
       .then(data => console.log(data))
       .catch(err => console.log(err));
-    // this.props.navigation.navigate('Login');
+    this.props.navigation.navigate('Login');
   }
 
   loadUser() {
@@ -55,18 +47,6 @@ class Profile extends Component {
           <Text>Email</Text>
           <Text>{this.props.authData.attributes.email}</Text>
           <Button title="Sign Out" onPress={() => this.signOut()} />
-          <Image
-            source={{
-              uri: this.state.images,
-            }}
-            style={{
-              width: 200,
-              height: 300,
-              borderWidth: 1,
-              borderColor: 'black',
-              padding: 20,
-            }}
-          />
         </SafeAreaView>
       </View>
     );

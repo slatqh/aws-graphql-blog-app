@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Input, Icon } from 'react-native-elements';

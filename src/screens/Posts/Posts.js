@@ -39,21 +39,14 @@ export default class Posts extends Component {
     ),
   });
 
-  state = {
-    loading: false,
-    error: false,
-  };
-
   async _deletePost(id) {
     console.log(id);
     try {
-      this.setState({ loading: true });
       await API.graphql(graphqlOperation(deletePost, { input: { id } })).catch(
         err => console.log(`Problem with deleting POST`, err)
       );
     } catch (error) {
-      console.log(error);
-      this.setState({ error: true, loading: false });
+      throw new Error(error);
     }
   }
 

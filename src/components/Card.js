@@ -31,7 +31,6 @@ export const CardView = ({
   deletePost,
 }) => {
   const [images, setImages] = useState([]);
-  console.log(postImage[0].key);
   useEffect(() => {
     Storage.get(postImage[0].key)
       .then(img => setImages(img))
@@ -48,13 +47,12 @@ export const CardView = ({
         borderColor: Colors.lightgrey,
         borderWidth: 1,
         backgroundColor: Colors.white,
-        shadowOffset: { width: -1, height: 9 },
         shadowColor: '00000',
         shadowOpacity: 0.2,
         shadowRadius: 10,
       }}
     >
-      <Avatar />
+      {/* <Avatar /> */}
       <Button title="delete" onPress={deletePost} />
       <Divider style={{ marginHorizontal: 10 }} />
       <Text
@@ -71,10 +69,9 @@ export const CardView = ({
         style={{ borderWidth: 1, borderColor: 'black', overflow: 'hidden' }}
       >
         <Image
-          // style={styles.backgroundImage}
           source={{ uri: images }}
           style={{
-            width: null,
+            // width: null,
             height: 150,
             backgroundColor: Colors.white,
           }}

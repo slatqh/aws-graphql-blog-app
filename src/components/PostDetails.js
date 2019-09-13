@@ -14,6 +14,7 @@ import { Avatar } from './Avatar';
 import { SingleComent } from './SingleComent';
 
 const PostDetails = props => {
+  console.log(props);
   const { description, message, title } = props.data.getPost;
   return (
     <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>

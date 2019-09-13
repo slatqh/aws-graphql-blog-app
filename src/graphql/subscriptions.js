@@ -57,6 +57,20 @@ export const onCreatePost = `subscription OnCreatePost {
     message
     description
     createdAt
+    Author {
+      name
+      lastName
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      myPost {
+        nextToken
+      }
+    }
     id
     images {
       bucket
@@ -86,6 +100,20 @@ export const onUpdatePost = `subscription OnUpdatePost {
     message
     description
     createdAt
+    Author {
+      name
+      lastName
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      myPost {
+        nextToken
+      }
+    }
     id
     images {
       bucket
@@ -115,6 +143,20 @@ export const onDeletePost = `subscription OnDeletePost {
     message
     description
     createdAt
+    Author {
+      name
+      lastName
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      myPost {
+        nextToken
+      }
+    }
     id
     images {
       bucket
@@ -147,6 +189,12 @@ export const onCreateComment = `subscription OnCreateComment {
       message
       description
       createdAt
+      Author {
+        name
+        lastName
+        phone
+        email
+      }
       id
       images {
         bucket
@@ -173,6 +221,12 @@ export const onUpdateComment = `subscription OnUpdateComment {
       message
       description
       createdAt
+      Author {
+        name
+        lastName
+        phone
+        email
+      }
       id
       images {
         bucket
@@ -199,6 +253,12 @@ export const onDeleteComment = `subscription OnDeleteComment {
       message
       description
       createdAt
+      Author {
+        name
+        lastName
+        phone
+        email
+      }
       id
       images {
         bucket
@@ -223,6 +283,21 @@ export const onCreateUser = `subscription OnCreateUser {
     lastName
     phone
     email
+    avatar {
+      bucket
+      key
+      region
+    }
+    myPost {
+      items {
+        message
+        description
+        createdAt
+        id
+        title
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -232,6 +307,21 @@ export const onUpdateUser = `subscription OnUpdateUser {
     lastName
     phone
     email
+    avatar {
+      bucket
+      key
+      region
+    }
+    myPost {
+      items {
+        message
+        description
+        createdAt
+        id
+        title
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -241,6 +331,21 @@ export const onDeleteUser = `subscription OnDeleteUser {
     lastName
     phone
     email
+    avatar {
+      bucket
+      key
+      region
+    }
+    myPost {
+      items {
+        message
+        description
+        createdAt
+        id
+        title
+      }
+      nextToken
+    }
   }
 }
 `;
