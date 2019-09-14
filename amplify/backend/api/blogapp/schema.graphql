@@ -7,7 +7,7 @@ type Blog @model {
 type Post @model
 @auth(
     rules: [
-      {allow: owner, ownerField: "owner", operations: [create, update, delete, read]},
+      {allow: owner, queries: null },
     ])
 {
   message: String

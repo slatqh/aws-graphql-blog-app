@@ -32,9 +32,11 @@ export const CardView = ({
 }) => {
   const [images, setImages] = useState([]);
   useEffect(() => {
-    Storage.get(postImage[0].key)
-      .then(img => setImages(img))
-      .catch(err => console.log(err));
+    if (postImage) {
+      Storage.get(postImage[0].key)
+        .then(img => setImages(img))
+        .catch(err => console.log(err));
+    }
   });
   return (
     <TouchableOpacity
@@ -68,15 +70,17 @@ export const CardView = ({
       <View
         style={{ borderWidth: 1, borderColor: 'black', overflow: 'hidden' }}
       >
-        <Image
-          source={{ uri: images }}
-          style={{
-            // width: null,
-            height: 150,
-            backgroundColor: Colors.white,
-          }}
-          resizeMethod="scale"
-        />
+        {images ? (
+          <Image
+            source={{ uri: images }}
+            style={{
+              // width: null,
+              height: 150,
+              backgroundColor: Colors.white,
+            }}
+            resizeMethod="scale"
+          />
+        ) : null}
       </View>
 
       <View style={{}}>

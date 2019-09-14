@@ -10,34 +10,36 @@ import { CreatePost, ImageSelect } from '../components';
 class ModalScreen extends React.Component {
   state = {
     data: null,
+    file: null,
   };
 
   getBlogPosts = async data => {
     const { title, description, message, images } = data;
+    console.log(images);
     const { id } = this.props.navigation.state.params.id; // get Id from parent screen Posts
-    const image = images.map(el => el.uri);
-    console.log(image);
-    const response = await fetch(image);
-    console.log('response', response);
-    const blob = await response.blob();
-    const key = `${blob._data.blobId}`;
-    console.log('blob', blob._data.blobId);
-    const fileToUpload = {
-      bucket: 'blogappa3f6cac5608b4c6fbabd4e15fbe2d03e-react',
-      key,
-      region: 'us-east-1',
-    };
     try {
-      await Storage.put(`${key}`, blob, {
-        contentType: 'image/jpeg',
-      });
+      if (images.length > 0) {
+        const image = images.map(el => el.uri);
+        const response = await fetch(image);
+        const blob = await response.blob();
+        const key = `${blob._data.blobId}`;
+        const fileToUpload = {
+          bucket: 'blogappa3f6cac5608b4c6fbabd4e15fbe2d03e-react',
+          key,
+          region: 'us-east-1',
+        };
+        this.setState({ file: fileToUpload });
+        await Storage.put(`${key}`, blob, {
+          contentType: 'image/jpeg',
+        });
+      }
       const newPost = await API.graphql(
         graphqlOperation(createPost, {
           input: {
             title,
             description,
             message,
-            images: fileToUpload,
+            images: this.state.file || null,
             createdAt: new Date(),
             postBlogId: id,
           },
