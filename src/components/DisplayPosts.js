@@ -4,7 +4,6 @@ import { ShowEmtyContent } from './ShowEmtyContent';
 import { CardView } from './Card';
 
 const DisplayPosts = ({ data, noContent, navigation }) => {
-  console.log('FROM DISPLAY POST', data);
   if (noContent) {
     return <ShowEmtyContent text="No Posts yet. Create one!" />;
   }
