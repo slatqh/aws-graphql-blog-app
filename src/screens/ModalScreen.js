@@ -15,7 +15,6 @@ class ModalScreen extends React.Component {
 
   getBlogPosts = async data => {
     const { title, description, message, images } = data;
-    console.log(images);
     const { id } = this.props.navigation.state.params.id; // get Id from parent screen Posts
     try {
       if (images.length > 0) {
@@ -55,6 +54,7 @@ class ModalScreen extends React.Component {
   };
 
   render() {
+    console.log('MODAL', this.props.authData.pool.client);
     return (
       <CreatePost {...this.props} data={data => this.getBlogPosts(data)} />
     );

@@ -8,7 +8,6 @@ export const Avatar = ({ onPress, name, status }) => (
     <View
       style={{
         alignItems: 'center',
-        padding: 10,
         backgroundColor: Colors.milk,
         flexDirection: 'row',
       }}

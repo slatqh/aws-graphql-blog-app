@@ -18,7 +18,7 @@ export const CardView = ({ onPress, title, postImage, deletePost }) => {
     }
   });
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={() => onPress(images)} style={styles.container}>
       <PostAuthor name="Dimon" status="Happyest">
         <TouchableOpacity
           style={{ flex: 1, alignItems: 'flex-end' }}
@@ -83,6 +83,7 @@ export const CardView = ({ onPress, title, postImage, deletePost }) => {
               height: 150,
               backgroundColor: Colors.white,
             }}
+            cache="force-cache"
             resizeMethod="scale"
           />
         </View>

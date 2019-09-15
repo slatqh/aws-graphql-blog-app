@@ -19,12 +19,6 @@ export default class Wrapper extends React.Component {
     this.loadDataFromServer();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.comment !== this.props.comment) {
-  //     this.loadDataFromServer();
-  //   }
-  // }
-
   loadDataFromServer = async () => {
     const { id, action } = this.props;
     try {
@@ -43,7 +37,6 @@ export default class Wrapper extends React.Component {
   };
 
   render() {
-    console.log('FETCH DATA', this.state.data);
     const { data, error, loading } = this.state;
     if (loading) {
       return <ActivityIndicator size="large" />;

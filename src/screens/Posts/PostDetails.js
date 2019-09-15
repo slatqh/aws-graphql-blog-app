@@ -14,6 +14,9 @@ query getPost($id: ID!){
     title
     description
     message
+    images{
+      key
+    }
     comments{
       items{
         content
@@ -92,13 +95,12 @@ class PostDetailsScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { postId } = navigation.state.params;
-    console.log('STATE DATA', this.state.comments);
+    const { postId, imageURI } = navigation.state.params;
     return (
       <Wrapper query={postDetails} action="Load Post details" id={postId}>
         {({ data }) => (
           <View style={{ flex: 1 }}>
-            <PostDetails data={data}>
+            <PostDetails data={data} images={imageURI}>
               {this.state.comments.map(el => (
                 <SingleComent key={el.id} comment={el.content} />
               ))}

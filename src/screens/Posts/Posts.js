@@ -40,7 +40,6 @@ export default class Posts extends Component {
   });
 
   async _deletePost(id) {
-    console.log(id);
     try {
       await API.graphql(graphqlOperation(deletePost, { input: { id } })).catch(
         err => console.log(`Problem with deleting POST`, err)
@@ -55,15 +54,16 @@ export default class Posts extends Component {
 
     return (
       <ScrollView contentContainerStyle={{ backgroundColor: Colors.blonde }}>
-        <Wrapper query={blogQuery} id={id}>
+        <Wrapper query={blogQuery} id={id} action="get posts">
           {({ data }) =>
             data.getBlog.posts.items.map(el => (
               <CardView
                 key={el.id}
-                onPress={() =>
+                onPress={imageURI =>
                   this.props.navigation.navigate('PostDetails', {
                     postId: el.id,
                     titleName: el.title,
+                    imageURI,
                   })
                 }
                 title={el.title}

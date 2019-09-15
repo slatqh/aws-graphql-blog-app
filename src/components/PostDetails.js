@@ -1,44 +1,44 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import React from 'react';
+import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
-import { Avatar } from './Avatar';
-import { SingleComent } from './SingleComent';
+import { PostAuthor } from './PostAuthor';
 
 const PostDetails = props => {
-  console.log(props);
   const { description, message, title } = props.data.getPost;
+  const { images } = props;
+
   return (
     <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>
       <View style={styles.container}>
-        <View style={{ flex: 0.3 }}>
-          <Avatar />
+        <View style={{ flex: 0.3, padding: 10 }}>
+          <PostAuthor />
           <Text style={styles.title}>{title}</Text>
           <Divider style={{ marginHorizontal: 10 }} />
           <Text>{description}</Text>
-          <Text style={{ padding: 10 }}>{message}</Text>
+          <Text>{message}</Text>
         </View>
-        <View style={styles.imageSection}>
-          <Image
-            // style={styles.backgroundImage}
+        {images.length ? (
+          <View
             style={{
-              width: null,
-              height: 200,
-              // overflow: 'visible',
-              backgroundColor: Colors.white,
+              borderWidth: 1,
+              borderColor: Colors.lightgrey,
+              overflow: 'hidden',
             }}
-            source={require('../../assets/images/3.jpeg')}
-            resizeMethod="scale"
-          />
-        </View>
+          >
+            <Image
+              source={{ uri: images }}
+              style={{
+                height: 150,
+                backgroundColor: Colors.white,
+              }}
+              cache="force-cache"
+              resizeMethod="scale"
+            />
+          </View>
+        ) : null}
+
         <View style={styles.socialIcons}>
           <View
             style={{
@@ -59,7 +59,6 @@ const PostDetails = props => {
         <View // commnets /  like / share
           style={styles.comments}
         />
-        {/* {loading ? <ActivityIndicator size="large" /> : null} */}
         {props.children}
       </View>
     </ScrollView>
@@ -81,7 +80,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     letterSpacing: 1,
     color: Colors.black,
-    padding: 10,
   },
   imageSection: {
     flex: 0.3,
