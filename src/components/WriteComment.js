@@ -15,13 +15,18 @@ export const WriteComment = ({ onPress }) => {
         backgroundColor: Colors.milk,
         height: 50,
         borderRadius: 10,
-        marginHorizontal: 10,
-        paddingLeft: 10,
-        paddingTop: 10,
         alingItems: 'flex-end',
       }}
     >
-      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          borderWidth: 1,
+          padding: 10,
+        }}
+      >
         <TextInput
           placeholder="Comment here"
           multiline
@@ -31,9 +36,9 @@ export const WriteComment = ({ onPress }) => {
         />
         <TouchableOpacity
           onPress={() => submitComment()}
-          style={{ alignSelf: 'flex-end', flex: 0.3 }}
+          style={{ alignSelf: 'flex-end', flex: 0.2, paddingRight: 7 }}
         >
-          <Text>Post</Text>
+          <Text style={{ fontSize: 14, padding: 5 }}>POST</Text>
         </TouchableOpacity>
       </View>
     </View>

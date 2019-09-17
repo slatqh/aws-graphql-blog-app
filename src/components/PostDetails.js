@@ -4,16 +4,22 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
 import { PostAuthor } from './PostAuthor';
+import { PostOptions } from './PostOptions';
 
 const PostDetails = props => {
   const { description, message, title } = props.data.getPost;
   const { images } = props;
 
   return (
-    <ScrollView contentContainerStyle={{ backgroundColor: Colors.milk }}>
+    <ScrollView
+      contentContainerStyle={{ backgroundColor: Colors.milk }}
+      bounces="none"
+    >
       <View style={styles.container}>
         <View style={{ flex: 0.3, padding: 10 }}>
-          <PostAuthor />
+          <PostAuthor>
+            <PostOptions />
+          </PostAuthor>
           <Text style={styles.title}>{title}</Text>
           <Divider style={{ marginHorizontal: 10 }} />
           <Text>{description}</Text>
@@ -56,10 +62,13 @@ const PostDetails = props => {
           </Text>
         </View>
         <Divider />
-        <View // commnets /  like / share
-          style={styles.comments}
-        />
-        {props.children}
+        <ScrollView
+          contentContainerStyle={{ backgroundColor: Colors.milk, flex: 0.7 }}
+        >
+          {/* <View style={{ flex: 1, backgroundColor: Colors.blonde }}> */}
+          {props.children}
+          {/* </View> */}
+        </ScrollView>
       </View>
     </ScrollView>
   );
@@ -70,7 +79,7 @@ export default PostDetails;
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    flex: 1,
+    // flex: 1,
     borderRadius: 5,
     borderColor: Colors.grey,
     borderWidth: 1,

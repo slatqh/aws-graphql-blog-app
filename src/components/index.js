@@ -17,6 +17,8 @@ import TextCustom from './TextCustom';
 import LoadingStatus from './LoadingStatus';
 import ImageSelect from './ImagePicker';
 import { PostAuthor } from './PostAuthor';
+import { PostOptions } from './PostOptions';
+import { CommentAuthor } from './CommentAuthor';
 
 export {
   CustomButton,
@@ -38,4 +40,6 @@ export {
   LoadingStatus,
   ImageSelect,
   PostAuthor,
+  PostOptions,
+  CommentAuthor,
 };

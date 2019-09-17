@@ -38,7 +38,7 @@ class ModalScreen extends React.Component {
             title,
             description,
             message,
-            images: this.state.file || null,
+            images: this.state.file,
             createdAt: new Date(),
             postBlogId: id,
           },
@@ -54,7 +54,6 @@ class ModalScreen extends React.Component {
   };
 
   render() {
-    console.log('MODAL', this.props.authData.pool.client);
     return (
       <CreatePost {...this.props} data={data => this.getBlogPosts(data)} />
     );

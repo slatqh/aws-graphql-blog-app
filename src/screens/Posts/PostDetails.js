@@ -1,4 +1,10 @@
-import { View, Text, Button, ActivityIndicator, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import React, { Component } from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import Wrapper from '../withContentHOC';

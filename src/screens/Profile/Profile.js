@@ -8,22 +8,19 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import { Auth } from 'aws-amplify';
+import uuid from 'uuid';
+import { Auth, Storage } from 'aws-amplify';
+import ImagePicker from 'react-native-image-picker';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Avatar } from '../../components';
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.loadUser = this.loadUser.bind(this);
-
-    // Hub.listen('auth', this, 'navigator'); // Add this component as listener of auth event.
-
-    this.state = { user: null, images: false };
-  }
+  state = {
+    avatar: null,
+  };
 
   componentDidMount() {
     this.loadUser();
-    // this.getImages();
   }
 
   signOut() {
@@ -39,15 +36,73 @@ class Profile extends Component {
       .catch(err => this.setState({ user: null }));
   }
 
+  selectPhotoTapped() {
+    // const options = {
+    //   quality: 1.0,
+    //   maxWidth: 500,
+    //   maxHeight: 500,
+    //   storageOptions: {
+    //     skipBackup: true,
+    //   },
+    // };
+
+    ImagePicker.showImagePicker(response => {
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        // this.setState({ avatar: response.uri });
+        console.log(response.uri);
+        this.setState({ avatar: response.uri });
+        this.uploadAvatar();
+      }
+    });
+  }
+
+  async uploadAvatar() {
+    console.log('star uploading');
+    try {
+      const response = await fetch(this.state.avatar);
+
+      const blob = await response.blob();
+      const avatarId = uuid();
+      Storage.put(`/avatars/${avatarId}`, blob, {
+        contentType: 'image/jpeg',
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render() {
+    const { avatar } = this.state;
     console.log(this.props);
     return (
-      <View>
-        <SafeAreaView>
-          <Text>Email</Text>
-          <Text>{this.props.authData.attributes.email}</Text>
-          <Button title="Sign Out" onPress={() => this.signOut()} />
-        </SafeAreaView>
+      <View style={{ flex: 1 }}>
+        <SafeAreaView />
+        <View
+          style={{
+            alignItems: 'center',
+          }}
+        >
+          <TouchableOpacity onPress={() => this.selectPhotoTapped()}>
+            <Image
+              style={{ width: 100, height: 100, borderRadius: 50 }}
+              source={
+                avatar
+                  ? { uri: avatar }
+                  : require('../../../assets/images/avatar.jpg')
+              }
+            />
+          </TouchableOpacity>
+        </View>
+        <Text>Email</Text>
+        <Text>{this.props.authData.attributes.email}</Text>
+        <Button title="Sign Out" onPress={this.signOut} />
       </View>
     );
   }

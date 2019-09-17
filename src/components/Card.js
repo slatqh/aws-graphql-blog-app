@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import DotsIcon from 'react-native-vector-icons/dist/Entypo';
+
 import { Storage } from 'aws-amplify';
 import Colors from '../../const/Colors';
 import { Divider } from './Divider';
 import { PostAuthor } from './PostAuthor';
+import { PostOptions } from './PostOptions';
 
 export const CardView = ({ onPress, title, postImage, deletePost }) => {
   const [images, setImages] = useState([]);
@@ -20,52 +21,7 @@ export const CardView = ({ onPress, title, postImage, deletePost }) => {
   return (
     <TouchableOpacity onPress={() => onPress(images)} style={styles.container}>
       <PostAuthor name="Dimon" status="Happyest">
-        <TouchableOpacity
-          style={{ flex: 1, alignItems: 'flex-end' }}
-          onPress={() => setDeleteMenu(!deleteMenu)}
-        >
-          {deleteMenu ? (
-            <View
-              style={{
-                backgroundColor: Colors.blonde,
-                borderColor: Colors.lightblack,
-                opacity: 0.5,
-                borderWidth: 1,
-                padding: 10,
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  backgroundColor: Colors.lightgrey,
-                  padding: 5,
-                }}
-                onPress={() => console.log('edit')}
-              >
-                <Text style={styles.deleteMeneFields}>EDIT</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: Colors.lightgrey,
-                  padding: 5,
-                }}
-                onPress={deletePost}
-              >
-                <Text style={styles.deleteMeneFields}>DELETE</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: Colors.lightgrey,
-                  padding: 5,
-                }}
-                onPress={() => setDeleteMenu(false)}
-              >
-                <Text style={styles.deleteMeneFields}>CANCEL</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <DotsIcon size={18} name="dots-three-vertical" />
-          )}
-        </TouchableOpacity>
+        <PostOptions delete={deletePost} />
       </PostAuthor>
       <Divider style={{ marginHorizontal: 10 }} />
       <Text style={styles.title}>{title}</Text>
