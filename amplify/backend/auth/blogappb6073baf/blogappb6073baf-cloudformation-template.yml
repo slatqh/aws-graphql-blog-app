@@ -9,6 +9,18 @@ Parameters:
     Type: String
   
   
+  
+  
+  functionblogappb6073bafCustomMessageArn: 
+    Type: String
+    Default: functionblogappb6073bafCustomMessageArn
+  
+  functionblogappb6073bafCustomMessageName: 
+    Type: String
+    Default: functionblogappb6073bafCustomMessageName
+  
+  
+  
 
     
   identityPoolName:
@@ -100,11 +112,38 @@ Parameters:
                 
   permissions:
     Type: CommaDelimitedList
-    
+        
+  thirdPartyAuth:
+    Type: String
+            
+  verificationBucketName:
+    Type: String
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 
 Resources:
+  
+  CustomMessageConfirmationBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: "Retain"
+    Properties:
+      BucketName:  !If [ShouldNotCreateEnvResources, !Ref verificationBucketName, !Join ['',[!Ref verificationBucketName, '-', !Ref env]]]
+      AccessControl: "Private"
+      WebsiteConfiguration:
+        IndexDocument: "index.html"
+        ErrorDocument: "index.html"
+      CorsConfiguration:
+        CorsRules:
+          - 
+            AllowedHeaders:
+              - "Authorization" 
+              - "Content-Length"
+            AllowedMethods:
+              - "GET"
+            AllowedOrigins:
+              - "*"
+            MaxAge: 3000
   
   
   # BEGIN SNS ROLE RESOURCE
@@ -154,6 +193,18 @@ Resources:
         
       
       
+      LambdaConfig:
+        
+        
+          CustomMessage: !Ref functionblogappb6073bafCustomMessageArn
+        
+        
+        
+        
+        
+        
+        
+      
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
@@ -179,6 +230,15 @@ Resources:
     
   
     
+  
+  UserPoolCustomMessageLambdaInvokePermission: 
+    Type: "AWS::Lambda::Permission"
+    DependsOn: UserPool
+    Properties: 
+      Action: "lambda:invokeFunction"
+      Principal: "cognito-idp.amazonaws.com"
+      FunctionName: !Ref functionblogappb6073bafCustomMessageName
+      SourceArn: !GetAtt UserPool.Arn
     
   
     
@@ -196,6 +256,9 @@ Resources:
     Properties:
       ClientName: blogapb6073baf_app_clientWeb
       
+      ReadAttributes: !Ref userpoolClientReadAttributes
+      WriteAttributes: !Ref userpoolClientWriteAttributes
+      
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
     DependsOn: UserPool
@@ -205,6 +268,9 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: blogapb6073baf_app_client
+      
+      ReadAttributes: !Ref userpoolClientReadAttributes
+      WriteAttributes: !Ref userpoolClientWriteAttributes
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity

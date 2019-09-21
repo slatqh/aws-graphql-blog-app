@@ -1,6 +1,6 @@
 {
     "identityPoolName": "blogappb6073baf_identitypool_b6073baf",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "blogapb6073baf",
     "userPoolName": "blogappb6073baf_userpool_b6073baf",
     "autoVerifiedAttributes": [
@@ -23,13 +23,42 @@
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
+        "address",
+        "birthdate",
+        "family_name",
+        "middle_name",
+        "gender",
+        "locale",
+        "given_name",
+        "name",
+        "nickname",
+        "phone_number",
+        "preferred_username",
+        "picture",
+        "profile",
+        "updated_at",
+        "website",
+        "zoneinfo",
         "email"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+        "address",
+        "birthdate",
+        "email",
+        "gender",
+        "name",
+        "nickname",
+        "phone_number",
+        "preferred_username",
+        "picture",
+        "profile",
+        "updated_at",
+        "website",
+        "email_verified",
+        "phone_number_verified"
     ],
     "userpoolClientLambdaRole": "blogapb6073baf_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "resourceName": "blogappb6073baf",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
@@ -44,15 +73,27 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "hostedUI": false,
     "usernameAttributes": [
         "email"
     ],
-    "dependsOn": [],
-    "triggers": "{}",
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "blogappb6073bafCustomMessage",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ],
+    "triggers": "{\"CustomMessage\":[\"verification-link\"]}",
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "thirdPartyAuth": false,
+    "verificationBucketName": "blogappb6073bafverificationbucket"
 }

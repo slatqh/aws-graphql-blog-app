@@ -13,6 +13,13 @@
         "categories": {
             "auth": {
                 "blogappb6073baf": {}
+            },
+            "function": {
+                "blogappb6073bafCustomMessage": {
+                    "REDIRECTURL": "",
+                    "EMAILSUBJECT": "",
+                    "EMAILMESSAGE": ""
+                }
             }
         }
     }

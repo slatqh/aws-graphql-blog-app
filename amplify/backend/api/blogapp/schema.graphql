@@ -13,7 +13,7 @@ type Post @model
   message: String
   description: String
   createdAt: String
-  Author: User @ connection(name: "PostAuthor")
+  Author: User @connection(name: "PostAuthor")
   id: ID!
   images: [S3Object]
   title: String!
@@ -37,6 +37,6 @@ type User @model {
   lastName: String
   phone: String
   email: String!
-  avatar: [S3Object]
+  avatar: S3Object
   myPost: [Post] @ connection(name: "PostAuthor")
 }
