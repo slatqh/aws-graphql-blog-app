@@ -2,15 +2,7 @@
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Description": "Lambda resource stack creation using Amplify CLI",
 	"Parameters": {
-		"REDIRECTURL": {
-			"Type": "String",
-			"Default": ""
-		},
-		"EMAILMESSAGE": {
-			"Type": "String",
-			"Default": ""
-		},
-		"EMAILSUBJECT": {
+		"GROUP": {
 			"Type": "String",
 			"Default": ""
 		},
@@ -69,12 +61,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"blogappb6073bafCustomMessage",
+						"messagemeb919faecPostConfirmation",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"blogappb6073bafCustomMessage",
+									"messagemeb919faecPostConfirmation",
 									"-",
 									{
 										"Ref": "env"
@@ -95,17 +87,8 @@
 						"REGION": {
 							"Ref": "AWS::Region"
 						},
-						"REDIRECTURL": {
-							"Ref": "REDIRECTURL"
-						},
-						"EMAILSUBJECT": {
-							"Ref": "EMAILSUBJECT"
-						},
-						"EMAILMESSAGE": {
-							"Ref": "EMAILMESSAGE"
-						},
-						"RESOURCENAME": {
-							"Ref": "resourceName"
+						"GROUP": {
+							"Ref": "GROUP"
 						}
 					}
 				},
@@ -118,8 +101,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "blogapp-react-20190819001437-deployment",
-					"S3Key": "amplify-builds/blogappb6073bafCustomMessage-2b6743454c3835516452-build.zip"
+					"S3Bucket": "messageme-messageme-20190926042204-deployment",
+					"S3Key": "amplify-builds/messagemeb919faecPostConfirmation-577257565561626f5165-build.zip"
 				}
 			}
 		},
@@ -129,12 +112,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"blogappb6073bafCustomMessage",
+						"messagemeb919faecPostConfirmation",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"blogappb6073bafCustomMessage",
+									"messagemeb919faecPostConfirmation",
 									"-",
 									{
 										"Ref": "env"

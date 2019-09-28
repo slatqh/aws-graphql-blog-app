@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "blogappb6073baf_identitypool_b6073baf",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "blogapb6073baf",
-    "userPoolName": "blogappb6073baf_userpool_b6073baf",
+    "identityPoolName": "messagemeb919faec_identitypool_b919faec",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "messagb919faec",
+    "userPoolName": "messagemeb919faec_userpool_b919faec",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -45,7 +45,11 @@
         "address",
         "birthdate",
         "email",
+        "family_name",
+        "middle_name",
         "gender",
+        "locale",
+        "given_name",
         "name",
         "nickname",
         "phone_number",
@@ -54,12 +58,13 @@
         "profile",
         "updated_at",
         "website",
+        "zoneinfo",
         "email_verified",
         "phone_number_verified"
     ],
-    "userpoolClientLambdaRole": "blogapb6073baf_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "messagb919faec_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
-    "resourceName": "blogappb6073baf",
+    "resourceName": "messagemeb919faec",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -74,14 +79,20 @@
         ]
     },
     "useDefault": "manual",
-    "hostedUI": false,
     "usernameAttributes": [
         "email"
+    ],
+    "triggers": "{\"PostConfirmation\":[\"add-to-group\"]}",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [
+        "{\"policyName\":\"AddToGroupCognito\",\"trigger\":\"PostConfirmation\",\"effect\":\"Allow\",\"actions\":[\"cognito-idp:AdminAddUserToGroup\",\"cognito-idp:GetGroup\",\"cognito-idp:CreateGroup\"],\"resource\":{\"paramType\":\"!GetAtt\",\"keys\":[\"UserPool\",\"Arn\"]}}"
     ],
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "blogappb6073bafCustomMessage",
+            "resourceName": "messagemeb919faecPostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
@@ -89,11 +100,6 @@
             ]
         }
     ],
-    "triggers": "{\"CustomMessage\":[\"verification-link\"]}",
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": [],
     "thirdPartyAuth": false,
-    "verificationBucketName": "blogappb6073bafverificationbucket"
+    "hostedUI": false
 }

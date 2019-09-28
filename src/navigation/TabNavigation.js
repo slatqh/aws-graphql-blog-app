@@ -12,9 +12,10 @@ import {
   Profile,
   Login,
   CreateAccount,
+  CreateNewPost,
 } from '../screens';
 
-import ModalScreen from '../screens/ModalScreen';
+// import ModalScreen from '../screens/ModalScreen';
 
 export const AuthStack = createStackNavigator(
   {
@@ -50,7 +51,7 @@ const BlogStack = createStackNavigator(
 const MainBlog = createStackNavigator(
   {
     Main: BlogStack,
-    Modal: ModalScreen,
+    Modal: CreateNewPost,
   },
   {
     defaultNavigationOptions: {
@@ -64,7 +65,7 @@ const MainBlog = createStackNavigator(
 const App = createBottomTabNavigator({
   Account: Profile,
   Home: MainBlog,
-  Auth: AuthStack,
+  // Auth: AuthStack,
   Test: TestScreen,
 });
 

@@ -10,10 +10,37 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblog {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
     }
   }
 }
@@ -27,10 +54,37 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblog {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
     }
   }
 }
@@ -44,10 +98,37 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblog {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
     }
   }
 }
@@ -57,9 +138,12 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
     message
     description
     createdAt
-    Author {
-      name
+    owner
+    author {
+      id
+      firstName
       lastName
+      username
       phone
       email
       avatar {
@@ -67,8 +151,18 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
         key
         region
       }
-      myPost {
+      userpost {
         nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
     id
@@ -83,6 +177,14 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
       name
       posts {
         nextToken
+      }
+      userblog {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
       }
     }
     comments {
@@ -100,9 +202,12 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
     message
     description
     createdAt
-    Author {
-      name
+    owner
+    author {
+      id
+      firstName
       lastName
+      username
       phone
       email
       avatar {
@@ -110,8 +215,18 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
         key
         region
       }
-      myPost {
+      userpost {
         nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
     id
@@ -126,6 +241,14 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
       name
       posts {
         nextToken
+      }
+      userblog {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
       }
     }
     comments {
@@ -143,9 +266,12 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
     message
     description
     createdAt
-    Author {
-      name
+    owner
+    author {
+      id
+      firstName
       lastName
+      username
       phone
       email
       avatar {
@@ -153,8 +279,18 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
         key
         region
       }
-      myPost {
+      userpost {
         nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
     id
@@ -169,6 +305,14 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
       name
       posts {
         nextToken
+      }
+      userblog {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
       }
     }
     comments {
@@ -189,9 +333,12 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       message
       description
       createdAt
-      Author {
-        name
+      owner
+      author {
+        id
+        firstName
         lastName
+        username
         phone
         email
       }
@@ -208,6 +355,32 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       }
       comments {
         nextToken
+      }
+    }
+    commentAuthor {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
   }
@@ -221,9 +394,12 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       message
       description
       createdAt
-      Author {
-        name
+      owner
+      author {
+        id
+        firstName
         lastName
+        username
         phone
         email
       }
@@ -240,6 +416,32 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       }
       comments {
         nextToken
+      }
+    }
+    commentAuthor {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
   }
@@ -253,9 +455,12 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
       message
       description
       createdAt
-      Author {
-        name
+      owner
+      author {
+        id
+        firstName
         lastName
+        username
         phone
         email
       }
@@ -274,13 +479,41 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         nextToken
       }
     }
+    commentAuthor {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
+    }
   }
 }
 `;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
-    name
+    id
+    firstName
     lastName
+    username
     phone
     email
     avatar {
@@ -288,23 +521,60 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
       key
       region
     }
-    myPost {
+    userpost {
       items {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblogs {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    usercomments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+    comment {
+      id
+      content
+      post {
+        message
+        description
+        createdAt
+        owner
+        id
+        title
+      }
+      commentAuthor {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
+      }
     }
   }
 }
 `;
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
-    name
+    id
+    firstName
     lastName
+    username
     phone
     email
     avatar {
@@ -312,23 +582,60 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       key
       region
     }
-    myPost {
+    userpost {
       items {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblogs {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    usercomments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+    comment {
+      id
+      content
+      post {
+        message
+        description
+        createdAt
+        owner
+        id
+        title
+      }
+      commentAuthor {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
+      }
     }
   }
 }
 `;
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
-    name
+    id
+    firstName
     lastName
+    username
     phone
     email
     avatar {
@@ -336,15 +643,50 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
       key
       region
     }
-    myPost {
+    userpost {
       items {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblogs {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    usercomments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+    comment {
+      id
+      content
+      post {
+        message
+        description
+        createdAt
+        owner
+        id
+        title
+      }
+      commentAuthor {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
+      }
     }
   }
 }

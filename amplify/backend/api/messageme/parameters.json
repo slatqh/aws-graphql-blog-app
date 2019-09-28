@@ -1,10 +1,10 @@
 {
-    "AppSyncApiName": "blogapp",
+    "AppSyncApiName": "messageme",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": "false",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
-            "authblogappb6073baf",
+            "authmessagemeb919faec",
             "Outputs.UserPoolId"
         ]
     }

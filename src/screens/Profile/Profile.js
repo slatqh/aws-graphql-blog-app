@@ -5,14 +5,13 @@ import {
   Button,
   SafeAreaView,
   Image,
-  ActivityIndicator,
+  TextInput,
 } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import uuid from 'uuid';
 import { Auth, Storage } from 'aws-amplify';
 import ImagePicker from 'react-native-image-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Avatar } from '../../components';
 
 class Profile extends Component {
   state = {
@@ -24,10 +23,10 @@ class Profile extends Component {
   }
 
   signOut() {
-    Auth.signOut(this.props.authData.pool.clientId)
-      .then(data => console.log(data))
+    const { navigation } = this.props;
+    Auth.signOut()
+      .then(() => navigation.navigate('Auth'))
       .catch(err => console.log(err));
-    this.props.navigation.navigate('Login');
   }
 
   loadUser() {
@@ -80,7 +79,7 @@ class Profile extends Component {
 
   render() {
     const { avatar } = this.state;
-    console.log(this.props);
+    console.log(this.props.authData);
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
@@ -100,9 +99,13 @@ class Profile extends Component {
             />
           </TouchableOpacity>
         </View>
+        <Text>First Name</Text>
+        <TextInput value={this.props.authData.attributes['custom:firstName']} />
+        <Text>Last Name</Text>
+        <TextInput value={this.props.authData.attributes['custom:lastName']} />
         <Text>Email</Text>
         <Text>{this.props.authData.attributes.email}</Text>
-        <Button title="Sign Out" onPress={this.signOut} />
+        <Button title="Sign Out" onPress={() => this.signOut()} />
       </View>
     );
   }

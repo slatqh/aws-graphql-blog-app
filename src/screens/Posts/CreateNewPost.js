@@ -4,10 +4,10 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { Storage } from 'aws-amplify';
 import uuid from 'uuid/v4';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import { createPost } from '../graphql/mutations';
-import { CreatePost, ImageSelect } from '../components';
+import { createPost } from '../../graphql/mutations';
+import { CreatePost, ImageSelect } from '../../components';
 
-class ModalScreen extends React.Component {
+class CreateNewPost extends React.Component {
   state = {
     data: null,
     file: null,
@@ -41,6 +41,7 @@ class ModalScreen extends React.Component {
             images: this.state.file,
             createdAt: new Date(),
             postBlogId: id,
+            postAuthorId: this.props.authData.attributes.email,
           },
         })
       ).catch(err => console.log('Failure to create a new post', err));
@@ -59,4 +60,4 @@ class ModalScreen extends React.Component {
     );
   }
 }
-export default withAuthenticator(ModalScreen);
+export default withAuthenticator(CreateNewPost);

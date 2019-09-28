@@ -1,25 +1,23 @@
 {
-    "react": {
+    "messageme": {
         "awscloudformation": {
-            "AuthRoleName": "blogapp-react-20190819001437-authRole",
-            "UnauthRoleArn": "arn:aws:iam::403317040539:role/blogapp-react-20190819001437-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::403317040539:role/blogapp-react-20190819001437-authRole",
+            "AuthRoleName": "messageme-messageme-20190926042204-authRole",
+            "UnauthRoleArn": "arn:aws:iam::403317040539:role/messageme-messageme-20190926042204-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::403317040539:role/messageme-messageme-20190926042204-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "blogapp-react-20190819001437-deployment",
-            "UnauthRoleName": "blogapp-react-20190819001437-unauthRole",
-            "StackName": "blogapp-react-20190819001437",
-            "StackId": "arn:aws:cloudformation:us-east-1:403317040539:stack/blogapp-react-20190819001437/dbc08d50-c237-11e9-929f-0eeb16b24f80"
+            "DeploymentBucketName": "messageme-messageme-20190926042204-deployment",
+            "UnauthRoleName": "messageme-messageme-20190926042204-unauthRole",
+            "StackName": "messageme-messageme-20190926042204",
+            "StackId": "arn:aws:cloudformation:us-east-1:403317040539:stack/messageme-messageme-20190926042204/b8cf25f0-e036-11e9-84eb-0a62acea77ae"
         },
         "categories": {
-            "auth": {
-                "blogappb6073baf": {}
-            },
             "function": {
-                "blogappb6073bafCustomMessage": {
-                    "REDIRECTURL": "",
-                    "EMAILSUBJECT": "",
-                    "EMAILMESSAGE": ""
+                "messagemeb919faecPostConfirmation": {
+                    "GROUP": "regular-users"
                 }
+            },
+            "auth": {
+                "messagemeb919faec": {}
             }
         }
     }

@@ -10,10 +10,37 @@ export const getBlog = `query GetBlog($id: ID!) {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblog {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
     }
   }
 }
@@ -30,6 +57,14 @@ export const listBlogs = `query ListBlogs(
       posts {
         nextToken
       }
+      userblog {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
+      }
     }
     nextToken
   }
@@ -40,9 +75,12 @@ export const getPost = `query GetPost($id: ID!) {
     message
     description
     createdAt
-    Author {
-      name
+    owner
+    author {
+      id
+      firstName
       lastName
+      username
       phone
       email
       avatar {
@@ -50,8 +88,18 @@ export const getPost = `query GetPost($id: ID!) {
         key
         region
       }
-      myPost {
+      userpost {
         nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
     id
@@ -66,6 +114,14 @@ export const getPost = `query GetPost($id: ID!) {
       name
       posts {
         nextToken
+      }
+      userblog {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
       }
     }
     comments {
@@ -88,9 +144,12 @@ export const listPosts = `query ListPosts(
       message
       description
       createdAt
-      Author {
-        name
+      owner
+      author {
+        id
+        firstName
         lastName
+        username
         phone
         email
       }
@@ -121,9 +180,12 @@ export const getComment = `query GetComment($id: ID!) {
       message
       description
       createdAt
-      Author {
-        name
+      owner
+      author {
+        id
+        firstName
         lastName
+        username
         phone
         email
       }
@@ -142,6 +204,32 @@ export const getComment = `query GetComment($id: ID!) {
         nextToken
       }
     }
+    commentAuthor {
+      id
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
+      }
+    }
   }
 }
 `;
@@ -158,8 +246,17 @@ export const listComments = `query ListComments(
         message
         description
         createdAt
+        owner
         id
         title
+      }
+      commentAuthor {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
       }
     }
     nextToken
@@ -168,8 +265,10 @@ export const listComments = `query ListComments(
 `;
 export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
-    name
+    id
+    firstName
     lastName
+    username
     phone
     email
     avatar {
@@ -177,15 +276,50 @@ export const getUser = `query GetUser($id: ID!) {
       key
       region
     }
-    myPost {
+    userpost {
       items {
         message
         description
         createdAt
+        owner
         id
         title
       }
       nextToken
+    }
+    userblogs {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    usercomments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+    comment {
+      id
+      content
+      post {
+        message
+        description
+        createdAt
+        owner
+        id
+        title
+      }
+      commentAuthor {
+        id
+        firstName
+        lastName
+        username
+        phone
+        email
+      }
     }
   }
 }
@@ -197,8 +331,10 @@ export const listUsers = `query ListUsers(
 ) {
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      name
+      id
+      firstName
       lastName
+      username
       phone
       email
       avatar {
@@ -206,8 +342,18 @@ export const listUsers = `query ListUsers(
         key
         region
       }
-      myPost {
+      userpost {
         nextToken
+      }
+      userblogs {
+        nextToken
+      }
+      usercomments {
+        nextToken
+      }
+      comment {
+        id
+        content
       }
     }
     nextToken

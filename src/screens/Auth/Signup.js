@@ -12,7 +12,7 @@ import {
 import { Auth } from 'aws-amplify';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
-import { CustomButton, TextInput, TextCustom } from '../../components';
+import { CustomButton, TextInput, TextCustom, Loading } from '../../components';
 
 import Colors from '../../../const/Colors';
 
@@ -23,7 +23,7 @@ class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: null,
+      firstName: null,
       lastName: null,
       email: null,
       password: null,
@@ -36,12 +36,19 @@ class CreateAccount extends Component {
       passwordConfirmError: false,
       confirmation: false,
       code: null,
+      isLoading: false,
     };
   }
 
   checkInputs() {
-    const { name, lastName, email, password, confirmPassword } = this.state;
-    if (name === null || name.length < 1) {
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    } = this.state;
+    if (firstName === null || firstName.length < 1) {
       this.setState({ nameError: true });
     } else if (lastName === null || lastName.length < 1) {
       this.setState({ lastNameError: true });
@@ -61,31 +68,33 @@ class CreateAccount extends Component {
   }
 
   createAccount() {
-    const { email, password } = this.state;
+    const { email, password, lastName, firstName } = this.state;
     const username = email;
-    console.log('USERNAME', username);
+    this.setState({ isLoading: true });
     Auth.signUp({
       username,
       email,
       password,
       attributes: {
-        email,
+        'custom:lastName': lastName,
+        'custom:firstName': firstName,
       },
       validationData: [], // optional
     })
       .then(data => {
+        this.setState({ isLoading: false });
         if (data) {
-          console.log(data);
           this.setState({ confirmation: true });
         } else {
           this.setState({
             signUpError:
               'Ops, some error while creating an acoount. Please try again.',
+            isLoading: false,
           });
         }
       })
       .catch(err => {
-        this.setState({ signUpError: err });
+        this.setState({ signUpError: err, isLoading: false });
         console.log(err);
       });
   }
@@ -93,15 +102,17 @@ class CreateAccount extends Component {
   confirmationCode() {
     const { code, email } = this.state;
     const username = email;
+    this.setState({ isLoading: true });
     Auth.confirmSignUp(username, code, {
       forceAliasCreation: true,
     })
       .then(data => {
         if (data) {
+          this.setState({ isLoading: false });
           this.props.navigation.navigate('App');
         }
       })
-      .catch(err => this.setState({ signUpError: err }));
+      .catch(err => this.setState({ signUpError: err, isLoading: false }));
   }
 
   render() {
@@ -114,8 +125,10 @@ class CreateAccount extends Component {
       nameError,
       lastNameError,
       passwordError,
+      isLoading,
     } = this.state;
     const { navigation } = this.props;
+    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
@@ -147,7 +160,11 @@ class CreateAccount extends Component {
               placeholder="FIRST NAME"
               label="first name"
               onChangeText={e =>
-                this.setState({ name: e, nameError: false, signUpError: null })
+                this.setState({
+                  firstName: e,
+                  nameError: false,
+                  signUpError: null,
+                })
               }
               error={!!nameError}
             />
@@ -220,6 +237,7 @@ class CreateAccount extends Component {
           {signUpError ? (
             <Text style={styles.error}>{signUpError.message}</Text>
           ) : null}
+          {isLoading ? <Loading /> : null}
           <View
             style={{
               flex: 0.3,
@@ -228,7 +246,6 @@ class CreateAccount extends Component {
               marginHorizontal: 25,
             }}
           />
-
           <CustomButton
             title={confirmation ? 'CONFIRM' : 'CREATE ACCOUNT'}
             gradient
