@@ -64,9 +64,9 @@ const MainBlog = createStackNavigator(
 
 const App = createBottomTabNavigator({
   Account: Profile,
+  Test: TestScreen,
   Home: MainBlog,
   // Auth: AuthStack,
-  Test: TestScreen,
 });
 
 export default App;

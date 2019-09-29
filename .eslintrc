@@ -14,12 +14,14 @@
       0,
       "never",
       {
-        "ignoreClassFields": false,
+        "ignoreClassFields": false
       }
     ],
     "prettier/prettier": [
       "error",
       {
+        "editor.formatOnSave": true,
+        "prettier.eslintIntegration": true,
         "trailingComma": "es5",
         "singleQuote": true,
         "no-console": 2

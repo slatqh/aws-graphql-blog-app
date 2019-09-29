@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { Storage } from 'aws-amplify';
-import { ImageSelect, PostAuthor } from '../components';
+import { ImageSelect, PostAuthor, Avatar } from '../components';
 // import Colors from '../../const/Colors';
 
 export default class TestScreen extends Component {
@@ -9,33 +18,48 @@ export default class TestScreen extends Component {
     images: [],
   };
 
-  // async uploadImage() {
-  //   const image = this.state.images.map(el => el.uri);
-  //   console.log(image.toString());
-  //   try {
-  //     const response = await fetch(image);
-  //     console.log('response', response);
-  //     const blob = await response.blob();
-  //     console.log('blob', blob._data.blobId);
-
-  //     Storage.put(`${blob._data.blobId}`, blob, {
-  //       contentType: 'image/jpeg',
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
   render() {
     console.log(this.state.images);
+    const avatar = false;
     return (
       <View style={{ flex: 1, paddingTop: 100 }}>
         <SafeAreaView />
-        <PostAuthor />
-        {/* <ImageSelect selectImages={images => this.setState({ images })}>
-          {() => this.uploadImage()}
-        </ImageSelect>
-        <Button title="upload" onPress={() => this.uploadImage()} /> */}
+        <TouchableOpacity
+          style={{ alignItems: 'center' }}
+          onPress={() => console.log('nah')}
+        >
+          <Image
+            style={{ width: 100, height: 100, borderRadius: 50 }}
+            source={
+              avatar
+                ? { uri: avatar }
+                : require('../../assets/images/avatar.jpg')
+            }
+          />
+        </TouchableOpacity>
+        <Text style={{ alignSelf: 'center', padding: 10, fontSize: 16 }}>
+          Vocalist
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+          }}
+        >
+          <Button onPress={() => console.log('pressed')} title="CONNECT" />
+          <Button onPress={() => console.log('pressed')} title="MESSAGE" />
+        </View>
+        <TouchableOpacity>
+          <Text>About me</Text>
+        </TouchableOpacity>
+        <Text>Some Text</Text>
+        <TouchableOpacity>
+          <Text>Project</Text>
+        </TouchableOpacity>
+        <Text>I;m looking for blah blah blah </Text>
+        <TextInput placeholder="Write something" />
       </View>
     );
   }
