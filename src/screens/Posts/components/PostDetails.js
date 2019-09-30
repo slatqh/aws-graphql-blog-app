@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Colors from '../../const/Colors';
-import { Divider } from './Divider';
-import { PostAuthor } from './PostAuthor';
-import { PostOptions } from './PostOptions';
+import Colors from '../../../../const/Colors';
+import { Divider, PostAuthor, PostOptions } from '../../../components';
 
 const PostDetails = props => {
   const { description, message, title } = props.data.getPost;

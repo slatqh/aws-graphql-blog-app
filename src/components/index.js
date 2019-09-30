@@ -1,8 +1,6 @@
 import { CustomButton } from './Button';
 import { AddText } from './InputSection';
 import DisplayBlogs from './DisplayBlogs';
-import DisplayPosts from './DisplayPosts';
-import PostDetails from './PostDetails';
 import { CreatePost } from './CreatePost';
 import { CustomTextInput } from './TextInput';
 import { CardView } from './Card';
@@ -19,13 +17,12 @@ import ImageSelect from './ImagePicker';
 import { PostAuthor } from './PostAuthor';
 import { PostOptions } from './PostOptions';
 import { CommentAuthor } from './CommentAuthor';
+import { ShowEmtyContent } from './ShowEmtyContent';
 
 export {
   CustomButton,
   AddText,
   DisplayBlogs,
-  DisplayPosts,
-  PostDetails,
   CreatePost,
   CustomTextInput,
   CardView,
@@ -42,4 +39,5 @@ export {
   PostAuthor,
   PostOptions,
   CommentAuthor,
+  ShowEmtyContent,
 };

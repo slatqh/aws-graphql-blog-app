@@ -11,36 +11,9 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -55,36 +28,9 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -99,36 +45,9 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -154,18 +73,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -177,14 +85,6 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -218,18 +118,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -241,14 +130,6 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -282,18 +163,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -305,14 +175,6 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -342,7 +204,6 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -355,32 +216,6 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -403,7 +238,6 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -416,32 +250,6 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -464,7 +272,6 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -477,32 +284,6 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -527,44 +308,9 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }
@@ -588,44 +334,9 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }
@@ -649,44 +360,9 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }

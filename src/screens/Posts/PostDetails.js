@@ -1,17 +1,10 @@
-import {
-  View,
-  Text,
-  Button,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import React, { Component } from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import Wrapper from '../withContentHOC';
-import { PostDetails, WriteComment, SingleComent } from '../../components';
+import { WriteComment, SingleComent } from '../../components';
 import { createComment } from '../../graphql/mutations';
-import CreateContent from '../postToServerHOC';
-import { listComments } from '../../graphql/queries';
+import PostDetails from './components/PostDetails';
 
 const postDetails = `
 query getPost($id: ID!){
@@ -52,9 +45,7 @@ query getPost($id: ID!){
 class PostDetailsScreen extends Component {
   state = {
     isLoading: false,
-    data: [],
     comments: [],
-    commentLoading: false,
   };
 
   componentDidMount() {

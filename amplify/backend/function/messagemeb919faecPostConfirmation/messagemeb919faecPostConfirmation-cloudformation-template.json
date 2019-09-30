@@ -102,7 +102,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "messageme-messageme-20190926042204-deployment",
-					"S3Key": "amplify-builds/messagemeb919faecPostConfirmation-577257565561626f5165-build.zip"
+					"S3Key": "amplify-builds/messagemeb919faecPostConfirmation-4a58734c7a365a6a3677-build.zip"
 				}
 			}
 		},

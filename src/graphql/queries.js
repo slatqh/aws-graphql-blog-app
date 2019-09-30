@@ -11,36 +11,9 @@ export const getBlog = `query GetBlog($id: ID!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -56,14 +29,6 @@ export const listBlogs = `query ListBlogs(
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     nextToken
@@ -91,18 +56,7 @@ export const getPost = `query GetPost($id: ID!) {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -114,14 +68,6 @@ export const getPost = `query GetPost($id: ID!) {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -153,7 +99,6 @@ export const listPosts = `query ListPosts(
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -189,7 +134,6 @@ export const getComment = `query GetComment($id: ID!) {
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -202,32 +146,6 @@ export const getComment = `query GetComment($id: ID!) {
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -247,16 +165,7 @@ export const listComments = `query ListComments(
         description
         createdAt
         owner
-        id
         title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     nextToken
@@ -282,44 +191,9 @@ export const getUser = `query GetUser($id: ID!) {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }
@@ -344,16 +218,6 @@ export const listUsers = `query ListUsers(
       }
       userpost {
         nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
     nextToken

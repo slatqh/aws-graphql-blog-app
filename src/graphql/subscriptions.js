@@ -11,36 +11,9 @@ export const onCreateBlog = `subscription OnCreateBlog {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -55,36 +28,9 @@ export const onUpdateBlog = `subscription OnUpdateBlog {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -99,36 +45,9 @@ export const onDeleteBlog = `subscription OnDeleteBlog {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblog {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
   }
 }
@@ -154,18 +73,7 @@ export const onCreatePost = `subscription OnCreatePost {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -177,14 +85,6 @@ export const onCreatePost = `subscription OnCreatePost {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -218,18 +118,7 @@ export const onUpdatePost = `subscription OnUpdatePost {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -241,14 +130,6 @@ export const onUpdatePost = `subscription OnUpdatePost {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -282,18 +163,7 @@ export const onDeletePost = `subscription OnDeletePost {
       userpost {
         nextToken
       }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
-      }
     }
-    id
     images {
       bucket
       key
@@ -305,14 +175,6 @@ export const onDeletePost = `subscription OnDeletePost {
       name
       posts {
         nextToken
-      }
-      userblog {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
       }
     }
     comments {
@@ -342,7 +204,6 @@ export const onCreateComment = `subscription OnCreateComment {
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -355,32 +216,6 @@ export const onCreateComment = `subscription OnCreateComment {
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -403,7 +238,6 @@ export const onUpdateComment = `subscription OnUpdateComment {
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -416,32 +250,6 @@ export const onUpdateComment = `subscription OnUpdateComment {
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -464,7 +272,6 @@ export const onDeleteComment = `subscription OnDeleteComment {
         phone
         email
       }
-      id
       images {
         bucket
         key
@@ -477,32 +284,6 @@ export const onDeleteComment = `subscription OnDeleteComment {
       }
       comments {
         nextToken
-      }
-    }
-    commentAuthor {
-      id
-      firstName
-      lastName
-      username
-      phone
-      email
-      avatar {
-        bucket
-        key
-        region
-      }
-      userpost {
-        nextToken
-      }
-      userblogs {
-        nextToken
-      }
-      usercomments {
-        nextToken
-      }
-      comment {
-        id
-        content
       }
     }
   }
@@ -527,44 +308,9 @@ export const onCreateUser = `subscription OnCreateUser {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }
@@ -588,44 +334,9 @@ export const onUpdateUser = `subscription OnUpdateUser {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }
@@ -649,44 +360,9 @@ export const onDeleteUser = `subscription OnDeleteUser {
         description
         createdAt
         owner
-        id
         title
       }
       nextToken
-    }
-    userblogs {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-    usercomments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    comment {
-      id
-      content
-      post {
-        message
-        description
-        createdAt
-        owner
-        id
-        title
-      }
-      commentAuthor {
-        id
-        firstName
-        lastName
-        username
-        phone
-        email
-      }
     }
   }
 }

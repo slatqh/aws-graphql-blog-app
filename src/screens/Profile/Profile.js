@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Button,
   SafeAreaView,
-  Image,
   TextInput,
   TouchableOpacity,
+  Image,
+  Button,
 } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import uuid from 'uuid';
-import { Auth, Storage } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { AvatarUpload } from './AvatarUpload';
 import { CustomButton } from '../../components';
 
@@ -32,10 +31,38 @@ class Profile extends Component {
 
   render() {
     const { avatar } = this.state;
+    console.log(this.props);
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
-        <AvatarUpload />
+        <SafeAreaView />
+        <TouchableOpacity
+          style={{ alignItems: 'center' }}
+          onPress={() => console.log('nah')}
+        >
+          <Image
+            style={{ width: 100, height: 100, borderRadius: 50 }}
+            source={
+              avatar
+                ? { uri: avatar }
+                : require('../../../assets/images/avatar.jpg')
+            }
+          />
+        </TouchableOpacity>
+        <Text style={{ alignSelf: 'center', padding: 10, fontSize: 16 }}>
+          Vocalist
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+          }}
+        >
+          <Button onPress={() => console.log('pressed')} title="CONNECT" />
+          <Button onPress={() => console.log('pressed')} title="MESSAGE" />
+        </View>
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           <Text>First Name</Text>
           <TextInput

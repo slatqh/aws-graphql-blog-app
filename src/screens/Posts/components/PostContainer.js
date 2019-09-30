@@ -1,9 +1,8 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { ShowEmtyContent } from './ShowEmtyContent';
-import { CardView } from './Card';
+import { CardView, ShowEmtyContent } from '../../../components';
 
-const DisplayPosts = ({ data, noContent, navigation }) => {
+const Post = ({ data, noContent, navigation }) => {
   if (noContent) {
     return <ShowEmtyContent text="No Posts yet. Create one!" />;
   }
@@ -26,4 +25,4 @@ const DisplayPosts = ({ data, noContent, navigation }) => {
   );
 };
 
-export default DisplayPosts;
+export default Post;

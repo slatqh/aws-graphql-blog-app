@@ -18,7 +18,6 @@ const CreateContent = props => {
         graphqlOperation(query, { input: newComment })
         // subscription();
       ).catch(err => console.log(`Problem with create comment`, err));
-      console.log('Comment submited', data);
       if (props.comments) {
         return props.comments({
           id: data.createComment.id,
@@ -31,19 +30,6 @@ const CreateContent = props => {
       console.log(err);
     }
   }
-
-  // const subscription = API.graphql(
-  //   graphqlOperation(subscriptions.onCreateComment)
-  // ).subscribe({
-  //   next: ({ value }) => console.log(value),
-  // });
-
-  // Stop receiving data updates from the subscription
-  // subscription.unsubscribe();
-
-  // if (isLoading) {
-  //   return <Text>Loading</Text>;
-  // }
   if (error) {
     return <Text>Some error</Text>;
   }
