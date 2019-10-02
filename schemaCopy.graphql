@@ -3,20 +3,19 @@ type Blog @model {
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
-  userblog: [User] @connection(name: "UserBlog")
 }
 type Post @model
 @auth(
     rules: [
-      {allow: owner, ownerField: "owner", operations: [create, update, delete, read] },
+      {allow: owner, ownerField: "owner", operations: [create, update, delete, read] }
     ])
 {
+  id: ID!
   message: String
   description: String
   createdAt: String
   owner: String
-  author: [User] @connection(name: "PostAuthor")
-  id: ID!
+  postAuthor: User @connection(name: "PostAuthor")
   images: [S3Object]
   title: String!
   blog: Blog @connection(name: "BlogPosts")
@@ -26,7 +25,7 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
-  commentAuthor: [User] @connection( name: "CommentAuthor")
+  commentAuthor: User @connection(name:"CommentAuthor")
 }
 
 type S3Object {
@@ -37,14 +36,13 @@ type S3Object {
 
 type User @model {
   id: ID!
+  authID: String
   firstName: String
   lastName: String
   username: String
   phone: String
-  email: String!
+  email: String
   avatar: S3Object
-  userpost: Post @connection(name: "PostAuthor")
-  userblogs: Blog @connection(name:"UserBlog")
-  usercomments: Comment @connection(name:"CommentAuthor")
-  comment: Comment @connection(name: "CommentAuthor")
+  userpost: [Post] @connection(name: "PostAuthor")
+  usercomment: [Comment] @connection(name:"CommentAuthor")
 }

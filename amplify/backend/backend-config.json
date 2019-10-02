@@ -1,41 +1,18 @@
 {
-	"function": {
-		"messagemeb919faecPostConfirmation": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true
-		}
-	},
 	"auth": {
-		"messagemeb919faec": {
+		"bandmatese712c402": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "messagemeb919faecPostConfirmation",
-					"triggerProvider": "Cognito",
-					"attributes": [
-						"Arn",
-						"Name"
-					]
-				}
-			]
+			"dependsOn": []
 		}
 	},
 	"api": {
-		"messageme": {
+		"bandmates": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"securityType": "AMAZON_COGNITO_USER_POOLS"
 			}
-		}
-	},
-	"storage": {
-		"messageME": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
 		}
 	}
 }

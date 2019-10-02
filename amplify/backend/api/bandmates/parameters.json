@@ -1,10 +1,10 @@
 {
-    "AppSyncApiName": "messageme",
+    "AppSyncApiName": "bandmates",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": "false",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
-            "authmessagemeb919faec",
+            "authbandmatese712c402",
             "Outputs.UserPoolId"
         ]
     }

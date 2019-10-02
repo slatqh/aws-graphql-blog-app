@@ -1,6 +1,6 @@
 projects:
-  messageme:
-    schemaPath: amplify/backend/api/messageme/build/schema.graphql
+  bandmates:
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.js
     excludes:
