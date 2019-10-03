@@ -41,7 +41,7 @@ class CreateNewPost extends React.Component {
             images: this.state.file,
             createdAt: new Date(),
             postBlogId: id,
-            postAuthorId: this.props.authData.attributes.email,
+            postPostAuthorId: this.props.authData.attributes['custom:authID'],
           },
         })
       ).catch(err => console.log('Failure to create a new post', err));
