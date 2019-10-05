@@ -8,7 +8,7 @@ import { Divider } from './Divider';
 import { PostAuthor } from './PostAuthor';
 import { PostOptions } from './PostOptions';
 
-export const CardView = ({ onPress, title, postImage, deletePost }) => {
+export const CardView = ({ onPress, title, user, postImage, deletePost }) => {
   const [images, setImages] = useState([]);
   const [deleteMenu, setDeleteMenu] = useState(false);
   useEffect(() => {
@@ -20,7 +20,7 @@ export const CardView = ({ onPress, title, postImage, deletePost }) => {
   });
   return (
     <TouchableOpacity onPress={() => onPress(images)} style={styles.container}>
-      <PostAuthor name="Dimon" status="Happyest">
+      <PostAuthor name={user.username} status="Happyest">
         <PostOptions delete={deletePost} />
       </PostAuthor>
       <Divider style={{ marginHorizontal: 10 }} />

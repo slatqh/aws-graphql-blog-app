@@ -7,6 +7,7 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -24,6 +25,7 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -41,6 +43,7 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -54,12 +57,14 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
 `;
 export const createPost = `mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -71,6 +76,9 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -99,12 +107,14 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
 `;
 export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -116,6 +126,9 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -144,12 +157,14 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
 `;
 export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -161,6 +176,9 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -192,12 +210,14 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -215,6 +235,26 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         name
       }
       comments {
+        nextToken
+      }
+    }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -226,12 +266,14 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -249,6 +291,26 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         name
       }
       comments {
+        nextToken
+      }
+    }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -260,12 +322,14 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -286,12 +350,33 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         nextToken
       }
     }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
+    }
   }
 }
 `;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id
+    authID
     firstName
     lastName
     username
@@ -304,11 +389,19 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }
@@ -318,6 +411,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     id
+    authID
     firstName
     lastName
     username
@@ -330,11 +424,19 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }
@@ -344,6 +446,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     id
+    authID
     firstName
     lastName
     username
@@ -356,11 +459,19 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }

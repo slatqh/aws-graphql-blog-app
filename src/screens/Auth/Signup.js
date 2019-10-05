@@ -7,11 +7,13 @@ import {
   SafeAreaView,
   Dimensions,
   Alert,
+  Button,
   TextInput as RNTextInput,
 } from 'react-native';
 import { Auth } from 'aws-amplify';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { connect } from 'react-redux';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import { createUser } from '../../graphql/mutations';
 import { CustomButton, TextInput, TextCustom, Loading } from '../../components';
 
 import Colors from '../../../const/Colors';
@@ -33,6 +35,8 @@ class CreateAccount extends Component {
       lastNameError: false,
       emailError: false,
       passwordError: false,
+      username: null,
+      usernameError: false,
       passwordConfirmError: false,
       confirmation: false,
       code: null,
@@ -67,6 +71,22 @@ class CreateAccount extends Component {
     }
   }
 
+  async createUser() {
+    const { username, lastName, firstName } = this.state;
+    const user = {
+      firstName,
+      lastName,
+      username,
+    };
+    try {
+      await API.graphql(graphqlOperation(createUser, { input: user }))
+        .then(this.props.navigation.navigate('App'))
+        .catch(err =>
+          console.log(`Problem with create user graphql model `, err)
+        );
+    } catch (error) {}
+  }
+
   createAccount() {
     const { email, password, lastName, firstName } = this.state;
     const username = email;
@@ -78,6 +98,8 @@ class CreateAccount extends Component {
       attributes: {
         'custom:lastName': lastName,
         'custom:firstName': firstName,
+        nickname: this.state.username,
+        'custom:authID': 'id',
       },
       validationData: [], // optional
     })
@@ -108,14 +130,49 @@ class CreateAccount extends Component {
     })
       .then(data => {
         if (data) {
-          this.setState({ isLoading: false });
-          this.props.navigation.navigate('App');
+          this.createUserGraphQlModal(data);
         }
       })
       .catch(err => this.setState({ signUpError: err, isLoading: false }));
   }
 
+  async createUserGraphQlModal() {
+    const { email, password } = this.state;
+    try {
+      const user = await Auth.signIn(email, password);
+      console.log('USER', user);
+
+      if (user) {
+        const createUserModal = {
+          authID: user.attributes.sub,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+        };
+        const userGraphql = await API.graphql(
+          graphqlOperation(createUser, { input: createUserModal })
+        ).catch(err =>
+          console.log(`Problem with create user graphql model `, err)
+        );
+        const userID = userGraphql.data.createUser.id;
+        const updateUser = await Auth.currentAuthenticatedUser({
+          bypassCache: false,
+        });
+        await Auth.updateUserAttributes(updateUser, {
+          'custom:authID': userID,
+        });
+        this.props.navigation.navigate('Login');
+      } else {
+        this.setState({ signUpError: true });
+      }
+    } catch (err) {
+      this.setState({ signUpError: err.message });
+      console.log(err);
+    }
+  }
+
   render() {
+    console.log(this.props);
     const {
       confirmation,
       email,
@@ -128,7 +185,6 @@ class CreateAccount extends Component {
       isLoading,
     } = this.state;
     const { navigation } = this.props;
-    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
@@ -185,7 +241,23 @@ class CreateAccount extends Component {
             label="email"
             placeholder="EMAIL"
             onChangeText={e =>
-              this.setState({ email: e, emailError: false, signUpError: null })
+              this.setState({
+                email: e,
+                emailError: false,
+                signUpError: null,
+              })
+            }
+            error={!!emailError}
+          />
+          <TextInput
+            label="username"
+            placeholder="USERNAME"
+            onChangeText={e =>
+              this.setState({
+                username: e,
+                usernameError: false,
+                signUpError: null,
+              })
             }
             error={!!emailError}
           />
@@ -246,6 +318,7 @@ class CreateAccount extends Component {
               marginHorizontal: 25,
             }}
           />
+          <Button title="signup" onPress={() => this.updateAtt()} />
           <CustomButton
             title={confirmation ? 'CONFIRM' : 'CREATE ACCOUNT'}
             gradient
@@ -288,4 +361,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+// export default withAuthenticator(CreateAccount, {
+//   authenticatorComponents: [<CreateAccount />],
+// });
+
 export default CreateAccount;

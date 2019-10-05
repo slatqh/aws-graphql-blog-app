@@ -20,7 +20,7 @@ type Post
   description: String
   createdAt: String
   owner: String
-  author: User @connection(name: "PostAuthor")
+  postAuthor: User @connection(name: "PostAuthor")
   images: [S3Object]
   title: String!
   blog: Blog @connection(name: "BlogPosts")
@@ -30,7 +30,7 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
-  author: User @connection(name: "CommentAuthor")
+  commentAuthor: User @connection(name: "CommentAuthor")
 }
 
 type S3Object {
@@ -49,5 +49,5 @@ type User @model {
   email: String
   avatar: S3Object
   userpost: [Post] @connection(name: "PostAuthor")
-  usercomments: [Comments] @connection(name: "CommentAuthor")
+  usercomment: [Comment] @connection(name: "CommentAuthor")
 }

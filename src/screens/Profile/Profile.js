@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
+
 import { AvatarUpload } from './AvatarUpload';
 import { CustomButton } from '../../components';
 
@@ -27,6 +28,11 @@ class Profile extends Component {
     Auth.signOut()
       .then(() => navigation.navigate('Auth'))
       .catch(err => console.log(err));
+  }
+
+  async updateAtt() {
+    const user = await Auth.currentAuthenticatedUser({ bypassCache: false });
+    console.log(user);
   }
 
   render() {
@@ -76,6 +82,7 @@ class Profile extends Component {
           <Text>Email</Text>
           <Text>dimonguitars@gmail.com</Text>
         </View>
+        <Button title="update attributes" onPress={() => this.updateAtt()} />
         <View style={{ paddingBottom: 40, paddingHorizontal: 10 }}>
           <CustomButton
             style={{ justifyContent: 'flex-end' }}

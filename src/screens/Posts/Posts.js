@@ -15,6 +15,9 @@ const blogQuery = `
           items{
             title
             id
+            postAuthor{
+              username
+            }
             images{
               key
             }
@@ -59,6 +62,7 @@ export default class Posts extends Component {
             data.getBlog.posts.items.map(el => (
               <CardView
                 key={el.id}
+                user={el.postAuthor}
                 onPress={imageURI =>
                   this.props.navigation.navigate('PostDetails', {
                     postId: el.id,

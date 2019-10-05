@@ -9,18 +9,6 @@ Parameters:
     Type: String
   
   
-  
-  
-  functionmessagemeb919faecPostConfirmationArn: 
-    Type: String
-    Default: functionmessagemeb919faecPostConfirmationArn
-  
-  functionmessagemeb919faecPostConfirmationName: 
-    Type: String
-    Default: functionmessagemeb919faecPostConfirmationName
-  
-  
-  
 
     
   identityPoolName:
@@ -97,25 +85,10 @@ Parameters:
                       
   usernameAttributes:
     Type: CommaDelimitedList
-      
-  triggers:
-    Type: String
-                    
-  parentStack:
-    Type: String
-                
-  permissions:
-    Type: CommaDelimitedList
               
   dependsOn:
     Type: CommaDelimitedList
-        
-  thirdPartyAuth:
-    Type: String
-              
-  hostedUI:
-    Type: String
-          
+    
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 
@@ -127,7 +100,7 @@ Resources:
   # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !If [ShouldNotCreateEnvResources, 'messagb919faec_sns-role', !Join ['',['messagb919faec_sns-role', '-', !Ref env]]]
+      RoleName: !If [ShouldNotCreateEnvResources, 'bandmae712c402_sns-role', !Join ['',['bandmae712c402_sns-role', '-', !Ref env]]]
       AssumeRolePolicyDocument: 
         Version: "2012-10-17"
         Statement: 
@@ -139,10 +112,10 @@ Resources:
               - "sts:AssumeRole"
             Condition: 
               StringEquals:
-                sts:ExternalId: messagb919faec_role_external_id
+                sts:ExternalId: bandmae712c402_role_external_id
       Policies: 
         - 
-          PolicyName: messagb919faec-sns-policy
+          PolicyName: bandmae712c402-sns-policy
           PolicyDocument: 
             Version: "2012-10-17"
             Statement: 
@@ -169,18 +142,6 @@ Resources:
         
       
       
-      LambdaConfig:
-        
-        
-        
-        
-        
-          PostConfirmation: !Ref functionmessagemeb919faecPostConfirmationArn
-        
-        
-        
-        
-      
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
@@ -202,70 +163,15 @@ Resources:
       SmsVerificationMessage: !Ref smsVerificationMessage
       SmsConfiguration: 
         SnsCallerArn: !GetAtt SNSRole.Arn
-        ExternalId: messagb919faec_role_external_id
+        ExternalId: bandmae712c402_role_external_id
     
-  
-    
-    
-  
-    
-  
-  UserPoolPostConfirmationLambdaInvokePermission: 
-    Type: "AWS::Lambda::Permission"
-    DependsOn: UserPool
-    Properties: 
-      Action: "lambda:invokeFunction"
-      Principal: "cognito-idp.amazonaws.com"
-      FunctionName: !Ref functionmessagemeb919faecPostConfirmationName
-      SourceArn: !GetAtt UserPool.Arn
-    
-  
-   
-    
-  # Updating lambda role with permissions to Cognito
-  
-  
-  messagemeb919faecPostConfirmationAddToGroupCognito:
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: messagemeb919faecPostConfirmationAddToGroupCognito
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Action:
-            
-              - cognito-idp:AdminAddUserToGroup
-            
-              - cognito-idp:GetGroup
-            
-              - cognito-idp:CreateGroup
-            
-            
-            
-            Resource: !GetAtt
-            
-              - UserPool
-            
-              - Arn
-            
-            
-            
-
-      Roles:
-        - !Join ['',["messagemeb919faecPostConfirmation", '-', !Ref env]]
-  
-  
   
   UserPoolClientWeb:
   # Created provide application access to user pool
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: messagb919faec_app_clientWeb
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
+      ClientName: bandmae712c402_app_clientWeb
       
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
@@ -275,10 +181,7 @@ Resources:
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: messagb919faec_app_client
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
+      ClientName: bandmae712c402_app_client
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
@@ -343,7 +246,7 @@ Resources:
   # Marked as depending on UserPoolClientRole for easier to understand CFN sequencing
     Type: 'AWS::IAM::Policy'
     Properties:
-      PolicyName: messagb919faec_userpoolclient_lambda_iam_policy
+      PolicyName: bandmae712c402_userpoolclient_lambda_iam_policy
       Roles: 
         - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
       PolicyDocument:
@@ -360,7 +263,7 @@ Resources:
   # Marked as depending on UserPoolClientLambdaPolicy for easier to understand CFN sequencing
     Type: 'AWS::IAM::Policy'
     Properties:
-      PolicyName: messagb919faec_userpoolclient_lambda_log_policy
+      PolicyName: bandmae712c402_userpoolclient_lambda_log_policy
       Roles: 
         - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
       PolicyDocument:
@@ -400,7 +303,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'messagemeb919faec_identitypool_b919faec', !Join ['',['messagemeb919faec_identitypool_b919faec', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'bandmatese712c402_identitypool_e712c402', !Join ['',['bandmatese712c402_identitypool_e712c402', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

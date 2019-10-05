@@ -7,6 +7,7 @@ export const onCreateBlog = `subscription OnCreateBlog {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -24,6 +25,7 @@ export const onUpdateBlog = `subscription OnUpdateBlog {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -41,6 +43,7 @@ export const onDeleteBlog = `subscription OnDeleteBlog {
     name
     posts {
       items {
+        id
         message
         description
         createdAt
@@ -54,12 +57,14 @@ export const onDeleteBlog = `subscription OnDeleteBlog {
 `;
 export const onCreatePost = `subscription OnCreatePost {
   onCreatePost {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -71,6 +76,9 @@ export const onCreatePost = `subscription OnCreatePost {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -99,12 +107,14 @@ export const onCreatePost = `subscription OnCreatePost {
 `;
 export const onUpdatePost = `subscription OnUpdatePost {
   onUpdatePost {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -116,6 +126,9 @@ export const onUpdatePost = `subscription OnUpdatePost {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -144,12 +157,14 @@ export const onUpdatePost = `subscription OnUpdatePost {
 `;
 export const onDeletePost = `subscription OnDeletePost {
   onDeletePost {
+    id
     message
     description
     createdAt
     owner
-    author {
+    postAuthor {
       id
+      authID
       firstName
       lastName
       username
@@ -161,6 +176,9 @@ export const onDeletePost = `subscription OnDeletePost {
         region
       }
       userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -192,12 +210,14 @@ export const onCreateComment = `subscription OnCreateComment {
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -215,6 +235,26 @@ export const onCreateComment = `subscription OnCreateComment {
         name
       }
       comments {
+        nextToken
+      }
+    }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -226,12 +266,14 @@ export const onUpdateComment = `subscription OnUpdateComment {
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -249,6 +291,26 @@ export const onUpdateComment = `subscription OnUpdateComment {
         name
       }
       comments {
+        nextToken
+      }
+    }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
         nextToken
       }
     }
@@ -260,12 +322,14 @@ export const onDeleteComment = `subscription OnDeleteComment {
     id
     content
     post {
+      id
       message
       description
       createdAt
       owner
-      author {
+      postAuthor {
         id
+        authID
         firstName
         lastName
         username
@@ -286,12 +350,33 @@ export const onDeleteComment = `subscription OnDeleteComment {
         nextToken
       }
     }
+    commentAuthor {
+      id
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
+    }
   }
 }
 `;
 export const onCreateUser = `subscription OnCreateUser {
   onCreateUser {
     id
+    authID
     firstName
     lastName
     username
@@ -304,11 +389,19 @@ export const onCreateUser = `subscription OnCreateUser {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }
@@ -318,6 +411,7 @@ export const onCreateUser = `subscription OnCreateUser {
 export const onUpdateUser = `subscription OnUpdateUser {
   onUpdateUser {
     id
+    authID
     firstName
     lastName
     username
@@ -330,11 +424,19 @@ export const onUpdateUser = `subscription OnUpdateUser {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }
@@ -344,6 +446,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
 export const onDeleteUser = `subscription OnDeleteUser {
   onDeleteUser {
     id
+    authID
     firstName
     lastName
     username
@@ -356,11 +459,19 @@ export const onDeleteUser = `subscription OnDeleteUser {
     }
     userpost {
       items {
+        id
         message
         description
         createdAt
         owner
         title
+      }
+      nextToken
+    }
+    usercomment {
+      items {
+        id
+        content
       }
       nextToken
     }
