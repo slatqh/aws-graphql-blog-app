@@ -27,11 +27,11 @@ export default class Wrapper extends React.Component {
         graphqlOperation(this.props.query, { id })
       ).catch(err => console.log(`Problem with ${action}`, err));
       if (data) {
+        console.log('RESPONSE', data);
         this.setState({ data });
         this.setState({ loading: false });
       }
     } catch (error) {
-      console.log(error);
       this.setState({ error: true, loading: false });
     }
   };
