@@ -4,6 +4,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import Wrapper from '../withContentHOC';
 import { CardView } from '../../components';
 import { deletePost } from '../../graphql/mutations';
+import { getBlog } from '../../graphql/queries';
 import Colors from '../../../const/Colors';
 
 const blogQuery = `
@@ -62,12 +63,13 @@ export default class Posts extends Component {
             data.getBlog.posts.items.map(el => (
               <CardView
                 key={el.id}
-                user={el.postAuthor}
+                username={el.postAuthor}
                 onPress={imageURI =>
                   this.props.navigation.navigate('PostDetails', {
                     postId: el.id,
                     titleName: el.title,
                     imageURI,
+                    username: el.postAuthor,
                   })
                 }
                 title={el.title}

@@ -1,15 +1,19 @@
-
 type Blog @model {
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
 }
-type Post @model
-@auth(
+type Post
+  @model
+  @auth(
     rules: [
-      {allow: owner, ownerField: "owner", operations: [create, update, delete, read] }
-    ])
-{
+      {
+        allow: owner
+        ownerField: "owner"
+        operations: [create, update, delete, read]
+      }
+    ]
+  ) {
   id: ID!
   message: String
   description: String
@@ -25,13 +29,13 @@ type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
-  commentAuthor: User @connection(name:"CommentAuthor")
+  commentAuthor: User @connection(name: "CommentAuthor")
 }
 
 type S3Object {
-    bucket: String!
-    key: String!
-    region: String!
+  bucket: String!
+  key: String!
+  region: String!
 }
 
 type User @model {
@@ -44,5 +48,5 @@ type User @model {
   email: String
   avatar: S3Object
   userpost: [Post] @connection(name: "PostAuthor")
-  usercomment: [Comment] @connection(name:"CommentAuthor")
+  usercomment: [Comment] @connection(name: "CommentAuthor")
 }
