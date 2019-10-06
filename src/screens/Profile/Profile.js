@@ -36,25 +36,11 @@ class Profile extends Component {
   }
 
   render() {
-    const { avatar } = this.state;
     console.log(this.props);
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
-        <SafeAreaView />
-        <TouchableOpacity
-          style={{ alignItems: 'center' }}
-          onPress={() => console.log('nah')}
-        >
-          <Image
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-            source={
-              avatar
-                ? { uri: avatar }
-                : require('../../../assets/images/avatar.jpg')
-            }
-          />
-        </TouchableOpacity>
+        <AvatarUpload />
         <Text style={{ alignSelf: 'center', padding: 10, fontSize: 16 }}>
           Vocalist
         </Text>
@@ -82,7 +68,6 @@ class Profile extends Component {
           <Text>Email</Text>
           <Text>dimonguitars@gmail.com</Text>
         </View>
-        <Button title="update attributes" onPress={() => this.updateAtt()} />
         <View style={{ paddingBottom: 40, paddingHorizontal: 10 }}>
           <CustomButton
             style={{ justifyContent: 'flex-end' }}

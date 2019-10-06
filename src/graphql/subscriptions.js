@@ -75,6 +75,7 @@ export const onCreatePost = `subscription OnCreatePost {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -125,6 +126,7 @@ export const onUpdatePost = `subscription OnUpdatePost {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -175,6 +177,7 @@ export const onDeletePost = `subscription OnDeletePost {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -223,6 +226,7 @@ export const onCreateComment = `subscription OnCreateComment {
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -251,6 +255,7 @@ export const onCreateComment = `subscription OnCreateComment {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -279,6 +284,7 @@ export const onUpdateComment = `subscription OnUpdateComment {
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -307,6 +313,7 @@ export const onUpdateComment = `subscription OnUpdateComment {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -335,6 +342,7 @@ export const onDeleteComment = `subscription OnDeleteComment {
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -363,6 +371,7 @@ export const onDeleteComment = `subscription OnDeleteComment {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -387,6 +396,7 @@ export const onCreateUser = `subscription OnCreateUser {
       key
       region
     }
+    instument
     userpost {
       items {
         id
@@ -422,6 +432,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
       key
       region
     }
+    instument
     userpost {
       items {
         id
@@ -457,6 +468,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
       key
       region
     }
+    instument
     userpost {
       items {
         id

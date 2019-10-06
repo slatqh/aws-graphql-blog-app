@@ -56,6 +56,7 @@ export const getPost = `query GetPost($id: ID!) {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -106,6 +107,7 @@ export const listPosts = `query ListPosts(
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -143,6 +145,7 @@ export const getComment = `query GetComment($id: ID!) {
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -171,6 +174,7 @@ export const getComment = `query GetComment($id: ID!) {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -206,6 +210,7 @@ export const listComments = `query ListComments(
         username
         phone
         email
+        instument
       }
     }
     nextToken
@@ -226,6 +231,7 @@ export const getUser = `query GetUser($id: ID!) {
       key
       region
     }
+    instument
     userpost {
       items {
         id
@@ -266,6 +272,7 @@ export const listUsers = `query ListUsers(
         key
         region
       }
+      instument
       userpost {
         nextToken
       }

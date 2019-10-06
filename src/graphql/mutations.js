@@ -75,6 +75,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -125,6 +126,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -175,6 +177,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -223,6 +226,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -251,6 +255,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -279,6 +284,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -307,6 +313,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -335,6 +342,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         username
         phone
         email
+        instument
       }
       images {
         bucket
@@ -363,6 +371,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         key
         region
       }
+      instument
       userpost {
         nextToken
       }
@@ -387,6 +396,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
       key
       region
     }
+    instument
     userpost {
       items {
         id
@@ -422,6 +432,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       key
       region
     }
+    instument
     userpost {
       items {
         id
@@ -457,6 +468,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
       key
       region
     }
+    instument
     userpost {
       items {
         id
