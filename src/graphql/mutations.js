@@ -9,6 +9,7 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -27,6 +28,7 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -45,6 +47,7 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -59,6 +62,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
     id
     message
+    ownerID
     description
     createdAt
     owner
@@ -75,7 +79,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -110,6 +114,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
     id
     message
+    ownerID
     description
     createdAt
     owner
@@ -126,7 +131,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -161,6 +166,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
     id
     message
+    ownerID
     description
     createdAt
     owner
@@ -177,7 +183,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -215,6 +221,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     post {
       id
       message
+      ownerID
       description
       createdAt
       owner
@@ -226,7 +233,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         username
         phone
         email
-        instument
+        instrument
       }
       images {
         bucket
@@ -255,7 +262,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -273,6 +280,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     post {
       id
       message
+      ownerID
       description
       createdAt
       owner
@@ -284,7 +292,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         username
         phone
         email
-        instument
+        instrument
       }
       images {
         bucket
@@ -313,7 +321,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -331,6 +339,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     post {
       id
       message
+      ownerID
       description
       createdAt
       owner
@@ -342,7 +351,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         username
         phone
         email
-        instument
+        instrument
       }
       images {
         bucket
@@ -371,7 +380,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -396,11 +405,12 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
       key
       region
     }
-    instument
+    instrument
     userpost {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -432,11 +442,12 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       key
       region
     }
-    instument
+    instrument
     userpost {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -468,11 +479,12 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
       key
       region
     }
-    instument
+    instrument
     userpost {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner

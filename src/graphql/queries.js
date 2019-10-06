@@ -9,6 +9,7 @@ export const getBlog = `query GetBlog($id: ID!) {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -40,6 +41,7 @@ export const getPost = `query GetPost($id: ID!) {
   getPost(id: $id) {
     id
     message
+    ownerID
     description
     createdAt
     owner
@@ -56,7 +58,7 @@ export const getPost = `query GetPost($id: ID!) {
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -96,6 +98,7 @@ export const listPosts = `query ListPosts(
     items {
       id
       message
+      ownerID
       description
       createdAt
       owner
@@ -107,7 +110,7 @@ export const listPosts = `query ListPosts(
         username
         phone
         email
-        instument
+        instrument
       }
       images {
         bucket
@@ -134,6 +137,7 @@ export const getComment = `query GetComment($id: ID!) {
     post {
       id
       message
+      ownerID
       description
       createdAt
       owner
@@ -145,7 +149,7 @@ export const getComment = `query GetComment($id: ID!) {
         username
         phone
         email
-        instument
+        instrument
       }
       images {
         bucket
@@ -174,7 +178,7 @@ export const getComment = `query GetComment($id: ID!) {
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }
@@ -197,6 +201,7 @@ export const listComments = `query ListComments(
       post {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -210,7 +215,7 @@ export const listComments = `query ListComments(
         username
         phone
         email
-        instument
+        instrument
       }
     }
     nextToken
@@ -231,11 +236,12 @@ export const getUser = `query GetUser($id: ID!) {
       key
       region
     }
-    instument
+    instrument
     userpost {
       items {
         id
         message
+        ownerID
         description
         createdAt
         owner
@@ -272,7 +278,7 @@ export const listUsers = `query ListUsers(
         key
         region
       }
-      instument
+      instrument
       userpost {
         nextToken
       }

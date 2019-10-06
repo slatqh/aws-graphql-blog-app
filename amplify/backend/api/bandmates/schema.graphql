@@ -48,7 +48,7 @@ type User @model {
   phone: String
   email: String
   avatar: S3Object
-  instument: String!
+  instrument: String
   userpost: [Post] @connection(name: "PostAuthor")
   usercomment: [Comment] @connection(name: "CommentAuthor")
 }

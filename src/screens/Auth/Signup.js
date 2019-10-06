@@ -41,6 +41,8 @@ class CreateAccount extends Component {
       confirmation: false,
       code: null,
       isLoading: false,
+      instrument: null,
+      instrumentError: false,
     };
   }
 
@@ -51,6 +53,8 @@ class CreateAccount extends Component {
       email,
       password,
       confirmPassword,
+      instrument,
+      username,
     } = this.state;
     if (firstName === null || firstName.length < 1) {
       this.setState({ nameError: true });
@@ -58,6 +62,10 @@ class CreateAccount extends Component {
       this.setState({ lastNameError: true });
     } else if (email === null || email.length < 1) {
       this.setState({ emailError: true });
+    } else if (username === null || username.length < 1) {
+      this.setState({ usernameError: true });
+    } else if (instrument === null || instrument.length < 1) {
+      this.setState({ instrumentError: true });
     } else if (password === null || password.length < 7) {
       this.setState({ passwordError: true });
     } else if (confirmPassword === null || confirmPassword.length < 1) {
@@ -71,27 +79,12 @@ class CreateAccount extends Component {
     }
   }
 
-  async createUser() {
-    const { username, lastName, firstName } = this.state;
-    const user = {
-      firstName,
-      lastName,
-      username,
-    };
-    try {
-      await API.graphql(graphqlOperation(createUser, { input: user }))
-        .then(this.props.navigation.navigate('App'))
-        .catch(err =>
-          console.log(`Problem with create user graphql model `, err)
-        );
-    } catch (error) {}
-  }
-
-  createAccount() {
+  // creating Cognito account
+  async createAccount() {
     const { email, password, lastName, firstName } = this.state;
     const username = email;
     this.setState({ isLoading: true });
-    Auth.signUp({
+    const signUpSuccess = await Auth.signUp({
       username,
       email,
       password,
@@ -102,25 +95,20 @@ class CreateAccount extends Component {
         'custom:authID': 'id',
       },
       validationData: [], // optional
-    })
-      .then(data => {
-        this.setState({ isLoading: false });
-        if (data) {
-          this.setState({ confirmation: true });
-        } else {
-          this.setState({
-            signUpError:
-              'Ops, some error while creating an acoount. Please try again.',
-            isLoading: false,
-          });
-        }
-      })
-      .catch(err => {
-        this.setState({ signUpError: err, isLoading: false });
-        console.log(err);
-      });
+    }).catch(err => console.log(err));
+
+    if (signUpSuccess) {
+      this.setState({ isLoading: false });
+      this.setState({ confirmation: true });
+    }
+    this.setState({
+      signUpError:
+        'Ops, some error while creating an account. Please try again.',
+      isLoading: false,
+    });
   }
 
+  // show textinput for confirmation code
   confirmationCode() {
     const { code, email } = this.state;
     const username = email;
@@ -128,51 +116,60 @@ class CreateAccount extends Component {
     Auth.confirmSignUp(username, code, {
       forceAliasCreation: true,
     })
-      .then(data => {
-        if (data) {
-          this.createUserGraphQlModal(data);
-        }
+      .then(() => {
+        this.createUserGraphQlModal();
       })
       .catch(err => this.setState({ signUpError: err, isLoading: false }));
   }
 
+  // getting auth creds from Cognito and creating a user with AppSync GraphQL User model
   async createUserGraphQlModal() {
     const { email, password } = this.state;
     try {
-      const user = await Auth.signIn(email, password);
-      console.log('USER', user);
+      const user = await Auth.signIn(email, password); // signin user
 
       if (user) {
-        const createUserModal = {
-          authID: user.attributes.sub,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          username: this.state.username,
-        };
-        const userGraphql = await API.graphql(
-          graphqlOperation(createUser, { input: createUserModal })
-        ).catch(err =>
-          console.log(`Problem with create user graphql model `, err)
-        );
-        const userID = userGraphql.data.createUser.id;
-        const updateUser = await Auth.currentAuthenticatedUser({
-          bypassCache: false,
-        });
-        await Auth.updateUserAttributes(updateUser, {
-          'custom:authID': userID,
-        });
-        this.props.navigation.navigate('Login');
-      } else {
-        this.setState({ signUpError: true });
+        try {
+          const createUserInDb = {
+            authID: user.attributes.sub,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            username: this.state.username,
+            instrument: this.state.instrument,
+          };
+          // updating GraphQl User Type with args
+          const userGraphQL = await API.graphql(
+            graphqlOperation(createUser, { input: createUserInDb })
+          ).catch(err => throw new Error(err));
+          const userID = userGraphQL.data.createUser.id;
+          const updateUser = await Auth.currentAuthenticatedUser({
+            bypassCache: false,
+          });
+          await Auth.updateUserAttributes(updateUser, {
+            'custom:authID': userID,
+          });
+          // here is some bug to apdate Cognito user attributes
+          // we have signOut and signin user back to get attributes update
+          await Auth.signOut()
+            .then(() => {
+              Auth.signIn(email, password);
+              this.setState({ isLoading: false });
+              this.props.navigation.navigate('App');
+            })
+            .catch(err => console.log(err));
+        } catch (error) {
+          throw new Error(error);
+        }
       }
+      this.setState({ signUpError: true });
     } catch (err) {
       this.setState({ signUpError: err.message });
-      console.log(err);
+      throw new Error(err);
     }
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state.instrument);
     const {
       confirmation,
       email,
@@ -183,6 +180,8 @@ class CreateAccount extends Component {
       lastNameError,
       passwordError,
       isLoading,
+      instrumentError,
+      usernameError,
     } = this.state;
     const { navigation } = this.props;
     return (
@@ -259,7 +258,19 @@ class CreateAccount extends Component {
                 signUpError: null,
               })
             }
-            error={!!emailError}
+            error={!!usernameError}
+          />
+          <TextInput
+            label="instrument"
+            placeholder="YOUR INSTRUMEMT"
+            onChangeText={e =>
+              this.setState({
+                instrument: e,
+                instrumentError: false,
+                signUpError: null,
+              })
+            }
+            error={!!instrumentError}
           />
           <TextInput
             label="password"
@@ -318,7 +329,6 @@ class CreateAccount extends Component {
               marginHorizontal: 25,
             }}
           />
-          <Button title="signup" onPress={() => this.updateAtt()} />
           <CustomButton
             title={confirmation ? 'CONFIRM' : 'CREATE ACCOUNT'}
             gradient

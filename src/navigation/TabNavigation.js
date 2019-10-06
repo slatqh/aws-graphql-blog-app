@@ -1,7 +1,9 @@
+import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
+import { Text } from 'react-native';
 import {
   Blogs,
   Posts,
@@ -13,6 +15,7 @@ import {
   Login,
   CreateAccount,
   CreateNewPost,
+  Settings,
 } from '../screens';
 
 // import ModalScreen from '../screens/ModalScreen';
@@ -30,7 +33,28 @@ export const AuthStack = createStackNavigator(
     initialRouteName: 'Auth',
   }
 );
-
+// const SettingStack = createStackNavigator(
+//   {
+//     Settings,
+//   },
+//   {
+//     navigationOptions: ({ navigation }) => ({
+//       headerLeft: <Text>SignOut</Text>,
+//     }),
+//   }
+// );
+const ProfileStack = createStackNavigator(
+  {
+    Profile,
+    Settings,
+  },
+  {
+    defaultNavigationOptions: {
+      title: 'Profile',
+      headeMode: 'none',
+    },
+  }
+);
 const BlogStack = createStackNavigator(
   {
     Blogs,
@@ -63,7 +87,7 @@ const MainBlog = createStackNavigator(
 );
 
 const App = createBottomTabNavigator({
-  Account: Profile,
+  Account: ProfileStack,
   Test: TestScreen,
   Home: MainBlog,
   // Auth: AuthStack,

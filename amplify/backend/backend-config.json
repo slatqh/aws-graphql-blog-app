@@ -14,5 +14,11 @@
 				"securityType": "AMAZON_COGNITO_USER_POOLS"
 			}
 		}
+	},
+	"storage": {
+		"bandmates": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }
