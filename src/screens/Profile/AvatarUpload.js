@@ -37,9 +37,12 @@ export const AvatarUpload = props => {
   return (
     <View>
       <View
-        style={{
-          alignItems: 'center',
-        }}
+        style={[
+          {
+            alignItems: 'center',
+          },
+          props.style,
+        ]}
       >
         <TouchableOpacity onPress={() => selectPhotoTapped()}>
           <Image

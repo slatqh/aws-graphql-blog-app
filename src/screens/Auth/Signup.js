@@ -140,7 +140,9 @@ class CreateAccount extends Component {
           // updating GraphQl User Type with args
           const userGraphQL = await API.graphql(
             graphqlOperation(createUser, { input: createUserInDb })
-          ).catch(err => throw new Error(err));
+          ).catch(err => {
+            throw new Error(err);
+          });
           const userID = userGraphQL.data.createUser.id;
           const updateUser = await Auth.currentAuthenticatedUser({
             bypassCache: false,

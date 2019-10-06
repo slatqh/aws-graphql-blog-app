@@ -11,8 +11,7 @@ import {
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createUser } from '../../graphql/mutations';
-
+import { getUser } from '../../graphql/queries';
 import { AvatarUpload } from './AvatarUpload';
 import { CustomButton } from '../../components';
 
@@ -32,6 +31,8 @@ class Profile extends Component {
 
   state = {
     avatar: null,
+    user: {},
+    wallPostMessage: '',
   };
 
   componentDidMount() {
@@ -39,33 +40,14 @@ class Profile extends Component {
   }
 
   async loadUser() {
-    const email = 'dimonguitars@gmail.com';
-    const password = 'password';
-    const user = await Auth.signIn(email, password);
-    const createUserInDb = {
-      authID: user.attributes.sub,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      username: this.state.username,
-      instrument: this.state.instrument,
-    };
-    try {
-      const userGraphQL = await API.graphql(
-        graphqlOperation(createUser, { input: createUserInDb })
-      ).catch(err =>
-        console.log(`Problem with create user graphql model `, err)
-      );
-      const userID = userGraphQL.data.createUser.id;
-      console.log('USERID', userID);
-      const updateUser = await Auth.currentAuthenticatedUser({
-        bypassCache: false,
-      });
-      await Auth.updateUserAttributes(updateUser, {
-        'custom:authID': userID,
-      });
-      this.props.navigation.navigate('Login');
-    } catch (error) {
-      console.log(error);
+    const id = 'd9c69907-59af-4897-b91b-4aaa529ce8d5';
+    const data = await API.graphql(graphqlOperation(getUser, { id })).catch(
+      err => console.log('Problem with getUser request', err)
+    );
+    if (data) {
+      console.log('RESPONSE', data);
+      this.setState({ user: data.getUser });
+      this.setState({ loading: false });
     }
   }
 
@@ -74,7 +56,7 @@ class Profile extends Component {
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
-        <AvatarUpload />
+        <AvatarUpload style={{ paddingTop: 20 }} />
         <Text style={{ alignSelf: 'center', padding: 10, fontSize: 16 }}>
           Vocalist
         </Text>
@@ -86,29 +68,18 @@ class Profile extends Component {
             justifyContent: 'space-evenly',
           }}
         >
-          <Button onPress={() => this.loadUser()} title="CONNECT" />
+          <Button onPress={() => console.log('connect')} title="CONNECT" />
           <Button onPress={() => console.log('pressed')} title="MESSAGE" />
         </View>
-        <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text>First Name</Text>
-          <TextInput
-            value={this.props.authData.attributes['custom:firstName']}
-            style={{ fontSize: 14, letterSpacing: 1 }}
-          />
-          <Text>Last Name</Text>
-          <TextInput
-            value={this.props.authData.attributes['custom:lastName']}
-          />
-          <Text>Email</Text>
-          <Text>{this.props.authData.attributes['email']}</Text>
-        </View>
+
         <View style={{ paddingBottom: 40, paddingHorizontal: 10 }}>
-          {/* <CustomButton
-            style={{ justifyContent: 'flex-end' }}
-            gradient
-            title="Sign Out"
-            onPress={() => this.signOut()}
-          /> */}
+          <TextInput
+            placeholder="wall post"
+            value={this.state.wallPostMessage && ''}
+            onChangeText={e => this.setState({ wallPostMessage: e })}
+          >
+            What's new?
+          </TextInput>
         </View>
       </View>
     );

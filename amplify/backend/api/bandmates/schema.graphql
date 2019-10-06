@@ -39,8 +39,17 @@ type S3Object {
   region: String!
 }
 
-type User @model {
+type User @model  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "owner"
+        operations: [create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
+  owner: String
   authID: String
   firstName: String
   lastName: String
@@ -49,6 +58,13 @@ type User @model {
   email: String
   avatar: S3Object
   instrument: String
+  wallPost: [UserWallPost] @connection (name:"UserWallPost")
   userpost: [Post] @connection(name: "PostAuthor")
   usercomment: [Comment] @connection(name: "CommentAuthor")
+}
+type UserWallPost @model {
+  id: ID!
+  message: String
+  title: String
+  userWallPost: User @connection(name:"UserWallPost)
 }
