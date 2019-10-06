@@ -6,8 +6,8 @@ import { Divider, PostAuthor, PostOptions } from '../../../components';
 
 const PostDetails = props => {
   const { description, message, title } = props.data.getPost;
-  const { images } = props;
-
+  const { images, username } = props;
+  console.log('POSTDETAILS COMPONENT', username);
   return (
     <ScrollView
       contentContainerStyle={{ backgroundColor: Colors.milk }}
@@ -15,7 +15,7 @@ const PostDetails = props => {
     >
       <View style={styles.container}>
         <View style={{ flex: 0.3, padding: 10 }}>
-          <PostAuthor>
+          <PostAuthor username={username.username}>
             <PostOptions />
           </PostAuthor>
           <Text style={styles.title}>{title}</Text>

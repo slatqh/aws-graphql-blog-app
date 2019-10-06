@@ -92,12 +92,13 @@ class PostDetailsScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { postId, imageURI } = navigation.state.params;
+    const { postId, imageURI, username } = navigation.state.params;
+    console.log('PostDetailsScreen', username);
     return (
       <Wrapper query={postDetails} action="Load Post details" id={postId}>
         {({ data }) => (
           <View style={{ flex: 1 }}>
-            <PostDetails data={data} images={imageURI}>
+            <PostDetails data={data} images={imageURI} username={username}>
               {this.state.comments.map(el => (
                 <SingleComent key={el.id} comment={el.content} />
               ))}

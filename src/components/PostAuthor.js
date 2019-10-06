@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Colors from '../../const/Colors';
 
-export const PostAuthor = ({ name, status, children }) => (
+export const PostAuthor = ({ username, status, children }) => (
   <View
     style={{
       alignItems: 'center',
@@ -18,7 +18,7 @@ export const PostAuthor = ({ name, status, children }) => (
         resizeMode="center"
       />
       <View style={{ padding: 5 }}>
-        <Text>{name}</Text>
+        <Text>{username}</Text>
         <Text>{status}</Text>
       </View>
     </View>

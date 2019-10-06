@@ -58,18 +58,18 @@ export default class Posts extends Component {
 
     return (
       <ScrollView contentContainerStyle={{ backgroundColor: Colors.blonde }}>
-        <Wrapper query={getBlog} id={id} action="get posts">
+        <Wrapper query={blogQuery} id={id} action="get posts">
           {({ data }) =>
             data.getBlog.posts.items.map(el => (
               <CardView
                 key={el.id}
-                // user={el.postAuthor}
-                user="Alex"
+                username={el.postAuthor}
                 onPress={imageURI =>
                   this.props.navigation.navigate('PostDetails', {
                     postId: el.id,
                     titleName: el.title,
                     imageURI,
+                    username: el.postAuthor,
                   })
                 }
                 title={el.title}
