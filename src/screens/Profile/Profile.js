@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Button,
-  Image,
-} from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Button } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import { Auth } from 'aws-amplify';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../../graphql/queries';
 import { AvatarUpload } from './AvatarUpload';
-import { CustomButton } from '../../components';
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
       <Button
-        onPress={() =>
-          navigation.navigate('Settings', {
-            id: navigation.state.params,
-          })
-        }
+        onPress={() => navigation.navigate('Settings')}
         title="Settings"
       />
     ),
@@ -40,11 +26,12 @@ class Profile extends Component {
   }
 
   async loadUser() {
-    const id = 'd9c69907-59af-4897-b91b-4aaa529ce8d5';
+    const id = this.props.authData.attributes['custom:authID'];
     const data = await API.graphql(graphqlOperation(getUser, { id })).catch(
       err => console.log('Problem with getUser request', err)
     );
     if (data) {
+      this.props.navigation.setParams({ user: data });
       console.log('RESPONSE', data);
       this.setState({ user: data.getUser });
       this.setState({ loading: false });
@@ -71,16 +58,14 @@ class Profile extends Component {
           <Button onPress={() => console.log('connect')} title="CONNECT" />
           <Button onPress={() => console.log('pressed')} title="MESSAGE" />
         </View>
-
-        <View style={{ paddingBottom: 40, paddingHorizontal: 10 }}>
-          <TextInput
-            placeholder="wall post"
-            value={this.state.wallPostMessage && ''}
-            onChangeText={e => this.setState({ wallPostMessage: e })}
-          >
-            What's new?
-          </TextInput>
-        </View>
+        <Text>My Post</Text>
+        <TextInput
+          placeholder="wall post"
+          value={this.state.wallPostMessage && 'Some TExt'}
+          onChangeText={e => this.setState({ wallPostMessage: e })}
+        >
+          What's new?
+        </TextInput>
       </View>
     );
   }

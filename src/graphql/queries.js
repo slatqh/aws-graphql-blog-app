@@ -47,6 +47,7 @@ export const getPost = `query GetPost($id: ID!) {
     owner
     postAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -59,6 +60,9 @@ export const getPost = `query GetPost($id: ID!) {
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -104,6 +108,7 @@ export const listPosts = `query ListPosts(
       owner
       postAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -143,6 +148,7 @@ export const getComment = `query GetComment($id: ID!) {
       owner
       postAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -167,6 +173,7 @@ export const getComment = `query GetComment($id: ID!) {
     }
     commentAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -179,6 +186,9 @@ export const getComment = `query GetComment($id: ID!) {
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -209,6 +219,7 @@ export const listComments = `query ListComments(
       }
       commentAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -225,6 +236,7 @@ export const listComments = `query ListComments(
 export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
     id
+    owner
     authID
     firstName
     lastName
@@ -237,6 +249,14 @@ export const getUser = `query GetUser($id: ID!) {
       region
     }
     instrument
+    wallPost {
+      items {
+        id
+        message
+        title
+      }
+      nextToken
+    }
     userpost {
       items {
         id
@@ -267,6 +287,7 @@ export const listUsers = `query ListUsers(
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      owner
       authID
       firstName
       lastName
@@ -279,11 +300,73 @@ export const listUsers = `query ListUsers(
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
       usercomment {
         nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getUserWallPost = `query GetUserWallPost($id: ID!) {
+  getUserWallPost(id: $id) {
+    id
+    message
+    title
+    userWallPost {
+      id
+      owner
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      instrument
+      wallPost {
+        nextToken
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listUserWallPosts = `query ListUserWallPosts(
+  $filter: ModelUserWallPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserWallPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      message
+      title
+      userWallPost {
+        id
+        owner
+        authID
+        firstName
+        lastName
+        username
+        phone
+        email
+        instrument
       }
     }
     nextToken

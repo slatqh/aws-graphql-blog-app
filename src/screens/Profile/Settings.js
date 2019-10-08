@@ -23,7 +23,8 @@ export default class Settings extends Component {
   };
 
   render() {
-    console.log(this.state.user);
+    const { user } = this.props.navigation.getParam('user');
+    console.log('USER', user);
     return (
       <ScrollView>
         <Wrapper
@@ -31,13 +32,10 @@ export default class Settings extends Component {
           id="d9c69907-59af-4897-b91b-4aaa529ce8d5"
           action="get user data"
         >
-          {({ data }) => {
-            console.log(data.getUser);
-            return <Text>User Data</Text>;
-          }}
+          {({ data }) => <Text>User Data</Text>}
         </Wrapper>
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text>First Name</Text>
+          {/* <Text>First Name</Text>
           <TextInput
             value={this.props.authData.attributes['custom:firstName']}
             style={{ fontSize: 14, letterSpacing: 1 }}
@@ -47,7 +45,7 @@ export default class Settings extends Component {
             value={this.props.authData.attributes['custom:lastName']}
           />
           <Text>Email</Text>
-          <Text>{this.props.authData.attributes['email']}</Text>
+          <Text>{this.props.authData.attributes['email']}</Text> */}
         </View>
       </ScrollView>
     );
