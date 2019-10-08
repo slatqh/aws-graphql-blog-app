@@ -16,6 +16,7 @@ import {
   CreateAccount,
   CreateNewPost,
   Settings,
+  ProfileUpdate,
 } from '../screens';
 
 // import ModalScreen from '../screens/ModalScreen';
@@ -23,6 +24,7 @@ import {
 export const AuthStack = createStackNavigator(
   {
     Auth: AuthMain,
+    ProfileUpdate,
     SignIn: Login,
     Signup: CreateAccount,
   },
@@ -33,16 +35,7 @@ export const AuthStack = createStackNavigator(
     initialRouteName: 'Auth',
   }
 );
-// const SettingStack = createStackNavigator(
-//   {
-//     Settings,
-//   },
-//   {
-//     navigationOptions: ({ navigation }) => ({
-//       headerLeft: <Text>SignOut</Text>,
-//     }),
-//   }
-// );
+
 const ProfileStack = createStackNavigator(
   {
     Profile,

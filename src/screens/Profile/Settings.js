@@ -37,7 +37,7 @@ export default class Settings extends Component {
           }}
         </Wrapper>
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text>First Name</Text>
+          {/* <Text>First Name</Text>
           <TextInput
             value={this.props.authData.attributes['custom:firstName']}
             style={{ fontSize: 14, letterSpacing: 1 }}
@@ -47,7 +47,7 @@ export default class Settings extends Component {
             value={this.props.authData.attributes['custom:lastName']}
           />
           <Text>Email</Text>
-          <Text>{this.props.authData.attributes['email']}</Text>
+          <Text>{this.props.authData.attributes['email']}</Text> */}
         </View>
       </ScrollView>
     );

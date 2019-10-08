@@ -63,7 +63,8 @@ export default class Posts extends Component {
             data.getBlog.posts.items.map(el => (
               <CardView
                 key={el.id}
-                username={el.postAuthor}
+                // username={el.postAuthor}
+                username="dimonguitrs"
                 onPress={imageURI =>
                   this.props.navigation.navigate('PostDetails', {
                     postId: el.id,

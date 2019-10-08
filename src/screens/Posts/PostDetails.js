@@ -98,7 +98,11 @@ class PostDetailsScreen extends Component {
       <Wrapper query={postDetails} action="Load Post details" id={postId}>
         {({ data }) => (
           <View style={{ flex: 1 }}>
-            <PostDetails data={data} images={imageURI} username={username}>
+            <PostDetails
+              data={data}
+              images={imageURI}
+              username={'DimonGuitars'}
+            >
               {this.state.comments.map(el => (
                 <SingleComent key={el.id} comment={el.content} />
               ))}
