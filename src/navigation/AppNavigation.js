@@ -1,6 +1,6 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { AuthLoadingScreen } from '../screens';
-import App, { AuthStack } from './TabNavigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {AuthLoadingScreen} from '../screens';
+import App, {AuthStack} from './TabNavigation';
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(

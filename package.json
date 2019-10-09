@@ -12,6 +12,7 @@
   "dependencies": {
     "@aws-amplify/api": "^1.0.42",
     "@aws-amplify/pubsub": "^1.1.0",
+    "amazon-cognito-identity-js": "^3.0.15",
     "aws-amplify": "^1.1.36",
     "aws-amplify-react-native": "^2.1.16",
     "aws-appsync": "^1.8.1",

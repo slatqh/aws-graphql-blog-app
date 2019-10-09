@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import { Text, View, SafeAreaView, TextInput, Button } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import API, { graphqlOperation } from '@aws-amplify/api';
+import { connect } from 'react-redux';
 import { getUser } from '../../graphql/queries';
 import { AvatarUpload } from './AvatarUpload';
+import { updateUserReducer } from './action';
+
+const data = {
+  lastName: 'Dimon',
+  firstName: 'Volkov',
+  instrument: 'Drumms',
+  gender: 'Male',
+};
+const userID = '1234-1234-1234-1234';
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -55,7 +65,10 @@ class Profile extends Component {
             justifyContent: 'space-evenly',
           }}
         >
-          <Button onPress={() => console.log('connect')} title="CONNECT" />
+          <Button
+            onPress={() => this.props.updateUserReducer(data, userID)}
+            title="CONNECT"
+          />
           <Button onPress={() => console.log('pressed')} title="MESSAGE" />
         </View>
         <Text>My Post</Text>
@@ -70,4 +83,7 @@ class Profile extends Component {
     );
   }
 }
-export default withAuthenticator(Profile);
+export default connect(
+  null,
+  { updateUserReducer }
+)(withAuthenticator(Profile));
