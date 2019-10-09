@@ -11,11 +11,12 @@ import {
   TextInput as RNTextInput,
 } from 'react-native';
 import { Auth } from 'aws-amplify';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createUser } from '../../graphql/mutations';
 import { CustomButton, TextInput, TextCustom, Loading } from '../../components';
-// import { updateUserReducer} from '..'
+import { updateUserReducer } from '../Profile/action';
 
 import Colors from '../../../const/Colors';
 
@@ -151,6 +152,8 @@ class CreateAccount extends Component {
           await Auth.updateUserAttributes(updateUser, {
             'custom:authID': userID,
           });
+          // save user to user  reducer
+          this.props.updateUserReducer(createUserInDb);
           // here is some bug to apdate Cognito user attributes
           // we have signOut and signin user back to get attributes update
           await Auth.signOut()
@@ -374,8 +377,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
-// export default withAuthenticator(CreateAccount, {
-//   authenticatorComponents: [<CreateAccount />],
-// });
 
-export default CreateAccount;
+export default connect(
+  null,
+  { updateUserReducer }
+)(CreateAccount);
