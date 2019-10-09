@@ -4,11 +4,24 @@ import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 import { getUser } from '../../graphql/queries';
 import Wrapper from '../withContentHOC';
+import { CustomButton } from '../../components';
+import Colors from '../../../const/Colors';
 
-const UserFields = ({ userFields }) => {
-  console.log(userFields);
-  const [value, setValue] = useState(userFields);
-  return <TextInput value={value} onChangeText={e => setValue(e)} />;
+const UserFields = ({ property, value }) => {
+  const [field, setFields] = useState(value);
+  console.log(field);
+  return (
+    <TextInput
+      style={{
+        paddingVertical: 5,
+        marginVertical: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.purple,
+      }}
+      value={field}
+      onChangeText={e => setFields(e)}
+    />
+  );
 };
 
 class Settings extends Component {
@@ -25,43 +38,28 @@ class Settings extends Component {
     ),
   });
 
-  state = {
-    user: {},
-  };
-
-  componentDidMount() {
-    // const user = this.props.navigation.getParam('user');
-    // console.log('USER', user);
+  updateUser() {
+    console.log('user updated');
   }
 
   render() {
-    console.log('Settings', this.props.user);
+    const user = this.props.navigation.getParam('user');
+    console.log(user);
     return (
-      <ScrollView>
-        {/* <Wrapper
-          query={getUser}
-          id="d9c69907-59af-4897-b91b-4aaa529ce8d5"
-          action="get user data"
+      <ScrollView contentContainerStyle={{ flex: 1, marginHorizontal: 10 }}>
+        <UserFields value={user.lastName} />
+        <UserFields value={user.firstName} />
+        <UserFields value={user.username} />
+        <UserFields value={user.instrument} />
+        <UserFields value={user.phone} />
+        <View
+          style={{ flex: 1, paddingHorizontal: 10, justifyContent: 'flex-end' }}
         >
-          {({ data }) =>
-            Object.values(data.getUser).map(e => <UserFields userFields={e} />)
-          }
-        </Wrapper> */}
-        {Object.values(this.props.user).map(e => (
-          <UserFields userFields={e} />
-        ))}
-        <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          {/* <Text>First Name</Text>
-          <TextInput
-            value={this.props.authData.attributes['custom:firstName']}
-            style={{ fontSize: 14, letterSpacing: 1 }}
+          <CustomButton
+            gradient
+            title="Save"
+            onPress={() => this.updateUser()}
           />
-          <Text>Last Name</Text>
-          <TextInput
-            value={this.props.authData.attributes['custom:lastName']}
-          />
-          <Text>Email</Text>
-          <Text>{this.props.authData.attributes['email']}</Text> */}
         </View>
       </ScrollView>
     );
