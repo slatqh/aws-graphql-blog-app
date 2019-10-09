@@ -37,6 +37,8 @@ target 'AWS' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
+  pod 'RNAWSCognito', :path => '../node_modules/amazon-cognito-identity-js'
+
   target 'AWSTests' do
     inherit! :search_paths
     # Pods for testing

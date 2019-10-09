@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createUser } from '../../graphql/mutations';
 import { CustomButton, TextInput, TextCustom, Loading } from '../../components';
+// import { updateUserReducer} from '..'
 
 import Colors from '../../../const/Colors';
 

@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Text, View, Button, ScrollView, TextInput } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { getUser } from '../../graphql/queries';
 import Wrapper from '../withContentHOC';
+
+const UserFields = ({ userFields }) => {
+  const [value, setValue] = useState(userFields);
+  return <TextInput value={value} onChangeText={e => setValue(e)} />;
+};
 
 export default class Settings extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,9 +27,13 @@ export default class Settings extends Component {
     user: {},
   };
 
-  render() {
-    const { user } = this.props.navigation.getParam('user');
+  componentDidMount() {
+    const user = this.props.navigation.getParam('user');
     console.log('USER', user);
+  }
+
+  render() {
+    console.log('Settings', this.props.navigation);
     return (
       <ScrollView>
         <Wrapper
@@ -32,7 +41,9 @@ export default class Settings extends Component {
           id="d9c69907-59af-4897-b91b-4aaa529ce8d5"
           action="get user data"
         >
-          {({ data }) => <Text>User Data</Text>}
+          {({ data }) =>
+            Object.values(data.getUser).map(e => <UserFields userFields={e} />)
+          }
         </Wrapper>
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           {/* <Text>First Name</Text>
