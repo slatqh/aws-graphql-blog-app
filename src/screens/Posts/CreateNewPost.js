@@ -55,6 +55,7 @@ class CreateNewPost extends React.Component {
   };
 
   render() {
+    console.log(this.props.authData.attributes['custom:authID']);
     return (
       <CreatePost {...this.props} data={data => this.getBlogPosts(data)} />
     );

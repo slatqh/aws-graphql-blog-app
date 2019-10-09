@@ -66,5 +66,5 @@ type UserWallPost @model {
   id: ID!
   message: String
   title: String
-  userWallPost: User @connection(name:"UserWallPost)
+  userWallPost: User @connection(name:"UserWallPost")
 }

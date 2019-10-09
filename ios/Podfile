@@ -35,6 +35,8 @@ target 'AWS' do
 
 
 
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
   target 'AWSTests' do
     inherit! :search_paths
     # Pods for testing

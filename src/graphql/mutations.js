@@ -68,6 +68,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
     owner
     postAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -80,6 +81,9 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -120,6 +124,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
     owner
     postAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -132,6 +137,9 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -172,6 +180,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
     owner
     postAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -184,6 +193,9 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -227,6 +239,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
       owner
       postAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -251,6 +264,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     }
     commentAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -263,6 +277,9 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -286,6 +303,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
       owner
       postAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -310,6 +328,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     }
     commentAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -322,6 +341,9 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -345,6 +367,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
       owner
       postAuthor {
         id
+        owner
         authID
         firstName
         lastName
@@ -369,6 +392,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     }
     commentAuthor {
       id
+      owner
       authID
       firstName
       lastName
@@ -381,6 +405,9 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         region
       }
       instrument
+      wallPost {
+        nextToken
+      }
       userpost {
         nextToken
       }
@@ -394,6 +421,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id
+    owner
     authID
     firstName
     lastName
@@ -406,6 +434,14 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
       region
     }
     instrument
+    wallPost {
+      items {
+        id
+        message
+        title
+      }
+      nextToken
+    }
     userpost {
       items {
         id
@@ -431,6 +467,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     id
+    owner
     authID
     firstName
     lastName
@@ -443,6 +480,14 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       region
     }
     instrument
+    wallPost {
+      items {
+        id
+        message
+        title
+      }
+      nextToken
+    }
     userpost {
       items {
         id
@@ -468,6 +513,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     id
+    owner
     authID
     firstName
     lastName
@@ -480,6 +526,14 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
       region
     }
     instrument
+    wallPost {
+      items {
+        id
+        message
+        title
+      }
+      nextToken
+    }
     userpost {
       items {
         id
@@ -498,6 +552,105 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
         content
       }
       nextToken
+    }
+  }
+}
+`;
+export const createUserWallPost = `mutation CreateUserWallPost($input: CreateUserWallPostInput!) {
+  createUserWallPost(input: $input) {
+    id
+    message
+    title
+    userWallPost {
+      id
+      owner
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      instrument
+      wallPost {
+        nextToken
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updateUserWallPost = `mutation UpdateUserWallPost($input: UpdateUserWallPostInput!) {
+  updateUserWallPost(input: $input) {
+    id
+    message
+    title
+    userWallPost {
+      id
+      owner
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      instrument
+      wallPost {
+        nextToken
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deleteUserWallPost = `mutation DeleteUserWallPost($input: DeleteUserWallPostInput!) {
+  deleteUserWallPost(input: $input) {
+    id
+    message
+    title
+    userWallPost {
+      id
+      owner
+      authID
+      firstName
+      lastName
+      username
+      phone
+      email
+      avatar {
+        bucket
+        key
+        region
+      }
+      instrument
+      wallPost {
+        nextToken
+      }
+      userpost {
+        nextToken
+      }
+      usercomment {
+        nextToken
+      }
     }
   }
 }
