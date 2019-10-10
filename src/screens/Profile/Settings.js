@@ -47,13 +47,19 @@ class Settings extends Component {
     console.log(user);
     return (
       <ScrollView contentContainerStyle={{ flex: 1, marginHorizontal: 10 }}>
-        <UserFields value={user.lastName} />
-        <UserFields value={user.firstName} />
-        <UserFields value={user.username} />
-        <UserFields value={user.instrument} />
-        <UserFields value={user.phone} />
+        <View style={{ flex: 2 }}>
+          <UserFields value={user.lastName} />
+          <UserFields value={user.firstName} />
+          <UserFields value={user.username} />
+          <UserFields value={user.instrument} />
+          <UserFields value={user.phone} />
+        </View>
         <View
-          style={{ flex: 1, paddingHorizontal: 10, justifyContent: 'flex-end' }}
+          style={{
+            paddingHorizontal: 10,
+            justifyContent: 'flex-end',
+            marginBottom: 30,
+          }}
         >
           <CustomButton
             gradient
