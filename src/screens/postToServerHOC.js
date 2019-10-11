@@ -1,17 +1,17 @@
-import { Text } from 'react-native';
-import React, { useState } from 'react';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import * as subscriptions from '../graphql/subscriptions';
+import { Text } from "react-native";
+import React, { useState } from "react";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import * as subscriptions from "../graphql/subscriptions";
 
 const CreateContent = props => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   async function postDataToServer(comment, id, query) {
-    console.log('postDataToServer', comment, id);
+    console.log("postDataToServer", comment, id);
     setLoading(true);
     const newComment = {
       commentPostId: id,
-      content: comment,
+      content: comment
     };
     try {
       const { data } = await API.graphql(
@@ -21,7 +21,7 @@ const CreateContent = props => {
       if (props.comments) {
         return props.comments({
           id: data.createComment.id,
-          content: data.createComment.content,
+          content: data.createComment.content
         });
       }
       setLoading(false);

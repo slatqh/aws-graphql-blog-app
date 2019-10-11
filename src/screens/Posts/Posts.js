@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { View, ScrollView, Button, Text } from 'react-native';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import Wrapper from '../withContentHOC';
-import { CardView } from '../../components';
-import { deletePost } from '../../graphql/mutations';
-import { getBlog } from '../../graphql/queries';
-import Colors from '../../../const/Colors';
+import React, { Component } from "react";
+import { View, ScrollView, Button, Text } from "react-native";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import Wrapper from "../withContentHOC";
+import { CardView } from "../../components";
+import { deletePost } from "../../graphql/mutations";
+import { getBlog } from "../../graphql/queries";
+import Colors from "../../../const/Colors";
 
 const blogQuery = `
     query getBlog($id: ID!){
@@ -34,13 +34,13 @@ export default class Posts extends Component {
     headerRight: (
       <Button
         onPress={() =>
-          navigation.navigate('Modal', {
-            id: navigation.state.params, // passing current post/blog id to modal screen
+          navigation.navigate("Modal", {
+            id: navigation.state.params // passing current post/blog id to modal screen
           })
         }
         title="New"
       />
-    ),
+    )
   });
 
   async _deletePost(id) {
@@ -66,11 +66,11 @@ export default class Posts extends Component {
                 // username={el.postAuthor}
                 username="dimonguitrs"
                 onPress={imageURI =>
-                  this.props.navigation.navigate('PostDetails', {
+                  this.props.navigation.navigate("PostDetails", {
                     postId: el.id,
                     titleName: el.title,
                     imageURI,
-                    username: el.postAuthor,
+                    username: el.postAuthor
                   })
                 }
                 title={el.title}

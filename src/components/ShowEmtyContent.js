@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import React from "react";
+import { Text, StyleSheet } from "react-native";
 
 export const ShowEmtyContent = props => {
   const { text } = props;
@@ -8,10 +8,10 @@ export const ShowEmtyContent = props => {
 
 const styles = StyleSheet.create({
   container: {
-    alignContent: 'center',
-    alignItems: 'center',
+    alignContent: "center",
+    alignItems: "center"
   },
   text: {
-    fontSize: 22,
-  },
+    fontSize: 22
+  }
 });

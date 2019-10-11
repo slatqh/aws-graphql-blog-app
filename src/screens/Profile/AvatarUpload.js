@@ -1,18 +1,18 @@
-import React, { Component, useState } from 'react';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
-import { Storage } from 'aws-amplify';
-import ImagePicker from 'react-native-image-picker';
+import React, { Component, useState } from "react";
+import { Image, View, Text, TouchableOpacity } from "react-native";
+import { Storage } from "aws-amplify";
+import ImagePicker from "react-native-image-picker";
 
 export const AvatarUpload = props => {
   const [avatar, setAvatar] = useState(null);
   function selectPhotoTapped() {
     ImagePicker.showImagePicker(response => {
       if (response.didCancel) {
-        console.log('User cancelled photo picker');
+        console.log("User cancelled photo picker");
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log("ImagePicker Error: ", response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.log("User tapped custom button: ", response.customButton);
       } else {
         setAvatar(response.uri);
         uploadAvatar();
@@ -27,7 +27,7 @@ export const AvatarUpload = props => {
       const blob = await response.blob();
       const avatarId = uuid();
       Storage.put(`/avatars/${avatarId}`, blob, {
-        contentType: 'image/jpeg',
+        contentType: "image/jpeg"
       });
     } catch (err) {
       console.log(err);
@@ -39,9 +39,9 @@ export const AvatarUpload = props => {
       <View
         style={[
           {
-            alignItems: 'center',
+            alignItems: "center"
           },
-          props.style,
+          props.style
         ]}
       >
         <TouchableOpacity onPress={() => selectPhotoTapped()}>
@@ -50,7 +50,7 @@ export const AvatarUpload = props => {
             source={
               avatar
                 ? { uri: avatar }
-                : require('../../../assets/images/avatar.jpg')
+                : require("../../../assets/images/avatar.jpg")
             }
           />
         </TouchableOpacity>

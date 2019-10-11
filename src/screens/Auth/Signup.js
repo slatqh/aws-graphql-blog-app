@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Image,
@@ -8,19 +8,19 @@ import {
   Dimensions,
   Alert,
   Button,
-  TextInput as RNTextInput,
-} from 'react-native';
-import { Auth } from 'aws-amplify';
-import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import { createUser } from '../../graphql/mutations';
-import { CustomButton, TextInput, TextCustom, Loading } from '../../components';
-import { updateUserReducer } from '../Profile/action';
+  TextInput as RNTextInput
+} from "react-native";
+import { Auth } from "aws-amplify";
+import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/Ionicons";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import { createUser } from "../../graphql/mutations";
+import { CustomButton, TextInput, TextCustom, Loading } from "../../components";
+import { updateUserReducer } from "../Profile/action";
 
-import Colors from '../../../const/Colors';
+import Colors from "../../../const/Colors";
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 const HEADER = height / 8;
 
 class CreateAccount extends Component {
@@ -44,7 +44,7 @@ class CreateAccount extends Component {
       code: null,
       isLoading: false,
       instrument: null,
-      instrumentError: false,
+      instrumentError: false
     };
   }
 
@@ -56,7 +56,7 @@ class CreateAccount extends Component {
       password,
       confirmPassword,
       instrument,
-      username,
+      username
     } = this.state;
     if (firstName === null || firstName.length < 1) {
       this.setState({ nameError: true });
@@ -73,8 +73,8 @@ class CreateAccount extends Component {
     } else if (confirmPassword === null || confirmPassword.length < 1) {
       this.setState({ passwordConfirmError: true });
     } else if (password !== confirmPassword) {
-      Alert.alert('Password not match', null, [{ text: 'OK' }], {
-        cancelable: false,
+      Alert.alert("Password not match", null, [{ text: "OK" }], {
+        cancelable: false
       });
     } else {
       this.createAccount();
@@ -91,12 +91,12 @@ class CreateAccount extends Component {
       email,
       password,
       attributes: {
-        'custom:lastName': lastName,
-        'custom:firstName': firstName,
+        "custom:lastName": lastName,
+        "custom:firstName": firstName,
         nickname: this.state.username,
-        'custom:authID': 'id',
+        "custom:authID": "id"
       },
-      validationData: [], // optional
+      validationData: [] // optional
     }).catch(err => console.log(err));
 
     if (signUpSuccess) {
@@ -105,8 +105,8 @@ class CreateAccount extends Component {
     }
     this.setState({
       signUpError:
-        'Ops, some error while creating an account. Please try again.',
-      isLoading: false,
+        "Ops, some error while creating an account. Please try again.",
+      isLoading: false
     });
   }
 
@@ -116,7 +116,7 @@ class CreateAccount extends Component {
     const username = email;
     this.setState({ isLoading: true });
     Auth.confirmSignUp(username, code, {
-      forceAliasCreation: true,
+      forceAliasCreation: true
     })
       .then(() => {
         this.createUserGraphQlModal();
@@ -137,7 +137,7 @@ class CreateAccount extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             username: this.state.username,
-            instrument: this.state.instrument,
+            instrument: this.state.instrument
           };
           // updating GraphQl User Type with args
           const userGraphQL = await API.graphql(
@@ -147,10 +147,10 @@ class CreateAccount extends Component {
           });
           const userID = userGraphQL.data.createUser.id;
           const updateUser = await Auth.currentAuthenticatedUser({
-            bypassCache: false,
+            bypassCache: false
           });
           await Auth.updateUserAttributes(updateUser, {
-            'custom:authID': userID,
+            "custom:authID": userID
           });
           // save user to user  reducer
           this.props.updateUserReducer(createUserInDb);
@@ -160,7 +160,7 @@ class CreateAccount extends Component {
             .then(() => {
               Auth.signIn(email, password);
               this.setState({ isLoading: false });
-              this.props.navigation.navigate('App');
+              this.props.navigation.navigate("App");
             })
             .catch(err => console.log(err));
         } catch (error) {
@@ -187,20 +187,20 @@ class CreateAccount extends Component {
       passwordError,
       isLoading,
       instrumentError,
-      usernameError,
+      usernameError
     } = this.state;
     const { navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
+        <View style={{ flex: 1, justifyContent: "space-evenly" }}>
           <SafeAreaView>
             <Icon
               onPress={() => navigation.goBack(null)}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 top: HEADER / 2.5,
                 left: 10,
-                marginBottom: 10,
+                marginBottom: 10
               }}
               name="ios-arrow-round-back"
               type="ionicons"
@@ -209,13 +209,13 @@ class CreateAccount extends Component {
             />
             <Image
               style={styles.logo}
-              source={require('../../../assets/images/logo.png')}
+              source={require("../../../assets/images/logo.png")}
               resizeMode="center"
             />
           </SafeAreaView>
         </View>
         <View style={styles.wrap}>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: "row" }}>
             <TextInput
               containerStyle={{ flex: 1 }}
               placeholder="FIRST NAME"
@@ -224,7 +224,7 @@ class CreateAccount extends Component {
                 this.setState({
                   firstName: e,
                   nameError: false,
-                  signUpError: null,
+                  signUpError: null
                 })
               }
               error={!!nameError}
@@ -236,7 +236,7 @@ class CreateAccount extends Component {
               onChangeText={e =>
                 this.setState({
                   lastName: e,
-                  lastNameError: false,
+                  lastNameError: false
                 })
               }
               error={!!lastNameError}
@@ -249,7 +249,7 @@ class CreateAccount extends Component {
               this.setState({
                 email: e,
                 emailError: false,
-                signUpError: null,
+                signUpError: null
               })
             }
             error={!!emailError}
@@ -261,7 +261,7 @@ class CreateAccount extends Component {
               this.setState({
                 username: e,
                 usernameError: false,
-                signUpError: null,
+                signUpError: null
               })
             }
             error={!!usernameError}
@@ -273,7 +273,7 @@ class CreateAccount extends Component {
               this.setState({
                 instrument: e,
                 instrumentError: false,
-                signUpError: null,
+                signUpError: null
               })
             }
             error={!!instrumentError}
@@ -286,7 +286,7 @@ class CreateAccount extends Component {
               this.setState({
                 password: e,
                 passwordError: false,
-                signUpError: null,
+                signUpError: null
               })
             }
             password={!!passwordError}
@@ -298,7 +298,7 @@ class CreateAccount extends Component {
               this.setState({
                 confirmPassword: e,
                 passwordConfirmError: false,
-                signUpError: null,
+                signUpError: null
               })
             }
             password={!!passwordConfirmError}
@@ -309,7 +309,7 @@ class CreateAccount extends Component {
             <View>
               <TextCustom
                 title={` Confirmation code sent to ${email}`}
-                styles={{ alignSelf: 'center' }}
+                styles={{ alignSelf: "center" }}
               />
               <RNTextInput
                 placeholder="Enter code"
@@ -317,7 +317,7 @@ class CreateAccount extends Component {
                   marginTop: 10,
                   padding: 20,
                   borderWidth: 1,
-                  borderColor: 'black',
+                  borderColor: "black"
                 }}
                 onChangeText={e => this.setState({ code: e })}
               />
@@ -330,13 +330,13 @@ class CreateAccount extends Component {
           <View
             style={{
               flex: 0.3,
-              alignSelf: 'center',
-              justifyContent: 'flex-start',
-              marginHorizontal: 25,
+              alignSelf: "center",
+              justifyContent: "flex-start",
+              marginHorizontal: 25
             }}
           />
           <CustomButton
-            title={confirmation ? 'CONFIRM' : 'CREATE ACCOUNT'}
+            title={confirmation ? "CONFIRM" : "CREATE ACCOUNT"}
             gradient
             onPress={() =>
               confirmation ? this.confirmationCode() : this.checkInputs()
@@ -349,33 +349,33 @@ class CreateAccount extends Component {
 }
 const styles = StyleSheet.create({
   logo: {
-    justifyContent: 'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignSelf: "center",
     width: 120,
-    height: 80,
+    height: 80
   },
   wrap: {
     flex: 2,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
     // alignContent: 'flex-start',
   },
   checkBox: {
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: "white",
+    borderColor: "white"
   },
   error: {
-    alignSelf: 'center',
-    color: 'red',
-    fontSize: 12,
+    alignSelf: "center",
+    color: "red",
+    fontSize: 12
     // fontFamily: 'montserrat',
   },
   checkBoxTitle: {
     color: Colors.grey,
     // fontFamily: 'montserrat',
-    fontWeight: '300',
+    fontWeight: "300",
     fontSize: 12,
-    letterSpacing: 1,
-  },
+    letterSpacing: 1
+  }
 });
 
 export default connect(

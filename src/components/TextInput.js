@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Input, Icon } from 'react-native-elements';
-import Colors from '../../const/Colors';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Input, Icon } from "react-native-elements";
+import Colors from "../../const/Colors";
 
 export const CustomTextInput = ({
   placeholder,
@@ -14,7 +14,7 @@ export const CustomTextInput = ({
   password,
   containerStyle,
   multiline,
-  clearButtonMode,
+  clearButtonMode
 }) => (
   <Input
     placeholder={placeholder}
@@ -29,7 +29,7 @@ export const CustomTextInput = ({
     underlineColorAndroid="transparent"
     keyboardAppearance="default"
     // leftIconContainerStyle={{ marginLeft: -10 }}
-    rightIconContainerStyle={{ backgroundColor: 'white' }}
+    rightIconContainerStyle={{ backgroundColor: "white" }}
     inputContainerStyle={styles.inputContainerStyle}
     inputStyle={styles.inputStyle}
     containerStyle={containerStyle}
@@ -37,12 +37,12 @@ export const CustomTextInput = ({
       error
         ? `Please enter ${label}.`
         : password
-        ? 'Password must be at least 8 characters long.'
+        ? "Password must be at least 8 characters long."
         : null
     }
     leftIcon={
       icon ? (
-        <Icon iconStyle={{ color: 'white' }} name={icon} size={24} />
+        <Icon iconStyle={{ color: "white" }} name={icon} size={24} />
       ) : null
     }
   />
@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     height: 20,
     paddingBottom: 12.5,
-    paddingTop: 25,
+    paddingTop: 25
   },
   inputStyle: {
     color: Colors.lightblack,
     fontSize: 14,
     letterSpacing: 1,
-    paddingLeft: 0,
+    paddingLeft: 0
     // fontFamily: 'montserrat',
-  },
+  }
 });

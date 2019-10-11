@@ -9,6 +9,11 @@
     "lint:fix": "eslint . --fix",
     "fix-code": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "dependencies": {
     "@aws-amplify/api": "^1.0.42",
     "@aws-amplify/pubsub": "^1.1.0",

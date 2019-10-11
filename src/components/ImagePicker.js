@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Image,
   Text,
   StyleSheet,
   TouchableOpacity,
-  PixelRatio,
-} from 'react-native';
-import ImagePicker from 'react-native-image-picker';
-import { CustomButton } from './Button';
-import Colors from '../../const/Colors';
+  PixelRatio
+} from "react-native";
+import ImagePicker from "react-native-image-picker";
+import { CustomButton } from "./Button";
+import Colors from "../../const/Colors";
 
 const options = {
-  title: 'Select Avatar',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  title: "Select Avatar",
+  customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
   storageOptions: {
     skipBackup: true,
-    path: 'images',
-  },
+    path: "images"
+  }
 };
 
 export default class ImageSelect extends Component {
   state = {
-    images: [],
+    images: []
   };
 
   // /const [image, selectImage] = useState([])
@@ -39,15 +39,15 @@ export default class ImageSelect extends Component {
 
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log('User cancelled photo picker');
+        console.log("User cancelled photo picker");
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log("ImagePicker Error: ", response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.log("User tapped custom button: ", response.customButton);
       } else {
         const source = { uri: response.uri };
         this.setState({
-          images: [...this.state.images, source],
+          images: [...this.state.images, source]
         });
         return this.props.selectImages(this.state.images);
       }
@@ -58,7 +58,7 @@ export default class ImageSelect extends Component {
     this.setState(state => {
       const deleted = state.images.filter(el => el !== id);
       return {
-        images: deleted,
+        images: deleted
       };
     });
   }
@@ -68,7 +68,7 @@ export default class ImageSelect extends Component {
     return (
       <View
         style={{
-          flex: 1,
+          flex: 1
         }}
       >
         <View
@@ -101,7 +101,7 @@ export default class ImageSelect extends Component {
           // )
           }
         </View>
-        <View style={{ flex: 1, padding: 15, justifyContent: 'flex-end' }}>
+        <View style={{ flex: 1, padding: 15, justifyContent: "flex-end" }}>
           <CustomButton
             title="Upload images"
             radius={5}
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
     borderWidth: 1 / PixelRatio.get(),
     borderRadius: 5,
     padding: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    flexShrink: 4,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    flexShrink: 4
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
     // borderRadius: 10,
     // borderColor: Colors.teal,
     // borderWidth: 1,
@@ -136,6 +136,6 @@ const styles = StyleSheet.create({
   avatar: {
     margin: 10,
     width: 50,
-    height: 50,
-  },
+    height: 50
+  }
 });

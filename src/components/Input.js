@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Input, Icon } from 'react-native-elements';
-import Colors from '../../const/Colors';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Input, Icon } from "react-native-elements";
+import Colors from "../../const/Colors";
 
 export const TextInput = ({
   placeholder,
@@ -11,7 +11,7 @@ export const TextInput = ({
   error,
   label,
   password,
-  containerStyle,
+  containerStyle
 }) => (
   <Input
     placeholder={placeholder}
@@ -19,12 +19,12 @@ export const TextInput = ({
     autoCapitalize="none"
     placeholderTextColor={Colors.grey}
     autoCorrect={false}
-    placeholderStyle={{ color: 'red', letterSpacing: 15 }}
+    placeholderStyle={{ color: "red", letterSpacing: 15 }}
     secureTextEntry={secureTextEntry}
     underlineColorAndroid="transparent"
     keyboardAppearance="default"
     leftIconContainerStyle={{ marginLeft: -10 }}
-    rightIconContainerStyle={{ backgroundColor: 'white' }}
+    rightIconContainerStyle={{ backgroundColor: "white" }}
     inputContainerStyle={styles.inputContainerStyle}
     inputStyle={styles.inputStyle}
     containerStyle={containerStyle}
@@ -32,10 +32,10 @@ export const TextInput = ({
       error
         ? `Please enter ${label}.`
         : password
-        ? 'Password must be at least 8 characters long.'
+        ? "Password must be at least 8 characters long."
         : null
     }
-    leftIcon={<Icon iconStyle={{ color: 'white' }} name={icon} size={24} />}
+    leftIcon={<Icon iconStyle={{ color: "white" }} name={icon} size={24} />}
   />
 );
 
@@ -45,17 +45,17 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     height: 20,
     paddingBottom: 12.5,
-    paddingTop: 25,
+    paddingTop: 25
   },
   inputStyle: {
     color: Colors.lightblack,
     fontSize: 12,
-    paddingLeft: 10,
+    paddingLeft: 10
     // fontFamily: 'montserrat',
   },
   containerStyle: {
     margin: 0,
     padding: 0,
-    marginTop: 10,
-  },
+    marginTop: 10
+  }
 });

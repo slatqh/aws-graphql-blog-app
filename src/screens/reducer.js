@@ -1,16 +1,16 @@
-export const GET_BLOG_ID = 'GET_BLOG_ID';
-export const TEXT_INPUT = 'TEXT_INPUT';
+export const GET_BLOG_ID = "GET_BLOG_ID";
+export const TEXT_INPUT = "TEXT_INPUT";
 
 const initialState = {
-  postId: '',
-  blogId: '',
-  commentId: '',
+  postId: "",
+  blogId: "",
+  commentId: "",
   showingPosts: false,
   showingComments: false,
-  input: '',
-  postTitle: '',
-  name: '',
-  error: false,
+  input: "",
+  postTitle: "",
+  name: "",
+  error: false
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
         ...state,
         showingPosts: true,
         blogId: action.id,
-        postTitle: action.name,
+        postTitle: action.name
       };
     case TEXT_INPUT:
       return { ...state, input: action.payload };

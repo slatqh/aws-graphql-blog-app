@@ -1,14 +1,14 @@
-import { GET_BLOG_ID, TEXT_INPUT } from './reducer';
+import { GET_BLOG_ID, TEXT_INPUT } from "./reducer";
 
 export function getNameAndId(id, name) {
   return {
     type: GET_BLOG_ID,
     id,
-    name,
+    name
   };
 }
 
 export const getInput = input => ({
   type: TEXT_INPUT,
-  payload: input,
+  payload: input
 });

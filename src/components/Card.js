@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 
-import { Storage } from 'aws-amplify';
-import Colors from '../../const/Colors';
-import { Divider } from './Divider';
-import { PostAuthor } from './PostAuthor';
-import { PostOptions } from './PostOptions';
+import { Storage } from "aws-amplify";
+import Colors from "../../const/Colors";
+import { Divider } from "./Divider";
+import { PostAuthor } from "./PostAuthor";
+import { PostOptions } from "./PostOptions";
 
 export const CardView = ({
   onPress,
   title,
   username,
   postImage,
-  deletePost,
+  deletePost
 }) => {
   const [images, setImages] = useState([]);
   const [deleteMenu, setDeleteMenu] = useState(false);
@@ -36,14 +36,14 @@ export const CardView = ({
           style={{
             borderWidth: 1,
             borderColor: Colors.lightgrey,
-            overflow: 'hidden',
+            overflow: "hidden"
           }}
         >
           <Image
             source={{ uri: images }}
             style={{
               height: 150,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.white
             }}
             cache="force-cache"
             resizeMethod="scale"
@@ -53,16 +53,16 @@ export const CardView = ({
 
       <View
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingVertical: 7,
+          flexDirection: "row",
+          alignItems: "center",
+          paddingVertical: 7
         }}
       >
         <View
           style={{
             flex: 0.3,
-            justifyContent: 'space-around',
-            flexDirection: 'row',
+            justifyContent: "space-around",
+            flexDirection: "row"
           }}
         >
           <Icon name="heart-o" size={15} color={Colors.lightblack} />
@@ -94,13 +94,13 @@ export const CardView = ({
 
 const styles = StyleSheet.create({
   fieldsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center"
   },
   fields: {
     fontSize: 14,
     color: Colors.black,
-    paddingLeft: 5,
+    paddingLeft: 5
   },
   container: {
     marginBottom: 10,
@@ -110,26 +110,26 @@ const styles = StyleSheet.create({
     borderColor: Colors.lightgrey,
     borderWidth: 1,
     backgroundColor: Colors.white,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.2,
-    shadowRadius: 10,
+    shadowRadius: 10
   },
   title: {
     fontSize: 14,
     letterSpacing: 1,
     color: Colors.black,
-    padding: 10,
+    padding: 10
   },
   commentLikeShare: {
     flex: 1,
     padding: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginHorizontal: 10,
-    alignItems: 'center',
+    alignItems: "center"
   },
   deleteMeneFields: {
     fontSize: 12,
-    color: Colors.lightblack,
-  },
+    color: Colors.lightblack
+  }
 });

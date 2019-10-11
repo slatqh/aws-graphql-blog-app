@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
+import LinearGradient from "react-native-linear-gradient";
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import Colors from '../../const/Colors';
+import Colors from "../../const/Colors";
 
 export const CustomButton = ({
   titleSize,
@@ -17,21 +17,21 @@ export const CustomButton = ({
   nospace,
   border,
   iconRight,
-  radius,
+  radius
 }) =>
   gradient ? (
     <Button
       ViewComponent={LinearGradient}
       linearGradientProps={{
-        colors: ['#96deda', '#50c9c3'],
+        colors: ["#96deda", "#50c9c3"],
         start: { x: 0, y: 0.5 },
-        end: { x: 1, y: 0.5 },
+        end: { x: 1, y: 0.5 }
       }}
       onPress={onPress}
       buttonStyle={[
         styles.button,
         titleSize ? { fontSize: titleSize } : null,
-        { borderRadius: radius || 30 },
+        { borderRadius: radius || 30 }
       ]}
       containerStyle={styles.container}
       type={type}
@@ -51,49 +51,49 @@ export const CustomButton = ({
         styles.button,
         {
           backgroundColor: color,
-          justifyContent: 'space-around',
-          borderRadius: radius || 30,
-        },
+          justifyContent: "space-around",
+          borderRadius: radius || 30
+        }
       ]}
       containerStyle={border ? styles.noGradientBorder : null}
       type={type}
       title={title}
-      titleStyle={[styles.title, { color: titleColor || 'white' }]}
+      titleStyle={[styles.title, { color: titleColor || "white" }]}
       color={color}
     />
   );
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: 'transparent',
+    borderColor: "transparent"
   },
   title: {
     marginVertical: 5,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
     // fontFamily: 'Montserrat-Medium',
     fontSize: 14,
-    letterSpacing: 2,
+    letterSpacing: 2
   },
   titleNoSpace: {
     paddingVertical: 0,
     margin: 0,
-    alignSelf: 'center',
+    alignSelf: "center",
     // fontFamily: 'Montserrat-Medium',
     fontSize: 10,
-    letterSpacing: 2,
+    letterSpacing: 2
   },
   container: {},
   buttonNoGradient: {
     marginVertical: 5,
     paddingHorizontal: 40,
     flex: 1,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start"
     //
   },
   noGradientBorder: {
     borderWidth: 2,
     borderRadius: 30,
-    borderColor: Colors.purple,
-  },
+    borderColor: Colors.purple
+  }
 });

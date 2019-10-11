@@ -10,6 +10,7 @@
     "no-plusplus": 0,
     "dot-notation": 0,
     "global-require": 0,
+    "quotes": "error",
     "react/destructuring-assignment": [
       0,
       "never",

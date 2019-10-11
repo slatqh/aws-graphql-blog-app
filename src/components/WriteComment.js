@@ -1,13 +1,13 @@
-import { View, TextInput, Button, TouchableOpacity, Text } from 'react-native';
-import React, { useState } from 'react';
-import Colors from '../../const/Colors';
+import { View, TextInput, Button, TouchableOpacity, Text } from "react-native";
+import React, { useState } from "react";
+import Colors from "../../const/Colors";
 
 export const WriteComment = ({ onPress }) => {
   const [comment, setComment] = useState(null);
 
   function submitComment() {
     onPress(comment);
-    setComment('');
+    setComment("");
   }
   return (
     <View
@@ -15,16 +15,16 @@ export const WriteComment = ({ onPress }) => {
         backgroundColor: Colors.milk,
         height: 50,
         borderRadius: 10,
-        alingItems: 'flex-end',
+        alingItems: "flex-end"
       }}
     >
       <View
         style={{
           flex: 1,
-          flexDirection: 'row',
-          alignItems: 'center',
+          flexDirection: "row",
+          alignItems: "center",
           borderWidth: 1,
-          padding: 10,
+          padding: 10
         }}
       >
         <TextInput
@@ -36,7 +36,7 @@ export const WriteComment = ({ onPress }) => {
         />
         <TouchableOpacity
           onPress={() => submitComment()}
-          style={{ alignSelf: 'flex-end', flex: 0.2, paddingRight: 7 }}
+          style={{ alignSelf: "flex-end", flex: 0.2, paddingRight: 7 }}
         >
           <Text style={{ fontSize: 14, padding: 5 }}>POST</Text>
         </TouchableOpacity>

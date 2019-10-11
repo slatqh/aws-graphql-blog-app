@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   TextInput,
   StyleSheet,
   Button,
   SafeAreaView,
-  StatusBar,
-} from 'react-native';
-import { CustomButton } from './Button';
-import { CustomTextInput } from './TextInput';
-import ImageSelect from './ImagePicker';
+  StatusBar
+} from "react-native";
+import { CustomButton } from "./Button";
+import { CustomTextInput } from "./TextInput";
+import ImageSelect from "./ImagePicker";
 
-import Colors from '../../const/Colors';
+import Colors from "../../const/Colors";
 
 export const CreatePost = props => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [message, setMessage] = useState("");
   const [images, setImages] = useState([]);
 
   function saveData() {
@@ -24,14 +24,14 @@ export const CreatePost = props => {
       title,
       description,
       message,
-      images,
+      images
     };
 
     return props.data(postData);
   }
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ alignItems: 'flex-end', marginTop: 40 }}>
+      <View style={{ alignItems: "flex-end", marginTop: 40 }}>
         <Button title="cancel" onPress={() => props.navigation.goBack()} />
       </View>
       <View style={{ flex: 1, paddingTop: 30, padding: 10 }}>
@@ -59,7 +59,7 @@ export const CreatePost = props => {
               padding: 10,
               color: Colors.lightblack,
               flex: 1,
-              height: 150,
+              height: 150
             }}
             onChangeText={e => setMessage(e)}
           />
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
     // borderColor: Colors.teal,
     opacity: 0.6,
     borderWidth: 0.5,
-    borderRadius: 5,
+    borderRadius: 5
     // height: 200,
     // textAlignVertical: 'top',
-  },
+  }
 });

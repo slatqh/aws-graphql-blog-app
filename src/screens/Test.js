@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   SafeAreaView,
@@ -7,23 +7,23 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
-} from 'react-native';
-import { Storage, Auth } from 'aws-amplify';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import { createUser } from '../graphql/mutations';
-import { ImageSelect, PostAuthor, Avatar } from '../components';
+  Image
+} from "react-native";
+import { Storage, Auth } from "aws-amplify";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import { createUser } from "../graphql/mutations";
+import { ImageSelect, PostAuthor, Avatar } from "../components";
 // import Colors from '../../const/Colors';
 
 export default class TestScreen extends Component {
   state = {
-    images: [],
+    images: []
   };
 
   postDataToServer = async () => {
     const newUser = {
-      username: 'Dimon',
-      lastName: 'Blotnoi',
+      username: "Dimon",
+      lastName: "Blotnoi"
     };
     try {
       await API.graphql(

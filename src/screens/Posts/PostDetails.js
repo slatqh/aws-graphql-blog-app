@@ -1,10 +1,10 @@
-import { View, ActivityIndicator } from 'react-native';
-import React, { Component } from 'react';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import Wrapper from '../withContentHOC';
-import { WriteComment, SingleComent } from '../../components';
-import { createComment } from '../../graphql/mutations';
-import PostDetails from './components/PostDetails';
+import { View, ActivityIndicator } from "react-native";
+import React, { Component } from "react";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import Wrapper from "../withContentHOC";
+import { WriteComment, SingleComent } from "../../components";
+import { createComment } from "../../graphql/mutations";
+import PostDetails from "./components/PostDetails";
 
 const postDetails = `
 query getPost($id: ID!){
@@ -45,7 +45,7 @@ query getPost($id: ID!){
 class PostDetailsScreen extends Component {
   state = {
     isLoading: false,
-    comments: [],
+    comments: []
   };
 
   componentDidMount() {
@@ -75,13 +75,13 @@ class PostDetailsScreen extends Component {
     const { postId } = navigation.state.params;
     const newComment = {
       commentPostId: postId,
-      content: comment,
+      content: comment
     };
     try {
       const { data } = await API.graphql(
         graphqlOperation(createComment, { input: newComment })
       ).catch(err => console.log(`Problem with create comment`, err));
-      console.log('Comment submited', data);
+      console.log("Comment submited", data);
       if (data) {
         this.fetchComments();
       }
@@ -93,7 +93,7 @@ class PostDetailsScreen extends Component {
   render() {
     const { navigation } = this.props;
     const { postId, imageURI, username } = navigation.state.params;
-    console.log('PostDetailsScreen', username);
+    console.log("PostDetailsScreen", username);
     return (
       <Wrapper query={postDetails} action="Load Post details" id={postId}>
         {({ data }) => (
@@ -101,7 +101,7 @@ class PostDetailsScreen extends Component {
             <PostDetails
               data={data}
               images={imageURI}
-              username={'DimonGuitars'}
+              username={"DimonGuitars"}
             >
               {this.state.comments.map(el => (
                 <SingleComent key={el.id} comment={el.content} />

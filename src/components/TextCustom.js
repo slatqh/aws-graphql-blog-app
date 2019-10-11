@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text } from 'react-native';
-import Colors from '../../const/Colors';
+import React from "react";
+import { Text } from "react-native";
+import Colors from "../../const/Colors";
 
 const TextCustom = ({
   size,
@@ -9,7 +9,7 @@ const TextCustom = ({
   color,
   styles,
   purple,
-  black,
+  black
 }) => (
   <Text
     style={[
@@ -17,9 +17,9 @@ const TextCustom = ({
         letterSpacing: 1,
         fontSize: size || 12,
         // fontFamily: fontFamily || 'montserrat',
-        color: purple ? Colors.purple : black ? 'black' : Colors.grey,
+        color: purple ? Colors.purple : black ? "black" : Colors.grey
       },
-      styles,
+      styles
     ]}
   >
     {title}

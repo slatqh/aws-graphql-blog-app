@@ -1,5 +1,5 @@
-import React from 'react';
-import { ActivityIndicator, StatusBar, View, Linking } from 'react-native';
+import React from "react";
+import { ActivityIndicator, StatusBar, View, Linking } from "react-native";
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = () => {
     const loogin = false;
-    this.props.navigation.navigate(loogin ? 'App' : 'Auth');
+    this.props.navigation.navigate(loogin ? "App" : "Auth");
   };
 
   // Render any loading content that you like here

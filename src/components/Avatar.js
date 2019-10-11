@@ -1,19 +1,19 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
-import Colors from '../../const/Colors';
+import React from "react";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
+import Colors from "../../const/Colors";
 
 export const Avatar = ({ onPress, name, status }) => (
   <View style={{}}>
     <View
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         backgroundColor: Colors.milk,
-        flexDirection: 'row',
+        flexDirection: "row"
       }}
     >
       <Image
-        source={require('../../assets/images/avatar.jpg')}
+        source={require("../../assets/images/avatar.jpg")}
         style={{ width: 50, height: 50, borderRadius: 25 }}
         resizeMode="center"
       />
@@ -21,7 +21,7 @@ export const Avatar = ({ onPress, name, status }) => (
         <Text>{name}</Text>
         <Text>{status}</Text>
       </View>
-      <TouchableOpacity style={{ flex: 1, alignItems: 'flex-end' }}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "flex-end" }}>
         <Icon size={18} name="dots-three-vertical" />
       </TouchableOpacity>
     </View>

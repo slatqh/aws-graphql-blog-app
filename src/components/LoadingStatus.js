@@ -1,7 +1,7 @@
-import React from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Overlay } from 'react-native-elements';
-import Colors from '../../const/Colors';
+import React from "react";
+import { ActivityIndicator } from "react-native";
+import { Overlay } from "react-native-elements";
+import Colors from "../../const/Colors";
 
 export const LoadingStatus = ({ loading }) => (
   <Overlay
@@ -10,9 +10,9 @@ export const LoadingStatus = ({ loading }) => (
     height="auto"
     // overlayBackgroundColor='white'
     overlayStyle={{
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: "center"
     }}
     isVisible={loading}
   >

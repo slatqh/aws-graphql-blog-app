@@ -1,4 +1,4 @@
-import Profile from './Profile';
-import Settings from './Settings';
+import Profile from "./Profile";
+import Settings from "./Settings";
 
 export { Profile, Settings };

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Image,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
-  Text,
-} from 'react-native';
-import { Auth } from 'aws-amplify';
-import { Authenticator } from 'aws-amplify-react-native';
+  Text
+} from "react-native";
+import { Auth } from "aws-amplify";
+import { Authenticator } from "aws-amplify-react-native";
 
-import { CustomButton, TextInput, TextCustom } from '../../components';
+import { CustomButton, TextInput, TextCustom } from "../../components";
 
 class Login extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Login extends Component {
       password: null,
       emailError: false,
       passwordError: false,
-      authError: false,
+      authError: false
     };
   }
 
@@ -38,10 +38,10 @@ class Login extends Component {
     const { username, password } = this.state;
     try {
       const user = await Auth.signIn(username, password);
-      console.log('USER', user);
+      console.log("USER", user);
 
       if (user) {
-        this.props.navigation.navigate('App');
+        this.props.navigation.navigate("App");
       } else {
         this.setState({ authError: true });
       }
@@ -60,23 +60,23 @@ class Login extends Component {
             <SafeAreaView>
               <Image
                 style={styles.image}
-                source={require('../../../assets/images/logo.png')}
+                source={require("../../../assets/images/logo.png")}
               />
             </SafeAreaView>
           </View>
-          {authError ? <Text style={{ color: 'red' }}>{authError}</Text> : null}
+          {authError ? <Text style={{ color: "red" }}>{authError}</Text> : null}
           <View style={styles.text}>
             <TextInput
               placeholder="EMAIL"
               label="email"
-              onChangeText={e => this.setState({ username: e, emailError: '' })}
+              onChangeText={e => this.setState({ username: e, emailError: "" })}
               error={!!emailError}
             />
             <TextInput
               placeholder="PASSWORD"
               secureTextEntry
               onChangeText={e =>
-                this.setState({ password: e, passwordError: '' })
+                this.setState({ password: e, passwordError: "" })
               }
               password={!!passwordError}
             />
@@ -89,26 +89,26 @@ class Login extends Component {
             </View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                flexDirection: "row",
+                justifyContent: "space-between",
                 marginTop: 20,
-                marginHorizontal: 15,
+                marginHorizontal: 15
               }}
             >
               <TouchableOpacity>
                 <TextCustom
                   title="FORGOT DETAILS?"
                   size={10}
-                  styles={{ fontWeight: '500' }}
+                  styles={{ fontWeight: "500" }}
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Signup')}
+                onPress={() => this.props.navigation.navigate("Signup")}
               >
                 <TextCustom
                   title="CREATE ACCOUNT"
                   size={10}
-                  styles={{ fontWeight: '500' }}
+                  styles={{ fontWeight: "500" }}
                 />
               </TouchableOpacity>
             </View>
@@ -122,14 +122,14 @@ class Login extends Component {
 export default Login;
 const styles = StyleSheet.create({
   image: {
-    justifyContent: 'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignSelf: "center",
     width: 300,
-    height: 300,
+    height: 300
   },
   text: {
     paddingTop: 20,
     flex: 1,
-    alignContent: 'center',
-  },
+    alignContent: "center"
+  }
 });

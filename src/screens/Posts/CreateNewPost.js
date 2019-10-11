@@ -1,16 +1,16 @@
-import React from 'react';
-import { Button } from 'react-native';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import { Storage } from 'aws-amplify';
-import uuid from 'uuid/v4';
-import { withAuthenticator } from 'aws-amplify-react-native';
-import { createPost } from '../../graphql/mutations';
-import { CreatePost, ImageSelect } from '../../components';
+import React from "react";
+import { Button } from "react-native";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import { Storage } from "aws-amplify";
+import uuid from "uuid/v4";
+import { withAuthenticator } from "aws-amplify-react-native";
+import { createPost } from "../../graphql/mutations";
+import { CreatePost, ImageSelect } from "../../components";
 
 class CreateNewPost extends React.Component {
   state = {
     data: null,
-    file: null,
+    file: null
   };
 
   getBlogPosts = async data => {
@@ -23,13 +23,13 @@ class CreateNewPost extends React.Component {
         const blob = await response.blob();
         const key = `${blob._data.blobId}`;
         const fileToUpload = {
-          bucket: 'blogappa3f6cac5608b4c6fbabd4e15fbe2d03e-react',
+          bucket: "blogappa3f6cac5608b4c6fbabd4e15fbe2d03e-react",
           key,
-          region: 'us-east-1',
+          region: "us-east-1"
         };
         this.setState({ file: fileToUpload });
         await Storage.put(`${key}`, blob, {
-          contentType: 'image/jpeg',
+          contentType: "image/jpeg"
         });
       }
       const newPost = await API.graphql(
@@ -41,12 +41,12 @@ class CreateNewPost extends React.Component {
             images: this.state.file,
             createdAt: new Date(),
             postBlogId: id,
-            postPostAuthorId: this.props.authData.attributes['custom:authID'],
-          },
+            postPostAuthorId: this.props.authData.attributes["custom:authID"]
+          }
         })
-      ).catch(err => console.log('Failure to create a new post', err));
+      ).catch(err => console.log("Failure to create a new post", err));
       if (newPost) {
-        console.log('post created');
+        console.log("post created");
         this.props.navigation.goBack();
       }
     } catch (error) {
@@ -55,7 +55,7 @@ class CreateNewPost extends React.Component {
   };
 
   render() {
-    console.log(this.props.authData.attributes['custom:authID']);
+    console.log(this.props.authData.attributes["custom:authID"]);
     return (
       <CreatePost {...this.props} data={data => this.getBlogPosts(data)} />
     );

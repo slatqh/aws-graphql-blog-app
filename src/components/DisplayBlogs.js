@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { ShowEmtyContent } from './ShowEmtyContent';
-import Colors from '../../const/Colors';
+import React from "react";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { ShowEmtyContent } from "./ShowEmtyContent";
+import Colors from "../../const/Colors";
 
 const DisplayBlogs = ({ data, noContent, navigation }) => {
   const { listBlogs } = data;
@@ -14,15 +14,15 @@ const DisplayBlogs = ({ data, noContent, navigation }) => {
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderTopWidth: 10,
-        borderTopColor: Colors.teal,
+        borderTopColor: Colors.teal
       }}
     >
       {data.listBlogs.items.map(el => (
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('Posts', {
+            navigation.navigate("Posts", {
               id: el.id,
-              titleName: el.name,
+              titleName: el.name
             })
           }
           key={el.id}

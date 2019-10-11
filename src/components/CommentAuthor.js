@@ -1,19 +1,19 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
-import Colors from '../../const/Colors';
+import React from "react";
+import { View, Text, Image } from "react-native";
+import Colors from "../../const/Colors";
 
 export const CommentAuthor = ({ name, status, children }) => (
   <View
     style={{
-      alignItems: 'center',
+      alignItems: "center",
       padding: 10,
       // backgroundColor: Colors.milk,
-      flexDirection: 'row',
+      flexDirection: "row"
     }}
   >
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: "row" }}>
       <Image
-        source={require('../../assets/images/avatar.jpg')}
+        source={require("../../assets/images/avatar.jpg")}
         style={{ width: 25, height: 25, borderRadius: 12.5 }}
         resizeMode="center"
       />

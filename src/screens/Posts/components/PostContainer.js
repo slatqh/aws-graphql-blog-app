@@ -1,6 +1,6 @@
-import React from 'react';
-import { ScrollView } from 'react-native';
-import { CardView, ShowEmtyContent } from '../../../components';
+import React from "react";
+import { ScrollView } from "react-native";
+import { CardView, ShowEmtyContent } from "../../../components";
 
 const Post = ({ data, noContent, navigation }) => {
   if (noContent) {
@@ -11,9 +11,9 @@ const Post = ({ data, noContent, navigation }) => {
       {data.getBlog.posts.items.map(el => (
         <CardView
           onPress={() =>
-            navigation.navigate('PostDetails', {
+            navigation.navigate("PostDetails", {
               postId: el.id,
-              titleName: el.title,
+              titleName: el.title
             })
           }
           title={el.title}

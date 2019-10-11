@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { getUser } from '../../graphql/queries';
 import { AvatarUpload } from './AvatarUpload';
 import { Loading } from '../../components';
+import Wrapper from '../withContentHOC';
+import Colors from '../../../const/Colors';
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -23,7 +25,9 @@ class Profile extends Component {
   state = {
     avatar: null,
     isLoading: false,
-    user: {},
+    user: null,
+    userId: null,
+    userpost: [],
     wallPostMessage: '',
   };
 
@@ -38,13 +42,16 @@ class Profile extends Component {
       err => console.log('Problem with getUser request', err)
     );
     if (data) {
+      this.setState({
+        user: data.getUser,
+        userpost: data.getUser.userpost.items,
+      });
       this.props.navigation.setParams({ user: data.getUser });
       this.setState({ isLoading: false });
     }
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
@@ -64,16 +71,23 @@ class Profile extends Component {
           <Button onPress={() => console.log('pressed')} title="MESSAGE" />
         </View>
         <Text>My Post</Text>
-        {this.state.isloading ? (
+        {this.state.isLoading ? (
           <Loading />
         ) : (
-          <TextInput
-            placeholder="wall post"
-            value={this.state.wallPostMessage && 'Some TExt'}
-            onChangeText={e => this.setState({ wallPostMessage: e })}
-          >
-            What's new?
-          </TextInput>
+          <View>
+            <TextInput
+              placeholder="What's new?"
+              // value={this.state.wallPostMessage}
+              style={{ padding: 5, borderWidth: 1, borderColor: Colors.teal }}
+              onChangeText={e => this.setState({ wallPostMessage: e })}
+            />
+            <Text style={{ fontSize: 18, fonFamily: 'Playfair' }}>My Post</Text>
+            {this.state.userpost.map(e => (
+              <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}>
+                {e.title}
+              </Text>
+            ))}
+          </View>
         )}
       </View>
     );
