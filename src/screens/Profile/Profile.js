@@ -70,22 +70,41 @@ class Profile extends Component {
           <Button onPress={() => console.log('connect')} title="CONNECT" />
           <Button onPress={() => console.log('pressed')} title="MESSAGE" />
         </View>
-        <Text>My Post</Text>
         {this.state.isLoading ? (
           <Loading />
         ) : (
-          <View>
+          <View style={{ padding: 10, flex: 1 }}>
             <TextInput
               placeholder="What's new?"
+              placeholderTextColor={Colors.placeholderColor}
+              autoFocus
               // value={this.state.wallPostMessage}
-              style={{ padding: 5, borderWidth: 1, borderColor: Colors.teal }}
+              style={{
+                padding: 10,
+                borderRadius: 5,
+              }}
               onChangeText={e => this.setState({ wallPostMessage: e })}
             />
-            <Text style={{ fontSize: 18, fonFamily: 'Playfair' }}>My Post</Text>
             {this.state.userpost.map(e => (
-              <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}>
-                {e.title}
-              </Text>
+              <View>
+                <Text
+                  style={{
+                    fontFamily: 'Montserrat-Regular',
+                    fontSize: 22,
+                    paddingVertical: 10,
+                  }}
+                >
+                  My Post's
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: 'PlayfairDisplay-Regular',
+                    fontSize: 18,
+                  }}
+                >
+                  {e.title}
+                </Text>
+              </View>
             ))}
           </View>
         )}

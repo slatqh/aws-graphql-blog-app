@@ -1,13 +1,13 @@
-import React from "react";
-import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Colors from "../../../../const/Colors";
-import { Divider, PostAuthor, PostOptions } from "../../../components";
+import React from 'react';
+import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Colors from '../../../../const/Colors';
+import { Divider, PostAuthor, PostOptions } from '../../../components';
 
 const PostDetails = props => {
   const { description, message, title } = props.data.getPost;
   const { images, username } = props;
-  console.log("POSTDETAILS COMPONENT", username);
+  console.log('POSTDETAILS COMPONENT', username);
   return (
     <ScrollView
       contentContainerStyle={{ backgroundColor: Colors.milk }}
@@ -15,7 +15,7 @@ const PostDetails = props => {
     >
       <View style={styles.container}>
         <View style={{ flex: 0.3, padding: 10 }}>
-          <PostAuthor username={username.username}>
+          <PostAuthor username={username} status="hardly looking">
             <PostOptions />
           </PostAuthor>
           <Text style={styles.title}>{title}</Text>
@@ -28,14 +28,14 @@ const PostDetails = props => {
             style={{
               borderWidth: 1,
               borderColor: Colors.lightgrey,
-              overflow: "hidden"
+              overflow: 'hidden',
             }}
           >
             <Image
               source={{ uri: images }}
               style={{
                 height: 150,
-                backgroundColor: Colors.white
+                backgroundColor: Colors.white,
               }}
               cache="force-cache"
               resizeMethod="scale"
@@ -47,8 +47,8 @@ const PostDetails = props => {
           <View
             style={{
               flex: 0.3,
-              justifyContent: "space-around",
-              flexDirection: "row"
+              justifyContent: 'space-around',
+              flexDirection: 'row',
             }}
           >
             <Icon name="heart-o" size={15} color={Colors.lightblack} />
@@ -81,30 +81,30 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: Colors.grey,
     borderWidth: 1,
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   title: {
     fontSize: 14,
     letterSpacing: 1,
-    color: Colors.black
+    color: Colors.black,
   },
   imageSection: {
     flex: 0.3,
     borderWidth: 1,
-    borderColor: "black",
-    overflow: "hidden"
+    borderColor: 'black',
+    overflow: 'hidden',
   },
   socialIcons: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 7
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 7,
   },
   comments: {
     flex: 0.4,
     padding: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginHorizontal: 10,
-    alignItems: "center"
-  }
+    alignItems: 'center',
+  },
 });

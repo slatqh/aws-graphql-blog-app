@@ -1,7 +1,8 @@
 export default {
   teal: '#61f2f5',
   purple: '#723881',
-  grey: '#7f8184',
+  grey: '#828282',
+  placeholderColor: '#BDBDBD',
   lightgrey: '#cfd8dc',
   white: '#ffffff',
   black: '#200f21',

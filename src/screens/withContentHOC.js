@@ -1,8 +1,7 @@
-import React from "react";
-import { ActivityIndicator, View, Button } from "react-native";
-import API, { graphqlOperation } from "@aws-amplify/api";
-import { Loading, ShowError } from "../components";
-import { listBlogs } from "../graphql/queries";
+import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import { Loading, ShowError } from '../components';
 
 export default class Wrapper extends React.Component {
   constructor(props) {
@@ -11,7 +10,7 @@ export default class Wrapper extends React.Component {
       data: null,
       loading: false,
       error: false,
-      reload: false
+      reload: false,
     };
   }
 
@@ -27,7 +26,7 @@ export default class Wrapper extends React.Component {
         graphqlOperation(this.props.query, { id })
       ).catch(err => console.log(`Problem with ${action}`, err));
       if (data) {
-        console.log("RESPONSE", data);
+        console.log('RESPONSE', data);
         this.setState({ data });
         this.setState({ loading: false });
       }
