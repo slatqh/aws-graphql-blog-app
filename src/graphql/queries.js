@@ -373,3 +373,74 @@ export const listUserWallPosts = `query ListUserWallPosts(
   }
 }
 `;
+export const searchBlogs = `query SearchBlogs(
+  $filter: SearchableBlogFilterInput
+  $sort: SearchableBlogSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchBlogs(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const searchPosts = `query SearchPosts(
+  $filter: SearchablePostFilterInput
+  $sort: SearchablePostSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchPosts(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      message
+      ownerID
+      description
+      createdAt
+      owner
+      postAuthor {
+        id
+        owner
+        authID
+        firstName
+        lastName
+        username
+        phone
+        email
+        instrument
+      }
+      images {
+        bucket
+        key
+        region
+      }
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;

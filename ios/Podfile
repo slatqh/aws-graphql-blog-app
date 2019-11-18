@@ -3,6 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'AWS' do
   # Pods for AWS
+  pod 'react-native-geolocation', path: '../node_modules/@react-native-community/geolocation'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
@@ -37,7 +38,6 @@ target 'AWS' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
-  pod 'RNAWSCognito', :path => '../node_modules/amazon-cognito-identity-js'
 
   target 'AWSTests' do
     inherit! :search_paths

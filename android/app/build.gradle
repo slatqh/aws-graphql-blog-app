@@ -188,7 +188,6 @@ android {
 }
 
 dependencies {
-    implementation project(':amazon-cognito-identity-js')
     implementation project(':react-native-screens')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])

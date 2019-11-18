@@ -1,10 +1,11 @@
-type Blog @model {
+type Blog @model @searchable{
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
 }
 type Post
   @model
+  @searchable
   @auth(
     rules: [
       {

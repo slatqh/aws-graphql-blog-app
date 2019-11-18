@@ -11,9 +11,12 @@ import {
 } from 'react-native';
 import { Storage, Auth } from 'aws-amplify';
 import API, { graphqlOperation } from '@aws-amplify/api';
+import Geolocation from 'react-native-geolocation-service';
+import axios from 'axios';
 import { createUser } from '../graphql/mutations';
 import { ImageSelect, PostAuthor, Avatar } from '../components';
 import Colors from '../../const/Colors';
+import { GOOGLE_GEOLOCATION_API } from '../../const/api';
 // import Colors from '../../const/Colors';
 
 export default class TestScreen extends Component {
@@ -21,63 +24,43 @@ export default class TestScreen extends Component {
     images: [],
   };
 
-  postDataToServer = async () => {
-    const newUser = {
-      username: 'Dimon',
-      lastName: 'Blotnoi',
-    };
-    try {
-      await API.graphql(
-        graphqlOperation(createUser, { input: newUser })
-        // subscription();
-      ).catch(err => console.log(`Problem with create User`, err));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  componentDidMount() {
+    // if (hasLocationPermission) {
+    Geolocation.getCurrentPosition(
+      position => {
+        console.log('Position', position);
+        const { latitude, longitude } = position.coords;
+        this.getUserCity(latitude, longitude);
+        Geolocation.clearWatch();
+      },
+      error => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: false, timeout: 15000, maximumAge: 10000 }
+    );
+    // }
+  }
+
+  async getUserCity(lat, lng) {
+    console.log(lat, lng);
+    const { data } = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_GEOLOCATION_API}`
+    );
+    console.log(data);
+    data.results.map(i => {
+      if (i.types[0] === 'administrative_area_level_2') {
+        console.log(i.formatted_address);
+        // console.log('found');
+      }
+    });
+  }
 
   render() {
     const avatar = false;
     return (
       <View style={{}}>
         <SafeAreaView />
-        <View
-          style={{
-            height: 47,
-            width: '100%',
-            borderBottomColor: Colors.grey,
-            borderBottomWidth: 0.3,
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}
-        >
-          <Text style={{ fontFamily: 'PlayfairDisplay-Regular', fontSize: 18 }}>
-            Looking for guitar
-          </Text>
-          <View style={{ flex: 1, alignItems: 'flex-end' }}>
-            <Text
-              style={{
-                fontFamily: 'PlayfairDisplay-Regular',
-                fontSize: 14,
-                // alignSelf: 'flex-end',
-                color: Colors.black,
-                paddingBottom: 5,
-              }}
-            >
-              01/14/19
-            </Text>
-            <Text
-              style={{
-                fontFamily: 'PlayfairDisplay-Regular',
-                fontSize: 14,
-                // alignSelf: 'flex-end',
-                color: Colors.black,
-              }}
-            >
-              Brooklyn
-            </Text>
-          </View>
-        </View>
       </View>
     );
   }

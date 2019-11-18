@@ -52,6 +52,7 @@ class Profile extends Component {
   }
 
   render() {
+    console.log(this.props.authData);
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView />
@@ -85,17 +86,17 @@ class Profile extends Component {
               }}
               onChangeText={e => this.setState({ wallPostMessage: e })}
             />
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Regular',
+                fontSize: 22,
+                paddingVertical: 10,
+              }}
+            >
+              My Post's
+            </Text>
             {this.state.userpost.map(e => (
-              <View>
-                <Text
-                  style={{
-                    fontFamily: 'Montserrat-Regular',
-                    fontSize: 22,
-                    paddingVertical: 10,
-                  }}
-                >
-                  My Post's
-                </Text>
+              <View key={e.id}>
                 <Text
                   style={{
                     fontFamily: 'PlayfairDisplay-Regular',
