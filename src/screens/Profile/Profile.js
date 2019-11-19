@@ -24,11 +24,12 @@ class Profile extends Component {
 
   state = {
     avatar: null,
-    isLoading: false,
+    isLoading: true,
     user: null,
     userId: null,
     userpost: [],
     wallPostMessage: '',
+    error: false,
   };
 
   componentDidMount() {
@@ -36,10 +37,12 @@ class Profile extends Component {
   }
 
   async loadUser() {
-    this.setState({ isLoading: true });
     const id = this.props.authData.attributes['custom:authID'];
     const { data } = await API.graphql(graphqlOperation(getUser, { id })).catch(
-      err => console.log('Problem with getUser request', err)
+      err => {
+        this.setState({ isLoading: false, error: err });
+        console.log('Problem with getUser request', err);
+      }
     );
     if (data) {
       this.setState({

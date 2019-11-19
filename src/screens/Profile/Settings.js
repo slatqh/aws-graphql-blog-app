@@ -1,10 +1,16 @@
 import React, { Component, useState } from 'react';
-import { Text, View, Button, ScrollView, TextInput } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Button as CustomButton,
+} from 'react-native';
 import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 import { getUser } from '../../graphql/queries';
 import Wrapper from '../withContentHOC';
-import { CustomButton } from '../../components';
+import { Button } from '../../components';
 import Colors from '../../../const/Colors';
 
 const UserFields = ({ property, value }) => {
@@ -27,7 +33,7 @@ const UserFields = ({ property, value }) => {
 class Settings extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
-      <Button
+      <CustomButton
         onPress={() =>
           Auth.signOut()
             .then(() => navigation.navigate('Auth'))
@@ -61,11 +67,7 @@ class Settings extends Component {
             marginBottom: 30,
           }}
         >
-          <CustomButton
-            gradient
-            title="Save"
-            onPress={() => this.updateUser()}
-          />
+          <Button title="Save" onPress={() => this.updateUser()} />
         </View>
       </ScrollView>
     );

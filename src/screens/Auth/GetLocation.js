@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
-import { TextInput, Button, Loading } from '../components';
-import { GOOGLE_GEOLOCATION_API } from '../../const/api';
-import Colors from '../../const/Colors';
+import { Button, Loading } from '../../components';
+import { GOOGLE_GEOLOCATION_API } from '../../../const/api';
+import Colors from '../../../const/Colors';
 // import Colors from '../../const/Colors';
 
-export default class TestScreen extends Component {
+export default class GetLocation extends Component {
   state = {
     input: '',
     location: '',
@@ -69,7 +69,7 @@ export default class TestScreen extends Component {
             type="noBorder"
             // loading={this.state.loading}
             // containerStyle={styles.loginButton}
-            onPress={() => console.log('next')}
+            onPress={() => this.props.navigation.navigate('App')}
           />
         </View>
       </View>

@@ -15,9 +15,8 @@ import {
   CreateNewPost,
   Settings,
   ProfileUpdate,
+  GetLocation,
 } from '../screens';
-
-// import ModalScreen from '../screens/ModalScreen';
 
 export const AuthStack = createStackNavigator(
   {
@@ -25,8 +24,10 @@ export const AuthStack = createStackNavigator(
     ProfileUpdate,
     SignIn: Login,
     Signup: CreateAccount,
+    Location: GetLocation,
   },
   {
+    initialRouteParams: 'Location',
     defaultNavigationOptions: {
       header: null,
     },
